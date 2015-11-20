@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01AB002A1BFF4FD500EEDF8C /* AXTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01AB00291BFF4FD500EEDF8C /* AXTableViewController.m */; };
+		01AB002D1BFF68BA00EEDF8C /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 01AB002B1BFF68BA00EEDF8C /* 37x-Checkmark.png */; };
+		01AB002E1BFF68BA00EEDF8C /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01AB002C1BFF68BA00EEDF8C /* 37x-Checkmark@2x.png */; };
 		01ABFF521BFF0A3E00EEDF8C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF511BFF0A3E00EEDF8C /* main.m */; };
 		01ABFF551BFF0A3E00EEDF8C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF541BFF0A3E00EEDF8C /* AppDelegate.m */; };
 		01ABFF581BFF0A3E00EEDF8C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF571BFF0A3E00EEDF8C /* ViewController.m */; };
@@ -22,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01AB00281BFF4FD500EEDF8C /* AXTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXTableViewController.h; sourceTree = "<group>"; };
+		01AB00291BFF4FD500EEDF8C /* AXTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXTableViewController.m; sourceTree = "<group>"; };
+		01AB002B1BFF68BA00EEDF8C /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
+		01AB002C1BFF68BA00EEDF8C /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		01ABFF4D1BFF0A3E00EEDF8C /* AXPracticalHUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AXPracticalHUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01ABFF511BFF0A3E00EEDF8C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		01ABFF531BFF0A3E00EEDF8C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -79,9 +86,13 @@
 				01ABFF541BFF0A3E00EEDF8C /* AppDelegate.m */,
 				01ABFF561BFF0A3E00EEDF8C /* ViewController.h */,
 				01ABFF571BFF0A3E00EEDF8C /* ViewController.m */,
+				01AB00281BFF4FD500EEDF8C /* AXTableViewController.h */,
+				01AB00291BFF4FD500EEDF8C /* AXTableViewController.m */,
 				01ABFF671BFF0AA200EEDF8C /* AXPracticalHUD */,
 				01ABFF591BFF0A3E00EEDF8C /* Main.storyboard */,
 				01ABFF5C1BFF0A3E00EEDF8C /* Assets.xcassets */,
+				01AB002B1BFF68BA00EEDF8C /* 37x-Checkmark.png */,
+				01AB002C1BFF68BA00EEDF8C /* 37x-Checkmark@2x.png */,
 				01ABFF5E1BFF0A3E00EEDF8C /* LaunchScreen.storyboard */,
 				01ABFF611BFF0A3E00EEDF8C /* Info.plist */,
 				01ABFF501BFF0A3E00EEDF8C /* Supporting Files */,
@@ -176,6 +187,8 @@
 				01ABFF5D1BFF0A3E00EEDF8C /* Assets.xcassets in Resources */,
 				01ABFF761BFF0AA200EEDF8C /* AXPracticalHUD.bundle in Resources */,
 				01ABFF5B1BFF0A3E00EEDF8C /* Main.storyboard in Resources */,
+				01AB002D1BFF68BA00EEDF8C /* 37x-Checkmark.png in Resources */,
+				01AB002E1BFF68BA00EEDF8C /* 37x-Checkmark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +203,7 @@
 				01ABFF781BFF0AA200EEDF8C /* AXPracticalHUDContentView.m in Sources */,
 				01ABFF731BFF0AA200EEDF8C /* AXBarProgressView.m in Sources */,
 				01ABFF741BFF0AA200EEDF8C /* AXCircleProgressView.m in Sources */,
+				01AB002A1BFF4FD500EEDF8C /* AXTableViewController.m in Sources */,
 				01ABFF581BFF0A3E00EEDF8C /* ViewController.m in Sources */,
 				01ABFF551BFF0A3E00EEDF8C /* AppDelegate.m in Sources */,
 				01ABFF751BFF0AA200EEDF8C /* AXGradientProgressView.m in Sources */,
@@ -340,6 +354,7 @@
 				01ABFF661BFF0A3E00EEDF8C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

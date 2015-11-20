@@ -303,7 +303,7 @@ if ([NSThread isMainThread]) {\
     _executedObject = object;
     // Launch execution in new thread
     _progressing = YES;
-    [NSThread detachNewThreadSelector:@selector(executing) toTarget:target withObject:object];
+    [NSThread detachNewThreadSelector:@selector(executing) toTarget:self withObject:nil];
     // Show HUD view
     EXECUTE_ON_MAIN_THREAD(^{
         [self showAnimated:YES];
