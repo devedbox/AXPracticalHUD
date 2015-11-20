@@ -105,7 +105,7 @@ Pod::Spec.new do |s|
   #
 
   # s.resource  = "icon.png"
-  s.resources = "AXPracticalHUD/AXPracticalHUD/AXPracticalHUD/*.png"
+  s.resources = "AXPracticalHUD/AXPracticalHUD/AXPracticalHUD.bundle/*.png"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
