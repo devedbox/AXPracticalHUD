@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "AXPracticalHUD"
-  s.version      = "1.0.2"
+  s.version      = "1.0.3"
   s.summary      = "A practical hud view in iOS."
 
   s.description  = <<-DESC
@@ -79,7 +79,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/devedbox/AXPracticalHUD.git", :tag => "1.0.2" }
+  s.source       = { :git => "https://github.com/devedbox/AXPracticalHUD.git", :tag => "1.0.3" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -90,7 +90,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "AXPracticalHUD/AXPracticalHUD/*.{h,m,bundle}"
+  s.source_files  = "AXPracticalHUD/AXPracticalHUD/*.{h,m}"
   #s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
@@ -105,7 +105,7 @@ Pod::Spec.new do |s|
   #
 
   # s.resource  = "icon.png"
-  # s.resources = "Resources/*.png"
+  s.resources = "AXPracticalHUD/AXPracticalHUD/*.png"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
