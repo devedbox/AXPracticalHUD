@@ -913,18 +913,18 @@ if ([NSThread isMainThread]) {\
 }
 + (instancetype)HUDInView:(UIView *)view {
     NSEnumerator *subviewEnum = [view.subviews reverseObjectEnumerator];
-    for (UIView *view in subviewEnum) {
-        if ([view isKindOfClass:[AXPracticalHUD class]]) {
-            return (AXPracticalHUD *)view;
+    for (UIView *hud in subviewEnum) {
+        if ([hud isKindOfClass:[AXPracticalHUD class]]) {
+            return (AXPracticalHUD *)hud;
         }
     }
     return nil;
 }
 + (NSArray *)HUDsInView:(UIView *)view {
     NSMutableArray *HUDs = [NSMutableArray array];
-    for (UIView *view in view.subviews) {
-        if ([view isKindOfClass:[AXPracticalHUD class]]) {
-            [HUDs addObject:view];
+    for (UIView *hud in view.subviews) {
+        if ([hud isKindOfClass:[AXPracticalHUD class]]) {
+            [HUDs addObject:hud];
         }
     }
     return HUDs;
