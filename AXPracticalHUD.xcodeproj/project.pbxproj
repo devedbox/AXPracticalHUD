@@ -13,6 +13,12 @@
 		01ABFF5B1BFF0A3E00EEDF8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01ABFF591BFF0A3E00EEDF8C /* Main.storyboard */; };
 		01ABFF5D1BFF0A3E00EEDF8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01ABFF5C1BFF0A3E00EEDF8C /* Assets.xcassets */; };
 		01ABFF601BFF0A3E00EEDF8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01ABFF5E1BFF0A3E00EEDF8C /* LaunchScreen.storyboard */; };
+		01ABFF731BFF0AA200EEDF8C /* AXBarProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF691BFF0AA200EEDF8C /* AXBarProgressView.m */; };
+		01ABFF741BFF0AA200EEDF8C /* AXCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF6B1BFF0AA200EEDF8C /* AXCircleProgressView.m */; };
+		01ABFF751BFF0AA200EEDF8C /* AXGradientProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF6D1BFF0AA200EEDF8C /* AXGradientProgressView.m */; };
+		01ABFF761BFF0AA200EEDF8C /* AXPracticalHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01ABFF6E1BFF0AA200EEDF8C /* AXPracticalHUD.bundle */; };
+		01ABFF771BFF0AA200EEDF8C /* AXPracticalHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF701BFF0AA200EEDF8C /* AXPracticalHUD.m */; };
+		01ABFF781BFF0AA200EEDF8C /* AXPracticalHUDContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF721BFF0AA200EEDF8C /* AXPracticalHUDContentView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +32,17 @@
 		01ABFF5C1BFF0A3E00EEDF8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01ABFF5F1BFF0A3E00EEDF8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01ABFF611BFF0A3E00EEDF8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01ABFF681BFF0AA200EEDF8C /* AXBarProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXBarProgressView.h; sourceTree = "<group>"; };
+		01ABFF691BFF0AA200EEDF8C /* AXBarProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXBarProgressView.m; sourceTree = "<group>"; };
+		01ABFF6A1BFF0AA200EEDF8C /* AXCircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXCircleProgressView.h; sourceTree = "<group>"; };
+		01ABFF6B1BFF0AA200EEDF8C /* AXCircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXCircleProgressView.m; sourceTree = "<group>"; };
+		01ABFF6C1BFF0AA200EEDF8C /* AXGradientProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXGradientProgressView.h; sourceTree = "<group>"; };
+		01ABFF6D1BFF0AA200EEDF8C /* AXGradientProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXGradientProgressView.m; sourceTree = "<group>"; };
+		01ABFF6E1BFF0AA200EEDF8C /* AXPracticalHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AXPracticalHUD.bundle; sourceTree = "<group>"; };
+		01ABFF6F1BFF0AA200EEDF8C /* AXPracticalHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXPracticalHUD.h; sourceTree = "<group>"; };
+		01ABFF701BFF0AA200EEDF8C /* AXPracticalHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXPracticalHUD.m; sourceTree = "<group>"; };
+		01ABFF711BFF0AA200EEDF8C /* AXPracticalHUDContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXPracticalHUDContentView.h; sourceTree = "<group>"; };
+		01ABFF721BFF0AA200EEDF8C /* AXPracticalHUDContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXPracticalHUDContentView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +79,7 @@
 				01ABFF541BFF0A3E00EEDF8C /* AppDelegate.m */,
 				01ABFF561BFF0A3E00EEDF8C /* ViewController.h */,
 				01ABFF571BFF0A3E00EEDF8C /* ViewController.m */,
+				01ABFF671BFF0AA200EEDF8C /* AXPracticalHUD */,
 				01ABFF591BFF0A3E00EEDF8C /* Main.storyboard */,
 				01ABFF5C1BFF0A3E00EEDF8C /* Assets.xcassets */,
 				01ABFF5E1BFF0A3E00EEDF8C /* LaunchScreen.storyboard */,
@@ -77,6 +95,24 @@
 				01ABFF511BFF0A3E00EEDF8C /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		01ABFF671BFF0AA200EEDF8C /* AXPracticalHUD */ = {
+			isa = PBXGroup;
+			children = (
+				01ABFF681BFF0AA200EEDF8C /* AXBarProgressView.h */,
+				01ABFF691BFF0AA200EEDF8C /* AXBarProgressView.m */,
+				01ABFF6A1BFF0AA200EEDF8C /* AXCircleProgressView.h */,
+				01ABFF6B1BFF0AA200EEDF8C /* AXCircleProgressView.m */,
+				01ABFF6C1BFF0AA200EEDF8C /* AXGradientProgressView.h */,
+				01ABFF6D1BFF0AA200EEDF8C /* AXGradientProgressView.m */,
+				01ABFF6E1BFF0AA200EEDF8C /* AXPracticalHUD.bundle */,
+				01ABFF6F1BFF0AA200EEDF8C /* AXPracticalHUD.h */,
+				01ABFF701BFF0AA200EEDF8C /* AXPracticalHUD.m */,
+				01ABFF711BFF0AA200EEDF8C /* AXPracticalHUDContentView.h */,
+				01ABFF721BFF0AA200EEDF8C /* AXPracticalHUDContentView.m */,
+			);
+			path = AXPracticalHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +174,7 @@
 			files = (
 				01ABFF601BFF0A3E00EEDF8C /* LaunchScreen.storyboard in Resources */,
 				01ABFF5D1BFF0A3E00EEDF8C /* Assets.xcassets in Resources */,
+				01ABFF761BFF0AA200EEDF8C /* AXPracticalHUD.bundle in Resources */,
 				01ABFF5B1BFF0A3E00EEDF8C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,8 +186,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01ABFF771BFF0AA200EEDF8C /* AXPracticalHUD.m in Sources */,
+				01ABFF781BFF0AA200EEDF8C /* AXPracticalHUDContentView.m in Sources */,
+				01ABFF731BFF0AA200EEDF8C /* AXBarProgressView.m in Sources */,
+				01ABFF741BFF0AA200EEDF8C /* AXCircleProgressView.m in Sources */,
 				01ABFF581BFF0A3E00EEDF8C /* ViewController.m in Sources */,
 				01ABFF551BFF0A3E00EEDF8C /* AppDelegate.m in Sources */,
+				01ABFF751BFF0AA200EEDF8C /* AXGradientProgressView.m in Sources */,
 				01ABFF521BFF0A3E00EEDF8C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
