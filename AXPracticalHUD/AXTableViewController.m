@@ -58,7 +58,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:
-            [self showSimple:tableView];
+//            [self showSimple:tableView];
+            [[AXPracticalHUD sharedHUD] showErrorInView:self.view.window];
+            [[AXPracticalHUD sharedHUD] hideAnimated:YES afterDelay:2.0 completion:nil];
             break;
         case 1:
             [self showWithLabel:tableView];
