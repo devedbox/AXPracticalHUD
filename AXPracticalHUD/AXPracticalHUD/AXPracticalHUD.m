@@ -756,6 +756,7 @@ if ([NSThread isMainThread]) {\
 #else
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AXPracticalHUD.bundle/ax_hud_error" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
 #endif
+    [imageView setFrame:CGRectMake(0, 0, 37, 37)];
     [self _showInView:view animated:YES mode:AXPracticalHUDModeCustomView text:text detail:detail customView:imageView configuration:configuration];
 }
 - (void)showSuccessInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
@@ -765,6 +766,7 @@ if ([NSThread isMainThread]) {\
 #else
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AXPracticalHUD.bundle/ax_hud_success" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
 #endif
+    [imageView setFrame:CGRectMake(0, 0, 37, 37)];
     [self _showInView:view animated:YES mode:AXPracticalHUDModeCustomView text:text detail:detail customView:imageView configuration:configuration];
 }
 
