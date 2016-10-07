@@ -14,14 +14,14 @@ typedef NS_ENUM(NSInteger, AXPracticalHUDTranslucentStyle) {
 };
 
 @interface AXPracticalHUDContentView : UIView
-/// Color
+/// Color of the content view. Default is nil.
 @property(strong, nonatomic) UIColor *color;
-/// End colot
+/// End color of the content view. Default is nil.
 @property(strong, nonatomic) UIColor *endColor;
-/// Translucent
+/// Translucent. Default is NO.
 @property(assign, nonatomic) BOOL translucent;
-/// Translucent style
+/// Translucent style. Default is Dark.
 @property(assign, nonatomic) AXPracticalHUDTranslucentStyle translucentStyle;
-/// Opacity
+/// Opacity. Default is 0.8f.
 @property(assign, nonatomic) CGFloat opacity;
 @end

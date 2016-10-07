@@ -11,82 +11,39 @@
 #import "AXGradientProgressView.h"
 #import "AXPracticalHUDContentView.h"
 
-#ifndef kAXPracticalHUDPadding
-#define kAXPracticalHUDPadding 4.0f
-#endif
-#ifndef kAXPracticalHUDMaxMovement
-#define kAXPracticalHUDMaxMovement 14.0f
-#endif
-#ifndef kAXPracticalHUDFontSize
-#define kAXPracticalHUDFontSize 14.0f
-#endif
-#ifndef kAXPracticalHUDDetailFontSize
-#define kAXPracticalHUDDetailFontSize 12.0f
-#endif
-#ifndef kAXPracticalHUDDefaultMargin
-#define kAXPracticalHUDDefaultMargin 15.0f
-#endif
-/*!
- *  Mode of hud view
- */
+/// Mode of hud view
 typedef NS_ENUM(NSInteger, AXPracticalHUDMode) {
-    /*!
-     *  Progress is shown using an UIActivityIndicatorView. This is the default.
-     */
+    /// Progress is shown using an UIActivityIndicatorView. This is the default.
     AXPracticalHUDModeIndeterminate,
-    /*!
-     *  Progress is shown using a round, pie-chart like, progress view.
-     */
+    /// Progress is shown using a round, pie-chart like, progress view.
     AXPracticalHUDModeDeterminate,
-    /*!
-     *  Progress is shown using a horizontal progress bar
-     */
+    /// Progress is shown using a horizontal progress bar
     AXPracticalHUDModeDeterminateHorizontalBar,
-    /*!
-     *  Progress is shown using a horizontal colorful progress bar
-     */
+    /// Progress is shown using a horizontal colorful progress bar
     AXPracticalHUDModeDeterminateColorfulHorizontalBar,
-    /*!
-     *  Progress is shown using a ring-shaped progress view.
-     */
+    /// Progress is shown using a ring-shaped progress view.
     AXPracticalHUDModeDeterminateAnnularEnabled,
-    /*!
-     *  Shows a custom view
-     */
+    /// Shows a custom view
     AXPracticalHUDModeCustomView,
-    /*!
-     *  Shows only labels
-     */
-    AXPracticalHUDModeText
+    /// Shows only labels
+    AXPracticalHUDModeText,
+    /// Progress is shown using an breach annular indicator.
+    AXPracticalHUDModeBreachedAnnularIndeterminate
 };
-/*!
- *  Animation styles of hud view animating.
- */
+/// Animation styles of hud view animating.
 typedef NS_ENUM(NSInteger, AXPracticalHUDAnimation) {
-    /*!
-     *  Using fade animation.
-     */
+    /// Using fade animation.
     AXPracticalHUDAnimationFade,
-    /*!
-     *  Using flip in animation.
-     */
+    /// Using flip in animation.
     AXPracticalHUDAnimationFlipIn
 };
-/*!
- *  Position of hud view.
- */
+/// Position of hud view.
 typedef NS_ENUM(NSInteger, AXPracticalHUDPosition) {
-    /*!
-     *  Top position.
-     */
+    /// Top position.
     AXPracticalHUDPositionTop,
-    /*!
-     *  Center position.
-     */
+    /// Center position.
     AXPracticalHUDPositionCenter,
-    /*!
-     *  Bottom position
-     */
+    /// Bottom position
     AXPracticalHUDPositionBottom
 };
 /// Completion block when task finished.
@@ -95,79 +52,74 @@ typedef void(^AXPracticalHUDCompletionBlock)();
 @protocol AXPracticalHUDDelegate;
 
 @interface AXPracticalHUD : UIView
-/// Restore the hud view when hud hided if YES, setting the properties of hud view to the initial state. Default is No.
+/// Delegate of HUD view,
+@property(assign, nonatomic) id<AXPracticalHUDDelegate>delegate;
+#pragma mark - Boolean
+/// Restore the hud view when hud hided if YES, setting the properties of hud view to the initial state. Default is NO.
 @property(assign, nonatomic) BOOL restoreEnabled;
 /// Lock the background to avoid the touch events if YES. Default is NO.
 @property(assign, nonatomic) BOOL lockBackground;
+/// Using dim background if YES. Default is NO.
+@property(assign, nonatomic) BOOL dimBackground;
+/// Remove the hud from super view if hud is hidden. Default is YES.
+@property(assign, nonatomic) BOOL removeFromSuperViewOnHide;
+/// Using the square content view if YES. Default is NO.
+@property(assign, nonatomic, getter=isSquare) BOOL square;
+#pragma mark - Frame.
 /// Total size of hud container view. Read only.
 @property(readonly, nonatomic) CGSize size;
-/// Using the square content view if YES. Default is NO.
-@property(assign, nonatomic) BOOL square;
 /// Margin of content views. Default is 15.0f.
 @property(assign, nonatomic) CGFloat margin;
-/// Offset of container view in x position. Default is 0.0f.
-@property(assign, nonatomic) CGFloat offsetX;
-/// Offset of container view in y position. Default is 0.0f.
-@property(assign, nonatomic) CGFloat offsetY;
+/// Offset of cotent view. Default is zero.
+@property(assign, nonatomic) CGPoint offsets;
 /// Minimum size of container view. Default is CGSizeZero.
-@property(assign, nonatomic) CGSize minSize;
+@property(assign, nonatomic) CGSize minimumSize;
+/// The insets of views in content view bounds. Default is {15.0f, 15.0f, 15.0f, 15.0f}
+@property(assign, nonatomic) UIEdgeInsets contentInsets;
+#pragma mark - Time interval.
 /// Grace time showing hud view. Default is 0.0f.
-@property(assign, nonatomic) NSTimeInterval graceTime;
+@property(assign, nonatomic) NSTimeInterval grace;
+/// Minimum showing time interval of hud view. Default is 0.5f.
+@property(assign, nonatomic) NSTimeInterval threshold;
+#pragma mark - Mode and ENUM.
+/// Mode of the hud view..
+@property(assign, nonatomic) AXPracticalHUDMode mode;
 /// Animation style of hud view. Default is .Fade.
 @property(assign, nonatomic) AXPracticalHUDAnimation animation;
+/// Position of the hud view.
+@property(assign, nonatomic) AXPracticalHUDPosition position;
 /// Completion block when hud view has hidden.
 @property(copy, nonatomic) AXPracticalHUDCompletionBlock completion;
-/// Minimum showing time interval of hud view. Default is 0.5f.
-@property(assign, nonatomic) NSTimeInterval minShowTime;
-/// Using dim background is YES. Default is NO.
-@property(assign, nonatomic) BOOL dimBackground;
-/// Delegate
-@property(assign, nonatomic) id<AXPracticalHUDDelegate>delegate;
-/// The insets of views. Default is {15.0f, 15.0f, 15.0f, 15.0f}
-@property(assign, nonatomic) UIEdgeInsets contentInsets;
+#pragma mark - Tasks.
+/// Is tasks progressing.
 @property(readonly, nonatomic) BOOL progressing;
-@property(assign, nonatomic) CGFloat opacity;
-@property(strong, nonatomic) UIColor *color;
-@property(strong, nonatomic) UIColor *endColor;
-@property(assign, nonatomic) BOOL translucent;
-@property(assign, nonatomic) AXPracticalHUDTranslucentStyle translucentStyle;
-@property(strong, nonatomic) NSString *text;
-@property(strong, nonatomic) UIFont *font;
-@property(assign, nonatomic) AXPracticalHUDMode mode;
-@property(assign, nonatomic) AXPracticalHUDPosition position;
+#pragma mark - Progress.
+/// Progress of the progerss indicator.
 @property(assign, nonatomic) CGFloat progress;
-@property(strong, nonatomic) NSString *detailText;
+#pragma mark - Custom view.
+/// Custom view. Readwrite.
 @property(strong, nonatomic) UIView *customView;
-@property(assign, nonatomic) CGFloat cornerRadius;
-@property(strong, nonatomic) UIColor *detailTextColor;
-@property(strong, nonatomic) UIColor *textColor;
-@property(strong, nonatomic) UIFont *detailFont;
-@property(strong, nonatomic) UIColor *activityIndicatorColor;
-@property(assign, nonatomic) BOOL removeFromSuperViewOnHide;
-
+#pragma mark - Content view
+/// Content view.
+@property(readonly, strong, nonatomic) AXPracticalHUDContentView *contentView;
+#pragma mark - Label
+/// Title label.
+@property(readonly, strong, nonatomic) UILabel *label;
+#pragma mark - Detail label.
+/// Detail label.
+@property(readonly, strong, nonatomic) UILabel *detailLabel;
+#pragma mark - Initializer
 - (instancetype)initWithView:(UIView *)view;
 - (instancetype)initWithWindow:(UIWindow *)window;
+#pragma mark - Show & Hide.
+- (void)show:(BOOL)animated;
+- (void)hide:(BOOL)animated;
 
-- (void)showAnimated:(BOOL)animated;
-- (void)hideAnimated:(BOOL)animated;
+- (void)show:(BOOL)animated executingBlock:(dispatch_block_t)executing onQueue:(dispatch_queue_t)queue completion:(AXPracticalHUDCompletionBlock)completion;
+- (void)show:(BOOL)animated executingBlockOnGQ:(dispatch_block_t)executing completion:(AXPracticalHUDCompletionBlock)completion;
+- (void)show:(BOOL)animated executingMethod:(SEL)method toTarget:(id)target withObject:(id)object;
 
-- (void)showAnimated:(BOOL)animated
-      executingBlock:(dispatch_block_t)executing
-             onQueue:(dispatch_queue_t)queue
-          completion:(AXPracticalHUDCompletionBlock)completion;
-
-- (void)showAnimated:(BOOL)animated
-  executingBlockOnGQ:(dispatch_block_t)executing
-          completion:(AXPracticalHUDCompletionBlock)completion;
-
-- (void)showAnimated:(BOOL)animated
-     executingMethod:(SEL)method
-            toTarget:(id)target
-          withObject:(id)object;
-
-- (void)hideAnimated:(BOOL)animated
-          afterDelay:(NSTimeInterval)delay
-          completion:(AXPracticalHUDCompletionBlock)completion;
+- (void)hide:(BOOL)animated afterDelay:(NSTimeInterval)delay completion:(AXPracticalHUDCompletionBlock)completion;
 @end
 
 @interface AXPracticalHUD(Shared)
@@ -181,34 +133,13 @@ typedef void(^AXPracticalHUDCompletionBlock)();
 - (void)showErrorInView:(UIView *)view;
 - (void)showSuccessInView:(UIView *)view;
 
-- (void)showPieInView:(UIView *)view
-                 text:(NSString *)text
-               detail:(NSString *)detail
-        configuration:(void(^)(AXPracticalHUD *HUD))configuration;
-- (void)showProgressInView:(UIView *)view
-                      text:(NSString *)text
-                    detail:(NSString *)detail
-             configuration:(void(^)(AXPracticalHUD *HUD))configuration;
-- (void)showColorfulProgressInView:(UIView *)view
-                              text:(NSString *)text
-                            detail:(NSString *)detail
-                     configuration:(void(^)(AXPracticalHUD *HUD))configuration;
-- (void)showTextInView:(UIView *)view
-                  text:(NSString *)text
-                detail:(NSString *)detail
-         configuration:(void(^)(AXPracticalHUD *HUD))configuration;
-- (void)showSimpleInView:(UIView *)view
-                    text:(NSString *)text
-                  detail:(NSString *)detail
-           configuration:(void(^)(AXPracticalHUD *HUD))configuration;
-- (void)showErrorInView:(UIView *)view
-                   text:(NSString *)text
-                 detail:(NSString *)detail
-          configuration:(void(^)(AXPracticalHUD *HUD))configuration;
-- (void)showSuccessInView:(UIView *)view
-                     text:(NSString *)text
-                   detail:(NSString *)detail
-            configuration:(void(^)(AXPracticalHUD *HUD))configuration;
+- (void)showPieInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
+- (void)showProgressInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
+- (void)showColorfulProgressInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
+- (void)showTextInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
+- (void)showSimpleInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
+- (void)showErrorInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
+- (void)showSuccessInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
 @end
 
 @interface AXPracticalHUD(Convenence)

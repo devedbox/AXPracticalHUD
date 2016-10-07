@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "AXPracticalHUD"
-  s.version      = "1.0.8"
+  s.version      = "1.1.0"
   s.summary      = "A practical hud view in iOS."
 
   s.description  = <<-DESC
@@ -79,7 +79,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/devedbox/AXPracticalHUD.git", :tag => "1.0.8" }
+  s.source       = { :git => "https://github.com/devedbox/AXPracticalHUD.git", :tag => "1.1.0" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -132,6 +132,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  # s.dependency "JSONKit", "~> 1.4"
+  # s.dependency "AXIndicatorView"
 
 end

@@ -17,4 +17,7 @@
 @property(copy, nonatomic) NSMutableArray *colors;
 /// Animation duration: 0.08
 @property(assign, nonatomic) CGFloat duration;
+
+- (void)beginAnimating;
+- (void)endAnimating;
 @end

@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background"]];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -58,9 +58,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:
-//            [self showSimple:tableView];
-            [[AXPracticalHUD sharedHUD] showErrorInView:self.view.window];
-            [[AXPracticalHUD sharedHUD] hideAnimated:YES afterDelay:2.0 completion:nil];
+            [self showSimple:tableView];
             break;
         case 1:
             [self showWithLabel:tableView];
@@ -157,8 +155,14 @@
     // Regiser for HUD callbacks so we can remove it from the window at the right time
     HUD.delegate = self;
     
+    HUD.lockBackground = YES;
+    
+//    HUD.mode = AXPracticalHUDModeBreachedIndeterminate;
+    HUD.dimBackground = YES;
+    HUD.tintColor = [UIColor orangeColor];
+    
     // Show the HUD while the provided method executes in a new thread
-    [HUD showAnimated:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
+    [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
 }
 
 - (IBAction)showWithLabel:(id)sender {
@@ -167,9 +171,13 @@
     [self.navigationController.view addSubview:HUD];
     
     HUD.delegate = self;
-    HUD.text = @"Loading";
+    HUD.label.text = @"Loading";
     
-    [HUD showAnimated:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
+    HUD.lockBackground = YES;
+    HUD.square = YES;
+    HUD.mode = AXPracticalHUDModeBreachedAnnularIndeterminate;
+    
+    [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
 }
 
 - (IBAction)showWithDetailsLabel:(id)sender {
@@ -178,11 +186,13 @@
     [self.navigationController.view addSubview:HUD];
     
     HUD.delegate = self;
-    HUD.text = @"Loading";
-    HUD.detailText = @"updating data";
+    HUD.label.text = @"Loading";
+    HUD.detailLabel.text = @"updating data";
+    HUD.lockBackground = YES;
     HUD.square = YES;
+    HUD.mode = AXPracticalHUDModeBreachedAnnularIndeterminate;
     
-    [HUD showAnimated:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
+    [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
 }
 
 - (IBAction)showWithLabelDeterminate:(id)sender {
@@ -194,10 +204,13 @@
     HUD.mode = AXPracticalHUDModeDeterminate;
     
     HUD.delegate = self;
-    HUD.text = @"Loading";
+    HUD.label.text = @"Loading";
+    
+    HUD.lockBackground = YES;
+    HUD.square = YES;
     
     // myProgressTask uses the HUD instance to update progress
-    [HUD showAnimated:YES executingMethod:@selector(myProgressTask) toTarget:self withObject:nil];
+    [HUD show:YES executingMethod:@selector(myProgressTask) toTarget:self withObject:nil];
 }
 
 - (IBAction)showWIthLabelAnnularDeterminate:(id)sender {
@@ -208,10 +221,10 @@
     HUD.mode = AXPracticalHUDModeDeterminateAnnularEnabled;
     
     HUD.delegate = self;
-    HUD.text = @"Loading";
+    HUD.label.text = @"Loading";
     
     // myProgressTask uses the HUD instance to update progress
-    [HUD showAnimated:YES executingMethod:@selector(myProgressTask) toTarget:self withObject:nil];
+    [HUD show:YES executingMethod:@selector(myProgressTask) toTarget:self withObject:nil];
 }
 
 - (IBAction)showWithLabelDeterminateHorizontalBar:(id)sender {
@@ -221,11 +234,12 @@
     
     // Set determinate bar mode
     HUD.mode = AXPracticalHUDModeDeterminateHorizontalBar;
+    HUD.tintColor = [UIColor orangeColor];
     
     HUD.delegate = self;
     
     // myProgressTask uses the HUD instance to update progress
-    [HUD showAnimated:YES executingMethod:@selector(myProgressTask) toTarget:self withObject:nil];
+    [HUD show:YES executingMethod:@selector(myProgressTask) toTarget:self withObject:nil];
 }
 
 - (IBAction)showWithCustomView:(id)sender {
@@ -241,10 +255,10 @@
     HUD.mode = AXPracticalHUDModeCustomView;
     
     HUD.delegate = self;
-    HUD.text = @"Completed";
+    HUD.label.text = @"Completed";
     
-    [HUD showAnimated:YES];
-    [HUD hideAnimated:YES afterDelay:3 completion:nil];
+    [HUD show:YES];
+    [HUD hide:YES afterDelay:3 completion:nil];
 }
 
 - (IBAction)showWithLabelMixed:(id)sender {
@@ -253,18 +267,18 @@
     [self.navigationController.view addSubview:HUD];
     
     HUD.delegate = self;
-    HUD.text = @"Connecting";
-    HUD.minSize = CGSizeMake(135.f, 135.f);
+    HUD.label.text = @"Connecting";
+    HUD.minimumSize = CGSizeMake(135.f, 135.f);
     
-    [HUD showAnimated:YES executingMethod:@selector(myMixedTask) toTarget:self withObject:nil];
+    [HUD show:YES executingMethod:@selector(myMixedTask) toTarget:self withObject:nil];
 }
 
 - (IBAction)showUsingBlocks:(id)sender {
 #if NS_BLOCKS_AVAILABLE
     AXPracticalHUD *hud = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:hud];
-    hud.text = @"With a block";
-    [hud showAnimated:YES executingBlockOnGQ:^{
+    hud.label.text = @"With a block";
+    [hud show:YES executingBlockOnGQ:^{
         [self myTask];
     } completion:^{
         [hud removeFromSuperview];
@@ -278,9 +292,9 @@
     [self.view.window addSubview:HUD];
     
     HUD.delegate = self;
-    HUD.text = @"Loading";
+    HUD.label.text = @"Loading";
     
-    [HUD showAnimated:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
+    [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
 }
 
 - (IBAction)showURL:(id)sender {
@@ -299,14 +313,14 @@
     
     HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
-    
-    HUD.dimBackground = YES;
+    HUD.mode = AXPracticalHUDModeDeterminateColorfulHorizontalBar;
+    HUD.progress = 1.0;
     
     // Regiser for HUD callbacks so we can remove it from the window at the right time
     HUD.delegate = self;
     
     // Show the HUD while the provided method executes in a new thread
-    [HUD showAnimated:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
+    [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
 }
 
 - (IBAction)showTextOnly:(id)sender {
@@ -315,11 +329,11 @@
     
     // Configure for text only and offset down
     hud.mode = AXPracticalHUDModeText;
-    hud.text = @"Some message...";
+    hud.label.text = @"Some message...";
     hud.margin = 10.f;
     hud.removeFromSuperViewOnHide = YES;
     
-    [hud hideAnimated:YES afterDelay:3 completion:nil];
+    [hud hide:YES afterDelay:3 completion:nil];
 }
 
 - (IBAction)showWithColor:(id)sender{
@@ -327,10 +341,10 @@
     [self.navigationController.view addSubview:HUD];
     
     // Set the hud to display with a color
-    HUD.color = [UIColor colorWithRed:0.23 green:0.50 blue:0.82 alpha:0.90];
+    HUD.contentView.color = [UIColor colorWithRed:0.23 green:0.50 blue:0.82 alpha:0.90];
     
     HUD.delegate = self;
-    [HUD showAnimated:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
+    [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
 }
 
 #pragma mark - Execution code
@@ -355,7 +369,7 @@
     sleep(2);
     // Switch to determinate mode
     HUD.mode = AXPracticalHUDModeDeterminate;
-    HUD.text = @"Progress";
+    HUD.label.text = @"Progress";
     float progress = 0.0f;
     while (progress < 1.0f)
     {
@@ -365,7 +379,7 @@
     }
     // Back to indeterminate mode
     HUD.mode = AXPracticalHUDModeIndeterminate;
-    HUD.text = @"Cleaning up";
+    HUD.label.text = @"Cleaning up";
     sleep(2);
     // UIImageView is a UIKit class, we have to initialize it on the main thread
     __block UIImageView *imageView;
@@ -375,7 +389,7 @@
     });
     HUD.customView = imageView;
     HUD.mode = AXPracticalHUDModeCustomView;
-    HUD.text = @"Completed";
+    HUD.label.text = @"Completed";
     sleep(2);
 }
 
@@ -395,10 +409,10 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
     HUD.mode = AXPracticalHUDModeCustomView;
-    [HUD hideAnimated:YES afterDelay:2 completion:nil];
+    [HUD hide:YES afterDelay:2 completion:nil];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    [HUD hideAnimated:YES];
+    [HUD hide:YES];
 }
 @end

@@ -22,6 +22,8 @@
 		01ABFF761BFF0AA200EEDF8C /* AXPracticalHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01ABFF6E1BFF0AA200EEDF8C /* AXPracticalHUD.bundle */; };
 		01ABFF771BFF0AA200EEDF8C /* AXPracticalHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF701BFF0AA200EEDF8C /* AXPracticalHUD.m */; };
 		01ABFF781BFF0AA200EEDF8C /* AXPracticalHUDContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF721BFF0AA200EEDF8C /* AXPracticalHUDContentView.m */; };
+		19AD6AB631E6F488B46FF73E /* Pods_AXPracticalHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574ECCB2C4144949818CF2C9 /* Pods_AXPracticalHUD.framework */; };
+		DC6665651DA7907300B2D063 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = DC6665641DA7907300B2D063 /* background.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,10 @@
 		01ABFF701BFF0AA200EEDF8C /* AXPracticalHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXPracticalHUD.m; sourceTree = "<group>"; };
 		01ABFF711BFF0AA200EEDF8C /* AXPracticalHUDContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXPracticalHUDContentView.h; sourceTree = "<group>"; };
 		01ABFF721BFF0AA200EEDF8C /* AXPracticalHUDContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXPracticalHUDContentView.m; sourceTree = "<group>"; };
+		269C6E62371C72E181B29DD1 /* Pods-AXPracticalHUD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AXPracticalHUD.release.xcconfig"; path = "Pods/Target Support Files/Pods-AXPracticalHUD/Pods-AXPracticalHUD.release.xcconfig"; sourceTree = "<group>"; };
+		2D5D374875714F82D4B500F9 /* Pods-AXPracticalHUD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AXPracticalHUD.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AXPracticalHUD/Pods-AXPracticalHUD.debug.xcconfig"; sourceTree = "<group>"; };
+		574ECCB2C4144949818CF2C9 /* Pods_AXPracticalHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AXPracticalHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC6665641DA7907300B2D063 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19AD6AB631E6F488B46FF73E /* Pods_AXPracticalHUD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +75,8 @@
 			children = (
 				01ABFF4F1BFF0A3E00EEDF8C /* AXPracticalHUD */,
 				01ABFF4E1BFF0A3E00EEDF8C /* Products */,
+				DE0F4661E98654ADD43A48C5 /* Pods */,
+				2B2C8E1C5669A465B5A7A8DD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,6 +102,7 @@
 				01ABFF5C1BFF0A3E00EEDF8C /* Assets.xcassets */,
 				01AB002B1BFF68BA00EEDF8C /* 37x-Checkmark.png */,
 				01AB002C1BFF68BA00EEDF8C /* 37x-Checkmark@2x.png */,
+				DC6665641DA7907300B2D063 /* background.png */,
 				01ABFF5E1BFF0A3E00EEDF8C /* LaunchScreen.storyboard */,
 				01ABFF611BFF0A3E00EEDF8C /* Info.plist */,
 				01ABFF501BFF0A3E00EEDF8C /* Supporting Files */,
@@ -111,19 +121,52 @@
 		01ABFF671BFF0AA200EEDF8C /* AXPracticalHUD */ = {
 			isa = PBXGroup;
 			children = (
+				01ABFF6F1BFF0AA200EEDF8C /* AXPracticalHUD.h */,
+				01ABFF701BFF0AA200EEDF8C /* AXPracticalHUD.m */,
+				01ABFF6E1BFF0AA200EEDF8C /* AXPracticalHUD.bundle */,
+				DC5DE49E1DA6A68300C58AD5 /* Progress */,
+				DC5DE49F1DA6A6C100C58AD5 /* ContentView */,
+			);
+			path = AXPracticalHUD;
+			sourceTree = "<group>";
+		};
+		2B2C8E1C5669A465B5A7A8DD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				574ECCB2C4144949818CF2C9 /* Pods_AXPracticalHUD.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DC5DE49E1DA6A68300C58AD5 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
 				01ABFF681BFF0AA200EEDF8C /* AXBarProgressView.h */,
 				01ABFF691BFF0AA200EEDF8C /* AXBarProgressView.m */,
 				01ABFF6A1BFF0AA200EEDF8C /* AXCircleProgressView.h */,
 				01ABFF6B1BFF0AA200EEDF8C /* AXCircleProgressView.m */,
 				01ABFF6C1BFF0AA200EEDF8C /* AXGradientProgressView.h */,
 				01ABFF6D1BFF0AA200EEDF8C /* AXGradientProgressView.m */,
-				01ABFF6E1BFF0AA200EEDF8C /* AXPracticalHUD.bundle */,
-				01ABFF6F1BFF0AA200EEDF8C /* AXPracticalHUD.h */,
-				01ABFF701BFF0AA200EEDF8C /* AXPracticalHUD.m */,
+			);
+			name = Progress;
+			sourceTree = "<group>";
+		};
+		DC5DE49F1DA6A6C100C58AD5 /* ContentView */ = {
+			isa = PBXGroup;
+			children = (
 				01ABFF711BFF0AA200EEDF8C /* AXPracticalHUDContentView.h */,
 				01ABFF721BFF0AA200EEDF8C /* AXPracticalHUDContentView.m */,
 			);
-			path = AXPracticalHUD;
+			name = ContentView;
+			sourceTree = "<group>";
+		};
+		DE0F4661E98654ADD43A48C5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2D5D374875714F82D4B500F9 /* Pods-AXPracticalHUD.debug.xcconfig */,
+				269C6E62371C72E181B29DD1 /* Pods-AXPracticalHUD.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,9 +176,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01ABFF641BFF0A3E00EEDF8C /* Build configuration list for PBXNativeTarget "AXPracticalHUD" */;
 			buildPhases = (
+				4DA2D5F09243302251620952 /* [CP] Check Pods Manifest.lock */,
 				01ABFF491BFF0A3E00EEDF8C /* Sources */,
 				01ABFF4A1BFF0A3E00EEDF8C /* Frameworks */,
 				01ABFF4B1BFF0A3E00EEDF8C /* Resources */,
+				5BAAD80CB75970C6174538F5 /* [CP] Embed Pods Frameworks */,
+				2100B4AA15E675EDA162579F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -157,6 +203,7 @@
 				TargetAttributes = {
 					01ABFF4C1BFF0A3E00EEDF8C = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = TKA48YVS5T;
 					};
 				};
 			};
@@ -185,6 +232,7 @@
 			files = (
 				01ABFF601BFF0A3E00EEDF8C /* LaunchScreen.storyboard in Resources */,
 				01ABFF5D1BFF0A3E00EEDF8C /* Assets.xcassets in Resources */,
+				DC6665651DA7907300B2D063 /* background.png in Resources */,
 				01ABFF761BFF0AA200EEDF8C /* AXPracticalHUD.bundle in Resources */,
 				01ABFF5B1BFF0A3E00EEDF8C /* Main.storyboard in Resources */,
 				01AB002D1BFF68BA00EEDF8C /* 37x-Checkmark.png in Resources */,
@@ -193,6 +241,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2100B4AA15E675EDA162579F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AXPracticalHUD/Pods-AXPracticalHUD-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4DA2D5F09243302251620952 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5BAAD80CB75970C6174538F5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AXPracticalHUD/Pods-AXPracticalHUD-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		01ABFF491BFF0A3E00EEDF8C /* Sources */ = {
@@ -315,8 +411,10 @@
 		};
 		01ABFF651BFF0A3E00EEDF8C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D5D374875714F82D4B500F9 /* Pods-AXPracticalHUD.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TKA48YVS5T;
 				INFOPLIST_FILE = AXPracticalHUD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = KEEPStudio.AXPracticalHUD;
@@ -326,8 +424,10 @@
 		};
 		01ABFF661BFF0A3E00EEDF8C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 269C6E62371C72E181B29DD1 /* Pods-AXPracticalHUD.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TKA48YVS5T;
 				INFOPLIST_FILE = AXPracticalHUD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = KEEPStudio.AXPracticalHUD;

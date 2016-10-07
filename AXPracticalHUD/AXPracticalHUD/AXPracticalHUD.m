@@ -7,6 +7,7 @@
 //
 
 #import "AXPracticalHUD.h"
+#import <AXIndicatorView/AXIndicatorView.h>
 
 #ifndef kCFCoreFoundationVersionNumber_iOS_8_0
 #define kCFCoreFoundationVersionNumber_iOS_8_0 1140.1
@@ -20,8 +21,27 @@ if ([NSThread isMainThread]) {\
 }
 #endif
 
+#ifndef kAXPracticalHUDPadding
+#define kAXPracticalHUDPadding 4.0f
+#endif
+#ifndef kAXPracticalHUDMaxMovement
+#define kAXPracticalHUDMaxMovement 14.0f
+#endif
+#ifndef kAXPracticalHUDFontSize
+#define kAXPracticalHUDFontSize 14.0f
+#endif
+#ifndef kAXPracticalHUDDetailFontSize
+#define kAXPracticalHUDDetailFontSize 12.0f
+#endif
+#ifndef kAXPracticalHUDDefaultMargin
+#define kAXPracticalHUDDefaultMargin 15.0f
+#endif
+
 @interface AXPracticalHUD()
 {
+    UILabel *_label;
+    UILabel *_detailLabel;
+    AXPracticalHUDContentView *_contentView;
     BOOL _animated;
     BOOL _isFinished;
     SEL _executedMethod;
@@ -33,12 +53,9 @@ if ([NSThread isMainThread]) {\
 @property(strong, nonatomic) NSTimer *minShowTimer;
 @property(strong, nonatomic) NSDate *showStarted;
 @property(readonly, nonatomic) CGRect contentFrame;
-@property(strong, nonatomic) UILabel *label;
-@property(strong, nonatomic) UILabel *detailLabel;
 @property(strong, nonatomic) UIView *indicator;
 @property(strong, nonatomic) UIInterpolatingMotionEffect *xMotionEffect;
 @property(strong, nonatomic) UIInterpolatingMotionEffect *yMotionEffect;
-@property(strong, nonatomic) AXPracticalHUDContentView *contentView;
 @end
 
 @implementation AXPracticalHUD
@@ -71,28 +88,25 @@ if ([NSThread isMainThread]) {\
     _size = CGSizeZero;
     _square = NO;
     _margin = kAXPracticalHUDDefaultMargin;
-    _offsetX = 0.0f;
-    _offsetY = 0.0f;
-    _minSize = CGSizeZero;
-    _graceTime = 0.0f;
+    _offsets = CGPointZero;
+    _minimumSize = CGSizeZero;
+    _grace = 0.0f;
     _animation = AXPracticalHUDAnimationFade;
-    _minShowTime = 0.5f;
+    _threshold = 0.5f;
     _dimBackground = NO;
     _contentInsets = UIEdgeInsetsMake(15.0f, 15.0f, 15.0f, 15.0f);
     _progressing = NO;
-    _opacity = 0.8f;
-    _translucent = NO;
-    _translucentStyle = AXPracticalHUDTranslucentStyleDark;
+    
     _mode = AXPracticalHUDModeIndeterminate;
     _position = AXPracticalHUDPositionCenter;
     _progress = 0.0f;
-    _cornerRadius = 8.0f;
-    _removeFromSuperViewOnHide = NO;
+    _removeFromSuperViewOnHide = YES;
     
     _animated = NO;
     _isFinished = NO;
     _rotationTransform = CGAffineTransformIdentity;
     
+    self.tintColor = [UIColor whiteColor];
     self.alpha = 0.0f;
     self.opaque = NO;
     self.contentMode = UIViewContentModeCenter;
@@ -106,6 +120,18 @@ if ([NSThread isMainThread]) {\
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarOrientationDidChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
 #pragma mark - Override
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    if (newSuperview) {
+        // Lauout subviews.
+        [self layoutSubviews];
+        
+        if ([_indicator isKindOfClass:[AXGradientProgressView class]] && [_indicator respondsToSelector:@selector(beginAnimating)]) {
+            [_indicator performSelector:@selector(beginAnimating)];
+        }
+    }
+}
+
 - (void)didMoveToSuperview {
     [super didMoveToSuperview];
     
@@ -174,16 +200,10 @@ if ([NSThread isMainThread]) {\
         rect_indicator = _indicator.frame;
     }
     
-    CGSize size = [_label.text boundingRectWithSize:CGSizeMake(maxWidth, CGFLOAT_MAX)
-                                            options:NSStringDrawingUsesLineFragmentOrigin
-                                         attributes:@{NSFontAttributeName : _label.font}
-                                            context:nil].size;
+    CGSize size = [_label.text boundingRectWithSize:CGSizeMake(maxWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : _label.font} context:nil].size;
     CGRect rect_label = CGRectMake(0, 0, ceil(size.width), ceil(size.height));
     
-    size = [_detailLabel.text boundingRectWithSize:CGSizeMake(maxWidth, CGFLOAT_MAX)
-                                           options:NSStringDrawingUsesLineFragmentOrigin
-                                        attributes:@{NSFontAttributeName : _detailLabel.font}
-                                           context:nil].size;
+    size = [_detailLabel.text boundingRectWithSize:CGSizeMake(maxWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : _detailLabel.font} context:nil].size;
     CGRect rect_detail = CGRectMake(0, 0, ceil(size.width), ceil(size.height));
     
     CGFloat height_content = rect_indicator.size.height + rect_label.size.height + rect_detail.size.height;
@@ -204,8 +224,11 @@ if ([NSThread isMainThread]) {\
     
     CGSize size_content = CGSizeMake(width_content, height_content);
     
+    CGFloat height_diff = 0.0;
+    
     if (_square) {
         CGFloat maxValue = MAX(width_content, height_content);
+        height_diff = (maxValue-height_content)*.5;
         if (maxValue <= (bounds.size.width - 2 * _margin)) {
             size_content.width = maxValue;
         }
@@ -214,16 +237,17 @@ if ([NSThread isMainThread]) {\
         }
     }
     
-    if (size_content.width < _minSize.width) {
-        size_content.width = _minSize.width;
+    if (size_content.width < _minimumSize.width) {
+        size_content.width = _minimumSize.width;
     }
-    if (size_content.height < _minSize.height) {
-        size_content.height = _minSize.height;
+    if (size_content.height < _minimumSize.height) {
+        height_diff = (_minimumSize.height - size_content.height)*.5;
+        size_content.height = _minimumSize.height;
     }
     
     _size = size_content;
     
-    rect_indicator.origin.y = _contentInsets.top;
+    rect_indicator.origin.y = _contentInsets.top + height_diff;
     rect_indicator.origin.x = round(_size.width - rect_indicator.size.width) / 2;
     _indicator.frame = rect_indicator;
     
@@ -239,38 +263,26 @@ if ([NSThread isMainThread]) {\
 }
 
 #pragma mark - Public
-- (void)showAnimated:(BOOL)animated {
-    [self showAnimated:animated
-        executingBlock:nil
-               onQueue:nil
-            completion:nil];
+- (void)show:(BOOL)animated {
+    [self show:animated executingBlock:nil onQueue:nil completion:nil];
 }
 
-- (void)hideAnimated:(BOOL)animated {
-    [self hideAnimated:animated
-            afterDelay:0.0
-            completion:nil];
+- (void)hide:(BOOL)animated {
+    [self hide:animated afterDelay:0.0 completion:nil];
 }
 
-- (void)showAnimated:(BOOL)animated executingBlockOnGQ:(dispatch_block_t)executing completion:(AXPracticalHUDCompletionBlock)completion
+- (void)show:(BOOL)animated executingBlockOnGQ:(dispatch_block_t)executing completion:(AXPracticalHUDCompletionBlock)completion
 {
-    [self showAnimated:animated
-        executingBlock:executing
-               onQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
-            completion:completion];
+    [self show:animated executingBlock:executing onQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0) completion:completion];
 }
 
-- (void)showAnimated:(BOOL)animated executingBlock:(dispatch_block_t)executing onQueue:(dispatch_queue_t)queue completion:(AXPracticalHUDCompletionBlock)completion
+- (void)show:(BOOL)animated executingBlock:(dispatch_block_t)executing onQueue:(dispatch_queue_t)queue completion:(AXPracticalHUDCompletionBlock)completion
 {
     void(^showBlock)(BOOL) = ^(BOOL animated) {
         _animated = animated;
         // If the grace time is set postpone the HUD display
-        if (_graceTime > 0.0) {
-            NSTimer *newGraceTimer = [NSTimer timerWithTimeInterval:_graceTime
-                                                             target:self
-                                                           selector:@selector(handleGraceTimer:)
-                                                           userInfo:nil
-                                                            repeats:NO];
+        if (_grace > 0.0) {
+            NSTimer *newGraceTimer = [NSTimer timerWithTimeInterval:_grace target:self selector:@selector(handleGraceTimer:) userInfo:nil repeats:NO];
             [[NSRunLoop currentRunLoop] addTimer:newGraceTimer forMode:NSRunLoopCommonModes];
             _graceTimer = newGraceTimer;
         } else {
@@ -296,7 +308,7 @@ if ([NSThread isMainThread]) {\
     });
 }
 
-- (void)showAnimated:(BOOL)animated executingMethod:(SEL)method toTarget:(id)target withObject:(id)object
+- (void)show:(BOOL)animated executingMethod:(SEL)method toTarget:(id)target withObject:(id)object
 {
     _executedMethod = method;
     _executedTarget = target;
@@ -306,24 +318,20 @@ if ([NSThread isMainThread]) {\
     [NSThread detachNewThreadSelector:@selector(executing) toTarget:self withObject:nil];
     // Show HUD view
     EXECUTE_ON_MAIN_THREAD(^{
-        [self showAnimated:YES];
+        [self show:YES];
     });
 }
 
-- (void)hideAnimated:(BOOL)animated afterDelay:(NSTimeInterval)delay completion:(void (^)())completion
+- (void)hide:(BOOL)animated afterDelay:(NSTimeInterval)delay completion:(void (^)())completion
 {
     void(^hideBlock)(BOOL) = ^(BOOL animated) {
         _animated = animated;
         // If the minShow time is set, calculate how long the hud was shown,
         // and pospone the hiding operation if necessary
-        if (_minShowTime > 0.0 && _showStarted) {
+        if (_threshold > 0.0 && _showStarted) {
             NSTimeInterval interv = [[NSDate date] timeIntervalSinceDate:_showStarted];
-            if (interv < _minShowTime) {
-                _minShowTimer = [NSTimer scheduledTimerWithTimeInterval:_minShowTime - interv
-                                                                target:self
-                                                              selector:@selector(handleMinShowTimer:)
-                                                              userInfo:nil
-                                                               repeats:NO];
+            if (interv < _threshold) {
+                _minShowTimer = [NSTimer scheduledTimerWithTimeInterval:_threshold - interv target:self selector:@selector(handleMinShowTimer:) userInfo:nil repeats:NO];
                 return;
             }
         }
@@ -339,52 +347,6 @@ if ([NSThread isMainThread]) {\
 }
 
 #pragma mark - Setters
-- (void)setOpacity:(CGFloat)opacity {
-    _opacity = opacity;
-    EXECUTE_ON_MAIN_THREAD(^{
-        _contentView.opacity = opacity;
-    });
-}
-
-- (void)setColor:(UIColor *)color {
-    _color = color;
-    EXECUTE_ON_MAIN_THREAD(^{
-        _contentView.color = color;
-    });
-}
-
-- (void)setEndColor:(UIColor *)endColor {
-    _endColor = endColor;
-    EXECUTE_ON_MAIN_THREAD(^{
-        _contentView.endColor = endColor;
-    });
-}
-
-- (void)setTranslucent:(BOOL)translucent {
-    _translucent = translucent;
-    EXECUTE_ON_MAIN_THREAD(^{
-        _contentView.translucent = translucent;
-    });
-}
-
-- (void)setTranslucentStyle:(AXPracticalHUDTranslucentStyle)translucentStyle {
-    _translucentStyle = translucentStyle;
-    EXECUTE_ON_MAIN_THREAD(^{
-        _contentView.translucentStyle = translucentStyle;
-    });
-}
-
-- (void)setText:(NSString *)text {
-    EXECUTE_ON_MAIN_THREAD(^{
-        _label.text = text;
-    });
-}
-
-- (void)setFont:(UIFont *)font {
-    EXECUTE_ON_MAIN_THREAD(^{
-        _label.font = font;
-    });
-}
 
 - (void)setMode:(AXPracticalHUDMode)mode {
     _mode = mode;
@@ -418,10 +380,6 @@ if ([NSThread isMainThread]) {\
     });
 }
 
-- (void)setDetailText:(NSString *)detailText {
-    _detailLabel.text = detailText;
-}
-
 - (void)setCustomView:(UIView *)customView {
     _customView = customView;
     EXECUTE_ON_MAIN_THREAD(^{
@@ -431,78 +389,29 @@ if ([NSThread isMainThread]) {\
     });
 }
 
-- (void)setCornerRadius:(CGFloat)cornerRadius {
-    _cornerRadius = cornerRadius;
-    EXECUTE_ON_MAIN_THREAD(^{
-        _contentView.layer.cornerRadius = _cornerRadius;
-        _contentView.layer.masksToBounds = YES;
-    });
-}
-
-- (void)setDetailTextColor:(UIColor *)detailTextColor {
-    EXECUTE_ON_MAIN_THREAD(^{
-        _detailLabel.textColor = detailTextColor;
-    });
-}
-
-- (void)setTextColor:(UIColor *)textColor {
-    EXECUTE_ON_MAIN_THREAD(^{
-        _label.textColor = textColor;
-    });
-}
-
-- (void)setDetailFont:(UIFont *)detailFont {
-    EXECUTE_ON_MAIN_THREAD(^{
-        _detailLabel.font = detailFont;
-    });
-}
-
-- (void)setActivityIndicatorColor:(UIColor *)activityIndicatorColor {
-    _activityIndicatorColor = activityIndicatorColor;
-    EXECUTE_ON_MAIN_THREAD(^{
+- (void)setTintColor:(UIColor *)tintColor {
+    [super setTintColor:tintColor];
+    
+    EXECUTE_ON_MAIN_THREAD(^() {
         [self setupIndicators];
-        [self setNeedsDisplay];
         [self setNeedsLayout];
+        [self setNeedsDisplay];
     });
 }
 #pragma mark - Getters
-- (NSString *)text {
-    return _label.text;
-}
-
-- (UIFont *)font {
-    return _label.font;
-}
-
-- (NSString *)detailText {
-    return _detailLabel.text;
-}
-
-- (UIColor *)detailTextColor {
-    return _detailLabel.textColor;
-}
-
-- (UIColor *)textColor {
-    return _label.textColor;
-}
-
-- (UIFont *)detailFont {
-    return _detailLabel.font;
-}
-
 - (CGRect)contentFrame {
     switch (_position) {
         case AXPracticalHUDPositionTop:
-            return CGRectMake(round((self.bounds.size.width - _size.width) / 2) + _offsetX, 0 + _offsetY, _size.width, _size.height);
+            return CGRectMake(round((self.bounds.size.width - _size.width) / 2) + _offsets.x, 0 + _offsets.y, _size.width, _size.height);
             break;
         case AXPracticalHUDPositionCenter:
-            return CGRectMake(round((self.bounds.size.width - _size.width) / 2) + _offsetX, round((self.bounds.size.height - _size.height) / 2) + _offsetY, _size.width, _size.height);
+            return CGRectMake(round((self.bounds.size.width - _size.width) / 2) + _offsets.x, round((self.bounds.size.height - _size.height) / 2) + _offsets.y, _size.width, _size.height);
             break;
         case AXPracticalHUDPositionBottom:
             if (self.superview) {
-                return CGRectMake(round((self.bounds.size.width - _size.width) / 2) + _offsetX, self.superview.bounds.size.height - _size.height + _offsetY, _size.width, _size.height);
+                return CGRectMake(round((self.bounds.size.width - _size.width) / 2) + _offsets.x, self.superview.bounds.size.height - _size.height + _offsets.y, _size.width, _size.height);
             } else {
-                return CGRectMake(round((self.bounds.size.width - _size.width) / 2) + _offsetX, round((self.bounds.size.height - _size.height) / 2) + _offsetY, _size.width, _size.height);
+                return CGRectMake(round((self.bounds.size.width - _size.width) / 2) + _offsets.x, round((self.bounds.size.height - _size.height) / 2) + _offsets.y, _size.width, _size.height);
             }
             break;
         default:
@@ -555,13 +464,8 @@ if ([NSThread isMainThread]) {\
 - (AXPracticalHUDContentView *)contentView {
     if (_contentView) return _contentView;
     _contentView = [[AXPracticalHUDContentView alloc] initWithFrame:CGRectZero];
-    _contentView.layer.cornerRadius = _cornerRadius;
+    _contentView.layer.cornerRadius = 4.0;
     _contentView.layer.masksToBounds = true;
-    _contentView.opacity = _opacity;
-    _contentView.color = _color;
-    _contentView.endColor = _endColor;
-    _contentView.translucent = _translucent;
-    _contentView.translucentStyle = _translucentStyle;
     return _contentView;
 }
 
@@ -579,22 +483,16 @@ if ([NSThread isMainThread]) {\
                 self.alpha = 1.0;
             }];
             CGRect rect = self.contentFrame;
+            
             CGFloat translation = (_position == AXPracticalHUDPositionBottom || _position == AXPracticalHUDPositionCenter) ? self.bounds.size.height : -rect.size.height;
             rect.origin.y = translation;
             _contentView.frame = rect;
-            [UIView animateWithDuration:0.5
-                                  delay:0.15
-                 usingSpringWithDamping:1.0
-                  initialSpringVelocity:0.9
-                                options:7
+            [UIView animateWithDuration:0.5 delay:0.15 usingSpringWithDamping:1.0 initialSpringVelocity:0.9 options:7
                              animations:^{
                                  _contentView.frame = self.contentFrame;
                              } completion:nil];
         } else {
-            [UIView animateWithDuration:0.25
-                                  delay:0.15
-                                options:7
-                             animations:^{
+            [UIView animateWithDuration:0.25 delay:0.15 options:7 animations:^{
                                  self.alpha = 1.0;
                              } completion:nil];
         }
@@ -634,23 +532,33 @@ if ([NSThread isMainThread]) {\
 - (void)setupIndicators {
     switch (_mode) {
         case AXPracticalHUDModeIndeterminate:
-            if (![_indicator isKindOfClass:[UIActivityIndicatorView class]]) {
+            if (![_indicator isKindOfClass:[AXActivityIndicatorView class]]) {
                 [_indicator removeFromSuperview];
-                _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-                [_indicator performSelector:@selector(startAnimating) withObject:nil];
+                _indicator = [[AXActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 37, 37)];
+                _indicator.backgroundColor = [UIColor clearColor];
+            }
+            [(AXActivityIndicatorView *)_indicator setLineWidth:2.5];
+            [(AXActivityIndicatorView *)_indicator setDrawingComponents:12];
+            [(AXActivityIndicatorView *)_indicator setTintColor:self.tintColor];
+            [(AXActivityIndicatorView *)_indicator setAnimating:YES];
+            [_contentView addSubview:_indicator];
+            break;
+        case AXPracticalHUDModeBreachedAnnularIndeterminate: {
+            if (![_indicator isKindOfClass:[AXBreachedAnnulusIndicatorView class]]) {
+                [_indicator removeFromSuperview];
+                _indicator = [[AXBreachedAnnulusIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 37, 37)];
+                _indicator.backgroundColor = [UIColor clearColor];
                 [_contentView addSubview:_indicator];
             }
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
-            if (_activityIndicatorColor) {
-                [_indicator setValue:_activityIndicatorColor forKey:@"color"];
-            } else {
-                [_indicator setValue:[UIColor whiteColor] forKey:@"color"];
-            }
-#endif
+            [(AXBreachedAnnulusIndicatorView *)_indicator setTintColor:self.tintColor];
+            [(AXBreachedAnnulusIndicatorView *)_indicator setAnimating:YES];
+        }
             break;
         case AXPracticalHUDModeDeterminateHorizontalBar:
             [_indicator removeFromSuperview];
             _indicator = [[AXBarProgressView alloc] init];
+            [_indicator setValue:self.tintColor forKey:@"lineColor"];
+            [_indicator setValue:self.tintColor forKey:@"progressColor"];
             [_contentView addSubview:_indicator];
             break;
         case AXPracticalHUDModeDeterminate:
@@ -658,6 +566,7 @@ if ([NSThread isMainThread]) {\
             if (![_indicator isKindOfClass:[AXCircleProgressView class]]) {
                 [_indicator removeFromSuperview];
                 _indicator = [[AXCircleProgressView alloc] init];
+                [_indicator setValue:self.tintColor forKey:@"progressColor"];
                 [_contentView addSubview:_indicator];
             }
             if (_mode == AXPracticalHUDModeDeterminateAnnularEnabled) {
@@ -686,8 +595,11 @@ if ([NSThread isMainThread]) {\
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     _isFinished = YES;
     self.alpha = .0;
+    if ([_indicator isKindOfClass:[AXGradientProgressView class]] && [_indicator respondsToSelector:@selector(endAnimating)]) {
+        [_indicator performSelector:@selector(endAnimating)];
+    }
     if (_removeFromSuperViewOnHide) {
-        [self removeFromSuperViewOnHide];
+        [self removeFromSuperview];
     }
     if (_restoreEnabled) {
         [self restore];
@@ -737,12 +649,12 @@ if ([NSThread isMainThread]) {\
     _executedObject = nil;
     _executedTarget = nil;
 
-    [self hideAnimated:YES];
+    [self hide:YES];
 }
 
 - (void)restore {
-    self.text = nil;
-    self.detailText = nil;
+    self.label.text = nil;
+    self.detailLabel.text = nil;
     [self initializer];
 }
 
@@ -796,46 +708,25 @@ if ([NSThread isMainThread]) {\
 }
 
 - (void)showPieInView:(UIView *)view {
-    [self showPieInView:view
-                   text:nil
-                 detail:nil
-          configuration:nil];
+    [self showPieInView:view text:nil detail:nil configuration:nil];
 }
 - (void)showProgressInView:(UIView *)view {
-    [self showProgressInView:view
-                        text:nil
-                      detail:nil
-               configuration:nil];
+    [self showProgressInView:view text:nil detail:nil configuration:nil];
 }
 - (void)showColorfulProgressInView:(UIView *)view; {
-    [self showColorfulProgressInView:view
-                                text:nil
-                              detail:nil
-                       configuration:nil];
+    [self showColorfulProgressInView:view text:nil detail:nil configuration:nil];
 }
 - (void)showTextInView:(UIView *)view {
-    [self showTextInView:view
-                    text:nil
-                  detail:nil
-           configuration:nil];
+    [self showTextInView:view text:nil detail:nil configuration:nil];
 }
 - (void)showSimpleInView:(UIView *)view {
-    [self showSimpleInView:view
-                      text:nil
-                    detail:nil
-             configuration:nil];
+    [self showSimpleInView:view text:nil detail:nil configuration:nil];
 }
 - (void)showErrorInView:(UIView *)view {
-    [self showErrorInView:view
-                     text:nil
-                   detail:nil
-            configuration:nil];
+    [self showErrorInView:view text:nil detail:nil configuration:nil];
 }
 - (void)showSuccessInView:(UIView *)view {
-    [self showSuccessInView:view
-                       text:nil
-                     detail:nil
-              configuration:nil];
+    [self showSuccessInView:view text:nil detail:nil configuration:nil];
 }
 
 - (void)showPieInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
@@ -860,12 +751,20 @@ if ([NSThread isMainThread]) {\
 }
 - (void)showErrorInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_8_0
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AXPracticalHUD.bundle/ax_hud_error"]];
+#else
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AXPracticalHUD.bundle/ax_hud_error" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
+#endif
     [self _showInView:view animated:YES mode:AXPracticalHUDModeCustomView text:text detail:detail customView:imageView configuration:configuration];
 }
 - (void)showSuccessInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_8_0
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AXPracticalHUD.bundle/ax_hud_success"]];
+#else
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AXPracticalHUD.bundle/ax_hud_success" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
+#endif
     [self _showInView:view animated:YES mode:AXPracticalHUDModeCustomView text:text detail:detail customView:imageView configuration:configuration];
 }
 
@@ -874,14 +773,14 @@ if ([NSThread isMainThread]) {\
 {
     EXECUTE_ON_MAIN_THREAD(^{
         self.mode = mode;
-        self.text = text;
+        self.label.text = text;
         self.customView = customView;
-        self.detailText = detail;
+        self.detailLabel.text = detail;
         [view addSubview:self];
         if (configuration) {
             configuration(self);
         }
-        [self showAnimated:animated];
+        [self show:animated];
     });
 }
 @end
@@ -891,14 +790,14 @@ if ([NSThread isMainThread]) {\
     AXPracticalHUD *hud = [[AXPracticalHUD alloc] initWithView:view];
     hud.removeFromSuperViewOnHide = YES;
     [view addSubview:hud];
-    [hud showAnimated:YES];
+    [hud show:YES];
     return hud;
 }
 + (BOOL)hideHUDInView:(UIView *)view animated:(BOOL)animated {
     AXPracticalHUD *hud = [self HUDInView:view];
     if (hud) {
         hud.removeFromSuperViewOnHide = YES;
-        [hud hideAnimated:YES];
+        [hud hide:YES];
         return YES;
     }
     return NO;
@@ -907,7 +806,7 @@ if ([NSThread isMainThread]) {\
     NSArray *HUDs = [self HUDsInView:view];
     for (AXPracticalHUD *hud in HUDs) {
         hud.removeFromSuperViewOnHide = YES;
-        [hud hideAnimated:animated];
+        [hud hide:animated];
     }
     return HUDs.count;
 }

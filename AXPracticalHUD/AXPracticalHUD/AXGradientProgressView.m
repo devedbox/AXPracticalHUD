@@ -8,8 +8,9 @@
 
 #import "AXGradientProgressView.h"
 
-@interface AXGradientProgressView()
+@interface AXGradientProgressView()<CAAnimationDelegate>
 @property(strong, nonatomic) CAGradientLayer *gradientLayer;
+@property(strong, nonatomic) CADisplayLink *displayLink;
 @end
 
 @implementation AXGradientProgressView
@@ -31,19 +32,24 @@
 - (void)initializer {
     _progress = 0.0;
     _progressHeight = 1.0;
-    _colors = [[self class] defaultColors];
+    _colors = [[[self class] defaultColors] mutableCopy];
     _duration = 0.08;
     
     [self.layer addSublayer:self.gradientLayer];
+}
+
+- (void)dealloc {
+    [_displayLink invalidate];
+    _displayLink = nil;
 }
 #pragma mark - Override
 - (void)didMoveToSuperview {
     [super didMoveToSuperview];
     
     if (self.superview) {
-        [self performAnimation];
+        [self beginAnimating];
     } else {
-        [_gradientLayer removeAnimationForKey:@"colors"];
+        [self endAnimating];
     }
 }
 
@@ -57,20 +63,49 @@
     [super layoutSubviews];
     
     [self sizeToFit];
+}
+
+- (void)layoutSublayersOfLayer:(CALayer *)layer {
+    [super layoutSublayersOfLayer:layer];
     
     CGRect rect = _gradientLayer.frame;
     rect.size.width = self.bounds.size.width * MIN(_progress, 1.0);
     rect.size.height = self.bounds.size.height;
     _gradientLayer.frame = rect;
 }
+
+#pragma mark - Public
+- (void)beginAnimating {
+    [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+}
+
+- (void)endAnimating {
+    [_displayLink invalidate];
+    _displayLink = nil;
+}
+
 #pragma mark - Getters & Setters
 - (CAGradientLayer *)gradientLayer {
     if (_gradientLayer) return _gradientLayer;
     _gradientLayer = [CAGradientLayer layer];
-    _gradientLayer.startPoint = CGPointMake(0.0, _progressHeight / 2.0);
-    _gradientLayer.endPoint = CGPointMake(1.0, _progressHeight / 2.0);
-    _gradientLayer.colors = _colors;
+    _gradientLayer.startPoint = CGPointMake(0.0, 0);
+    _gradientLayer.endPoint = CGPointMake(1.0, 0);
+    _gradientLayer.colors = [_colors copy];
+    _gradientLayer.type = kCAGradientLayerAxial;
     return _gradientLayer;
+}
+
+- (CADisplayLink *)displayLink {
+    if (_displayLink) return _displayLink;
+    _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(handleDisplayLink:)];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_10_0
+    self.displayLink.frameInterval = 1;
+#else
+    if ([self.displayLink respondsToSelector:@selector(setPreferredFramesPerSecond:)] && kCFCoreFoundationVersionNumber > kCFCoreFoundationVersionNumber_iOS_9_4) {
+        self.displayLink.preferredFramesPerSecond = 60;
+    }
+#endif
+    return _displayLink;
 }
 
 - (void)setColors:(NSMutableArray *)colors {
@@ -85,36 +120,23 @@
 
 - (void)setProgressHeight:(CGFloat)progressHeight {
     _progressHeight = progressHeight;
-    _gradientLayer.startPoint = CGPointMake(0.0, _progressHeight / 2.0);
-    _gradientLayer.endPoint = CGPointMake(1.0, _progressHeight / 2.0);
 }
 #pragma mark - Private helper
-- (void)performAnimation {
-    CGColorRef color = (__bridge CGColorRef)([_colors lastObject]);
-    [_colors removeLastObject];
-    [_colors insertObject:(__bridge id)(color) atIndex:0];
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"colors"];
-    animation.toValue = _colors;
-    animation.duration = _duration;
-    animation.removedOnCompletion = YES;
-    animation.fillMode = kCAFillModeForwards;
-    animation.delegate = self;
-    [_gradientLayer addAnimation:animation forKey:@"colors"];
-}
-
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-    if (flag) {
-        [self performSelectorOnMainThread:@selector(performAnimation) withObject:nil waitUntilDone:NO modes:@[NSDefaultRunLoopMode]];
-    }
+- (void)handleDisplayLink:(CADisplayLink *)sender {
+    NSMutableArray *colors = [_gradientLayer.colors mutableCopy];
+    CGColorRef color = (__bridge CGColorRef)([colors lastObject]);
+    [colors removeLastObject];
+    [colors insertObject:(__bridge id)(color) atIndex:0];
+    _gradientLayer.colors = [colors copy];
 }
 
 + (NSMutableArray *)defaultColors {
     NSMutableArray *colors = [NSMutableArray array];
-    NSInteger hue = 0;
+    NSInteger hue = 1;
     while (hue <= 360) {
         UIColor *color = [[UIColor alloc] initWithHue:1.0 * hue / 360.0 saturation:1.0 brightness:1.0 alpha:1.0];
         [colors addObject:(__bridge id)(color.CGColor)];
-        hue += 1;
+        hue += 5;
     }
     return colors;
 }
