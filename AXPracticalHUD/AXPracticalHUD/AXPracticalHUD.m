@@ -526,6 +526,9 @@ if ([NSThread isMainThread]) {\
             [self completed];
         }
         _showStarted = nil;
+    } else {
+        self.alpha = .0f;
+        [self completed];
     }
 }
 
