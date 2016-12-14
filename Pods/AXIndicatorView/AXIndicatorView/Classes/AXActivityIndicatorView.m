@@ -24,11 +24,25 @@
 //  SOFTWARE.
 
 #import "AXActivityIndicatorView.h"
-
+@class _AXActivityIndicatorLayerView;
 @interface AXActivityIndicatorView ()
-
+/// Color index layer.
+@property(strong, nonatomic) _AXActivityIndicatorLayerView *colorIndexLayerView;
 @end
-
+@interface _AXActivityIndicatorLayerView : UIView
+/// Line width.
+@property(assign, nonatomic) CGFloat lineWidth;
+/// Drawing percent of the components.
+@property(assign, nonatomic) int64_t drawingComponents;
+/// Animating.
+@property(assign, nonatomic) BOOL animating;
+/// Should gradient color index.
+@property(assign, nonatomic) BOOL shouldGradientColorIndex;
+/// Begin angle offset.
+@property(assign, nonatomic) CGFloat angleOffset;
+- (void)drawComponents;
+- (void)drawLineWithAngle:(CGFloat)angle context:(CGContextRef)context tintColor:(UIColor *)tintColor;
+@end
 @implementation AXActivityIndicatorView
 @synthesize animating = _animating;
 #pragma mark - Initializer
@@ -61,6 +75,99 @@
 
 - (void)initializer {
     _lineWidth = 2.0;
+    
+    [self addSubview:self.colorIndexLayerView];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    _colorIndexLayerView.frame = [self bounds];
+}
+
+#pragma mark - Getters
+- (_AXActivityIndicatorLayerView *)colorIndexLayerView {
+    if (_colorIndexLayerView) return _colorIndexLayerView;
+    _colorIndexLayerView = [_AXActivityIndicatorLayerView new];
+    _colorIndexLayerView.backgroundColor = [UIColor clearColor];
+    _colorIndexLayerView.lineWidth = _lineWidth;
+    _colorIndexLayerView.drawingComponents = _drawingComponents;
+    _colorIndexLayerView.animating = _animating;
+    _colorIndexLayerView.shouldGradientColorIndex = _shouldGradientColorIndex;
+    _colorIndexLayerView.angleOffset = _angleOffset;
+    return _colorIndexLayerView;
+}
+
+- (BOOL)isAnimating {
+    return _animating;
+}
+
+#pragma mark - Setters
+- (void)setLineWidth:(CGFloat)lineWidth {
+    _lineWidth = lineWidth;
+    self.colorIndexLayerView.lineWidth = _lineWidth;
+}
+
+- (void)setDrawingComponents:(int64_t)drawingComponents {
+    _drawingComponents = MIN(12, drawingComponents);
+    self.colorIndexLayerView.drawingComponents = _drawingComponents;
+}
+
+- (void)setShouldGradientColorIndex:(BOOL)shouldGradientColorIndex {
+    _shouldGradientColorIndex = shouldGradientColorIndex;
+    [self.colorIndexLayerView setShouldGradientColorIndex:_shouldGradientColorIndex];
+}
+
+- (void)setAngleOffset:(CGFloat)angleOffset {
+    _angleOffset = angleOffset;
+    [self.colorIndexLayerView setAngleOffset:_angleOffset];
+}
+
+- (void)setAnimating:(BOOL)animating {
+    _animating = animating;
+    self.colorIndexLayerView.animating = _animating;
+    if (animating) {
+        [self addColorIndexAnimation];
+    } else {
+        [_colorIndexLayerView.layer removeAnimationForKey:@"transform.rotation"];
+    }
+}
+
+#pragma mark - Helper
+
+- (void)addColorIndexAnimation {
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation"];
+    NSMutableArray *values = [@[] mutableCopy];
+    for (int i = 0; i < 12; i++) {
+        [values addObject:@((i*M_PI/6)-M_PI_4)];
+    }
+    animation.values = values;
+    animation.duration = 0.6;
+    animation.repeatCount = CGFLOAT_MAX;
+    animation.calculationMode = kCAAnimationDiscrete;
+    [_colorIndexLayerView.layer addAnimation:animation forKey:@"transform.rotation"];
+}
+@end
+
+@implementation _AXActivityIndicatorLayerView
+- (void)setAnimating:(BOOL)animating {
+    _animating = animating;
+    [self setNeedsDisplay];
+}
+
+- (void)setDrawingComponents:(int64_t)drawingComponents {
+    _drawingComponents = MIN(12, drawingComponents);
+    [self setNeedsDisplay];
+}
+
+- (void)setShouldGradientColorIndex:(BOOL)shouldGradientColorIndex {
+    _shouldGradientColorIndex = shouldGradientColorIndex;
+    [self setNeedsDisplay];
+}
+
+- (void)setAngleOffset:(CGFloat)angleOffset {
+    _angleOffset = angleOffset;
+    [self setNeedsDisplay];
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -75,41 +182,8 @@
     CGContextRef cxt = UIGraphicsGetCurrentContext();
     UIColor *tintColor = self.tintColor?:[UIColor blackColor];
     // Draw all the possilbe line using the proper tint color.
-    for (int64_t i = _animatedColorIndex; i < _animatedColorIndex+_drawingComponents; i++) [self drawLineWithAngle:angle*i-M_PI_2 context:cxt tintColor:_animating?[tintColor colorWithAlphaComponent:((float)i-(float)_animatedColorIndex)/12.0]:tintColor];
+    for (int64_t i = 0; i < _drawingComponents; i++) [self drawLineWithAngle:angle*i-M_PI_2+_angleOffset context:cxt tintColor:_animating&&_shouldGradientColorIndex?[tintColor colorWithAlphaComponent:((float)i)/12.0]:tintColor];
 }
-
-#pragma mark - Getters
-- (BOOL)isAnimating {
-    return _animating;
-}
-
-- (CADisplayLink *)displayLink {
-    return _displayLink;
-}
-
-#pragma mark - Setters
-
-- (void)setAnimatedColorIndex:(int64_t)animatedColorIndex {
-    _animatedColorIndex = animatedColorIndex;
-    [self setNeedsDisplay];
-}
-
-- (void)setDrawingComponents:(int64_t)drawingComponents {
-    _drawingComponents = MIN(12, drawingComponents);
-    [self setNeedsDisplay];
-}
-
-- (void)setAnimating:(BOOL)animating {
-    _animating = animating;
-    
-    if (animating) {
-        [self addColorIndexAnimation];
-    } else {
-        [self.displayLink invalidate];
-        self.displayLink = nil;
-    }
-}
-
 #pragma mark - Helper
 - (void)drawLineWithAngle:(CGFloat)angle context:(CGContextRef)context tintColor:(UIColor *)tintColor {
     CGContextSetStrokeColorWithColor(context, tintColor.CGColor);
@@ -132,26 +206,5 @@
     CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
     
     CGContextStrokePath(context);
-}
-
-- (void)addColorIndexAnimation {
-    if (!self.displayLink) {
-        self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(handleDisplayLink:)];
-    }
-    [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
-#if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_10_0
-    self.displayLink.frameInterval = 3;
-#else
-    if ([self.displayLink respondsToSelector:@selector(setPreferredFramesPerSecond:)] && kCFCoreFoundationVersionNumber > kCFCoreFoundationVersionNumber_iOS_9_4) {
-        self.displayLink.preferredFramesPerSecond = 20;
-    }
-#endif
-}
-
-- (void)handleDisplayLink:(CADisplayLink *)sender {
-    if (++_animatedColorIndex > 12) {
-        _animatedColorIndex = 0;
-    }
-    [self setAnimatedColorIndex:_animatedColorIndex];
 }
 @end

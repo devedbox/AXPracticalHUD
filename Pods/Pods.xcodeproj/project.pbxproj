@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		0ED2636E08C6D2D3FBE09AE33467AF42 /* Pods-AXPracticalHUD-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EF45D730C940C2A8087F9D25DB90866B /* Pods-AXPracticalHUD-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		120E3363F1AF9220470EC49A8ABF041E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E86668F20F252C440D1015B816BE59C5 /* UIKit.framework */; };
-		21DD146D76418D6A10407B4D153AC9AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A6FF208CEC4C2861F1E9D42D651453 /* Foundation.framework */; };
 		27AB219C2865010C9FD525C2E293B620 /* AXIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AA8899C67A3F604B96445672A85F761 /* AXIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		29B5A2DCFCF408026C4805A9D57D4230 /* AXBreachedAnnulusIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7297F96EB880E3971AE952460FEC2328 /* AXBreachedAnnulusIndicatorView.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		39EEE0CE77CCF97D83E3D90E639A911C /* AXIndicatorView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD0EFB46C78CA722A63097544EBE55D /* AXIndicatorView-dummy.m */; };
+		3F2F9C4DA1F091BBA283BF6CB8AF51EB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC994CDC2D681BA26389F78A7E4B325 /* UIKit.framework */; };
+		411F0B1D309FFAFF6BB15C943FF9E18F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616BEB51ECCAD129BDBCB7A956B56CC6 /* Foundation.framework */; };
 		5BC811BBC22CB55A5ACA3F223E13BBF0 /* AXActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A01EE949D277815C73A7C2423D924D76 /* AXActivityIndicatorView.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		5F917B4FA9907122C0D76CF4DD5477BF /* AXBreachedAnnulusIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37871A0A9D739F5037EA196AC5194987 /* AXBreachedAnnulusIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A9F07D522968E74EDDFB3FC673EE425F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A6FF208CEC4C2861F1E9D42D651453 /* Foundation.framework */; };
 		D3D9AFD8CAB9156EF932B78B7E0454EA /* AXActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A3DE16FA1BDFE547B5CB20D5E9CF698 /* AXActivityIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F18E15732C808840D6114F79F924FC70 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616BEB51ECCAD129BDBCB7A956B56CC6 /* Foundation.framework */; };
 		F754C0108ECD803CDE8562D225FA1B79 /* AXIndicatorView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A770859F9F061EE3A477A38F5520AB78 /* AXIndicatorView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF7817D3FCA59C2406222F461C012012 /* Pods-AXPracticalHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE30696FE768460CC589E26D21ACDD7 /* Pods-AXPracticalHUD-dummy.m */; };
 /* End PBXBuildFile section */
@@ -39,15 +39,16 @@
 		3BD0EFB46C78CA722A63097544EBE55D /* AXIndicatorView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AXIndicatorView-dummy.m"; sourceTree = "<group>"; };
 		5E9CDAFB53BF2D8F8F348343CCFDC401 /* Pods-AXPracticalHUD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AXPracticalHUD.debug.xcconfig"; sourceTree = "<group>"; };
 		5F89C0CFACDA8099571F5E02216F74B0 /* Pods-AXPracticalHUD-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AXPracticalHUD-frameworks.sh"; sourceTree = "<group>"; };
+		616BEB51ECCAD129BDBCB7A956B56CC6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		6885B9033AF9AA683B137EE32C95F851 /* AXIndicatorView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AXIndicatorView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7297F96EB880E3971AE952460FEC2328 /* AXBreachedAnnulusIndicatorView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AXBreachedAnnulusIndicatorView.m; path = AXIndicatorView/Classes/AXBreachedAnnulusIndicatorView.m; sourceTree = "<group>"; };
 		7D29CB417C598320A83ADE53AB82650E /* Pods-AXPracticalHUD-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AXPracticalHUD-acknowledgements.plist"; sourceTree = "<group>"; };
+		7EC994CDC2D681BA26389F78A7E4B325 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		859FA98FE5A7946766097F5667E53445 /* Pods-AXPracticalHUD-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AXPracticalHUD-resources.sh"; sourceTree = "<group>"; };
 		8DE30696FE768460CC589E26D21ACDD7 /* Pods-AXPracticalHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AXPracticalHUD-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9A3DE16FA1BDFE547B5CB20D5E9CF698 /* AXActivityIndicatorView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AXActivityIndicatorView.h; path = AXIndicatorView/Classes/AXActivityIndicatorView.h; sourceTree = "<group>"; };
 		A01EE949D277815C73A7C2423D924D76 /* AXActivityIndicatorView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AXActivityIndicatorView.m; path = AXIndicatorView/Classes/AXActivityIndicatorView.m; sourceTree = "<group>"; };
-		A2A6FF208CEC4C2861F1E9D42D651453 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A770859F9F061EE3A477A38F5520AB78 /* AXIndicatorView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AXIndicatorView-umbrella.h"; sourceTree = "<group>"; };
 		A9F87794E19C91B31DE57B907FF88368 /* AXIndicatorView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AXIndicatorView-prefix.pch"; sourceTree = "<group>"; };
 		AC832B76D8EC627000E6EE6F59B16EE7 /* Pods-AXPracticalHUD.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-AXPracticalHUD.modulemap"; sourceTree = "<group>"; };
@@ -56,7 +57,6 @@
 		D8F427E52424CF5A0C2DCFD3CF827EAD /* AXIndicatorView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AXIndicatorView.xcconfig; sourceTree = "<group>"; };
 		DB8D7B4E0918859CB7667ECC57F7A04D /* Pods_AXPracticalHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AXPracticalHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3DCDF65EB89BB423F8832B3110208BD /* Pods-AXPracticalHUD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AXPracticalHUD.release.xcconfig"; sourceTree = "<group>"; };
-		E86668F20F252C440D1015B816BE59C5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		EF45D730C940C2A8087F9D25DB90866B /* Pods-AXPracticalHUD-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AXPracticalHUD-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,8 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21DD146D76418D6A10407B4D153AC9AF /* Foundation.framework in Frameworks */,
-				120E3363F1AF9220470EC49A8ABF041E /* UIKit.framework in Frameworks */,
+				F18E15732C808840D6114F79F924FC70 /* Foundation.framework in Frameworks */,
+				3F2F9C4DA1F091BBA283BF6CB8AF51EB /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9F07D522968E74EDDFB3FC673EE425F /* Foundation.framework in Frameworks */,
+				411F0B1D309FFAFF6BB15C943FF9E18F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +98,7 @@
 		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F302CD3B306AF1ED96B9AF31FCDBC26C /* iOS */,
+				E6EE98446B568159EE277B68FD442AF0 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -170,11 +170,11 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		F302CD3B306AF1ED96B9AF31FCDBC26C /* iOS */ = {
+		E6EE98446B568159EE277B68FD442AF0 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				A2A6FF208CEC4C2861F1E9D42D651453 /* Foundation.framework */,
-				E86668F20F252C440D1015B816BE59C5 /* UIKit.framework */,
+				616BEB51ECCAD129BDBCB7A956B56CC6 /* Foundation.framework */,
+				7EC994CDC2D681BA26389F78A7E4B325 /* UIKit.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";

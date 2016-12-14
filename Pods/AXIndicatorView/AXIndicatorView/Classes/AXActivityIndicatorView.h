@@ -32,12 +32,10 @@
 @property(assign, nonatomic) int64_t drawingComponents;
 /// Animating.
 @property(assign, nonatomic, getter=isAnimating) BOOL animating;
-/// Animated color index.
-@property(assign, nonatomic) int64_t animatedColorIndex;
-/// Shape layer.
-@property(strong, nonatomic) CADisplayLink *displayLink;
+/// Should gradient color index.
+@property(assign, nonatomic) BOOL shouldGradientColorIndex;
+/// Begin angle offset.
+@property(assign, nonatomic) CGFloat angleOffset;
 
 - (void)initializer;
-- (void)drawComponents;
-- (void)drawLineWithAngle:(CGFloat)angle context:(CGContextRef)context tintColor:(UIColor *)tintColor;
 @end

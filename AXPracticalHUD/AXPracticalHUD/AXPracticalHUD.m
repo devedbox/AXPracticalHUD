@@ -542,6 +542,7 @@ if ([NSThread isMainThread]) {\
             }
             [(AXActivityIndicatorView *)_indicator setLineWidth:2.5];
             [(AXActivityIndicatorView *)_indicator setDrawingComponents:12];
+            [(AXActivityIndicatorView *)_indicator setShouldGradientColorIndex:YES];
             [(AXActivityIndicatorView *)_indicator setTintColor:self.tintColor];
             [(AXActivityIndicatorView *)_indicator setAnimating:YES];
             [_contentView addSubview:_indicator];
