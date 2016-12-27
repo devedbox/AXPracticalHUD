@@ -1,6 +1,0 @@
-framework module Pods_AXPracticalHUD {
-  umbrella header "Pods-AXPracticalHUD-umbrella.h"
-
-  export *
-  module * { export * }
-}
