@@ -324,25 +324,22 @@ if ([NSThread isMainThread]) {\
 
 - (void)hide:(BOOL)animated afterDelay:(NSTimeInterval)delay completion:(void (^)())completion
 {
-    void(^hideBlock)(BOOL) = ^(BOOL animated) {
-        _animated = animated;
-        // If the minShow time is set, calculate how long the hud was shown,
-        // and pospone the hiding operation if necessary
-        if (_threshold > 0.0 && _showStarted) {
-            NSTimeInterval interv = [[NSDate date] timeIntervalSinceDate:_showStarted];
-            if (interv < _threshold) {
-                _minShowTimer = [NSTimer scheduledTimerWithTimeInterval:_threshold - interv target:self selector:@selector(handleMinShowTimer:) userInfo:nil repeats:NO];
-                return;
-            }
+    _animated = animated;
+    // If the minShow time is set, calculate how long the hud was shown,
+    // and pospone the hiding operation if necessary
+    if (_threshold > 0.0 && _showStarted) {
+        NSTimeInterval interv = [[NSDate date] timeIntervalSinceDate:_showStarted];
+        if (interv < _threshold) {
+            _minShowTimer = [NSTimer scheduledTimerWithTimeInterval:_threshold - interv target:self selector:@selector(handleMinShowTimer:) userInfo:nil repeats:NO];
+            return;
         }
-        // ... otherwise hide the HUD immediately
-        EXECUTE_ON_MAIN_THREAD(^{
-            [self hidingAnimated:YES];
-        });
-    };
+    }
+    
     _completion = [completion copy];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        hideBlock(animated);
+    
+    // ... otherwise hide the HUD after the delay.
+    EXECUTE_ON_MAIN_THREAD(^{
+        [self performSelector:animated?@selector(_hidingByAnimated):@selector(_hidingWithoutAnimated) withObject:nil afterDelay:delay];
     });
 }
 
@@ -522,14 +519,27 @@ if ([NSThread isMainThread]) {\
                                  }
                              }];
         } else {
-            self.alpha = .0f;
-            [self completed];
+            [UIView animateWithDuration:0.25 animations:^{
+                self.alpha = .0f;
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    [self completed];
+                }
+            }];
         }
         _showStarted = nil;
     } else {
         self.alpha = .0f;
         [self completed];
     }
+}
+
+- (void)_hidingByAnimated {
+    [self hidingAnimated:YES];
+}
+
+- (void)_hidingWithoutAnimated {
+    [self hidingAnimated:NO];
 }
 
 - (void)setupIndicators {
