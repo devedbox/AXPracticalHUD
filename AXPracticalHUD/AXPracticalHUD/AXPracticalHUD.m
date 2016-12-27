@@ -278,19 +278,7 @@ if ([NSThread isMainThread]) {\
 
 - (void)show:(BOOL)animated executingBlock:(dispatch_block_t)executing onQueue:(dispatch_queue_t)queue completion:(AXPracticalHUDCompletionBlock)completion
 {
-    void(^showBlock)(BOOL) = ^(BOOL animated) {
-        _animated = animated;
-        // If the grace time is set postpone the HUD display
-        if (_grace > 0.0) {
-            NSTimer *newGraceTimer = [NSTimer timerWithTimeInterval:_grace target:self selector:@selector(handleGraceTimer:) userInfo:nil repeats:NO];
-            [[NSRunLoop currentRunLoop] addTimer:newGraceTimer forMode:NSRunLoopCommonModes];
-            _graceTimer = newGraceTimer;
-        } else {
-            // ... otherwise show the HUD imediately
-            [self showingAnimated:animated];
-        }
-    };
-    
+    _animated = animated;
     _completion = [completion copy];
     
     if (executing) {
@@ -303,9 +291,18 @@ if ([NSThread isMainThread]) {\
         });
     }
     
-    EXECUTE_ON_MAIN_THREAD(^{
-        showBlock(animated);
-    });
+    // If the grace time is set postpone the HUD display
+    if (_grace > 0.0) {
+        /*
+        NSTimer *newGraceTimer = [NSTimer timerWithTimeInterval:_grace target:self selector:@selector(handleGraceTimer:) userInfo:nil repeats:NO];
+        [[NSRunLoop currentRunLoop] addTimer:newGraceTimer forMode:NSRunLoopCommonModes];
+        _graceTimer = newGraceTimer;
+         */
+        [self performSelector:animated?@selector(_showingByAnimated):@selector(_showingWithoutAnimated) withObject:nil afterDelay:_grace];
+    } else {
+        // ... otherwise show the HUD imediately
+        [self showingAnimated:animated];
+    }
 }
 
 - (void)show:(BOOL)animated executingMethod:(SEL)method toTarget:(id)target withObject:(id)object
@@ -317,83 +314,73 @@ if ([NSThread isMainThread]) {\
     _progressing = YES;
     [NSThread detachNewThreadSelector:@selector(executing) toTarget:self withObject:nil];
     // Show HUD view
-    EXECUTE_ON_MAIN_THREAD(^{
-        [self show:YES];
-    });
+    [self show:YES];
 }
 
 - (void)hide:(BOOL)animated afterDelay:(NSTimeInterval)delay completion:(void (^)())completion
 {
     _animated = animated;
+    _completion = [completion copy];
+    
+    NSTimeInterval timeInterval = delay;
+    
     // If the minShow time is set, calculate how long the hud was shown,
     // and pospone the hiding operation if necessary
     if (_threshold > 0.0 && _showStarted) {
         NSTimeInterval interv = [[NSDate date] timeIntervalSinceDate:_showStarted];
         if (interv < _threshold) {
+            /*
             _minShowTimer = [NSTimer scheduledTimerWithTimeInterval:_threshold - interv target:self selector:@selector(handleMinShowTimer:) userInfo:nil repeats:NO];
-            return;
+             */
+            timeInterval = MAX(_threshold - interv, delay);
         }
     }
     
-    _completion = [completion copy];
-    
     // ... otherwise hide the HUD after the delay.
-    EXECUTE_ON_MAIN_THREAD(^{
-        [self performSelector:animated?@selector(_hidingByAnimated):@selector(_hidingWithoutAnimated) withObject:nil afterDelay:delay];
-    });
+    [self performSelector:animated?@selector(_hidingByAnimated):@selector(_hidingWithoutAnimated) withObject:nil afterDelay:timeInterval];
 }
 
 #pragma mark - Setters
 
 - (void)setMode:(AXPracticalHUDMode)mode {
     _mode = mode;
-    EXECUTE_ON_MAIN_THREAD(^{
-        [self setupIndicators];
-        [self setNeedsLayout];
-        [self setNeedsDisplay];
-    });
+    [self setupIndicators];
+    [self setNeedsLayout];
+    [self setNeedsDisplay];
 }
 
 - (void)setPosition:(AXPracticalHUDPosition)position {
     _position = position;
-    EXECUTE_ON_MAIN_THREAD((^{
-        if (_position == AXPracticalHUDPositionCenter) {
-            _contentView.motionEffects = @[self.xMotionEffect, self.yMotionEffect];
-        } else {
-            [_contentView removeMotionEffect:_xMotionEffect];
-            [_contentView removeMotionEffect:_yMotionEffect];
-        }
-        [self setNeedsDisplay];
-        [self setNeedsLayout];
-    }));
+    if (_position == AXPracticalHUDPositionCenter) {
+        _contentView.motionEffects = @[self.xMotionEffect, self.yMotionEffect];
+    } else {
+        [_contentView removeMotionEffect:_xMotionEffect];
+        [_contentView removeMotionEffect:_yMotionEffect];
+    }
+    [self setNeedsDisplay];
+    [self setNeedsLayout];
 }
 
 - (void)setProgress:(CGFloat)progress {
     _progress = progress;
-    EXECUTE_ON_MAIN_THREAD(^{
-        if ([_indicator isKindOfClass:[AXBarProgressView class]] || [_indicator isKindOfClass:[AXCircleProgressView class]] || [_indicator isKindOfClass:[AXGradientProgressView class]]) {
-            [_indicator setValue:@(_progress) forKey:@"progress"];
-        }
-    });
+    if ([_indicator isKindOfClass:[AXBarProgressView class]] || [_indicator isKindOfClass:[AXCircleProgressView class]] || [_indicator isKindOfClass:[AXGradientProgressView class]]) {
+        [_indicator setValue:@(_progress) forKey:@"progress"];
+    }
 }
 
 - (void)setCustomView:(UIView *)customView {
     _customView = customView;
-    EXECUTE_ON_MAIN_THREAD(^{
-        [self setupIndicators];
-        [self setNeedsLayout];
-        [self setNeedsDisplay];
-    });
+    [self setupIndicators];
+    [self setNeedsLayout];
+    [self setNeedsDisplay];
 }
 
 - (void)setTintColor:(UIColor *)tintColor {
     [super setTintColor:tintColor];
     
-    EXECUTE_ON_MAIN_THREAD(^() {
-        [self setupIndicators];
-        [self setNeedsLayout];
-        [self setNeedsDisplay];
-    });
+    [self setupIndicators];
+    [self setNeedsLayout];
+    [self setNeedsDisplay];
 }
 #pragma mark - Getters
 - (CGRect)contentFrame {
@@ -472,7 +459,7 @@ if ([NSThread isMainThread]) {\
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self setNeedsDisplay];
     [self setNeedsLayout];
-    self.showStarted = [NSDate date];
+    _showStarted = [NSDate date];
     // Animating
     if (animated) {
         if (_animation == AXPracticalHUDAnimationFlipIn) {
@@ -496,6 +483,14 @@ if ([NSThread isMainThread]) {\
     } else {
         self.alpha = 1.0;
     }
+}
+
+- (void)_showingByAnimated {
+    [self showingAnimated:YES];
+}
+
+- (void)_showingWithoutAnimated {
+    [self showingAnimated:NO];
 }
 
 - (void)hidingAnimated:(BOOL)animated {
@@ -787,17 +782,15 @@ if ([NSThread isMainThread]) {\
 #pragma mark - Private
 - (void)_showInView:(UIView *)view animated:(BOOL)animated mode:(AXPracticalHUDMode)mode text:(NSString *)text detail:(NSString *)detail customView:(UIView *)customView configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {
-    EXECUTE_ON_MAIN_THREAD(^{
-        self.mode = mode;
-        self.label.text = text;
-        self.customView = customView;
-        self.detailLabel.text = detail;
-        [view addSubview:self];
-        if (configuration) {
-            configuration(self);
-        }
-        [self show:animated];
-    });
+    self.mode = mode;
+    self.label.text = text;
+    self.customView = customView;
+    self.detailLabel.text = detail;
+    [view addSubview:self];
+    if (configuration) {
+        configuration(self);
+    }
+    [self show:animated];
 }
 @end
 

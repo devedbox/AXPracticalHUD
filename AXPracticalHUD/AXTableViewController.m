@@ -166,7 +166,9 @@
     HUD.dimBackground = YES;
     
     // Show the HUD while the provided method executes in a new thread
-    [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
+//    [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
+    [HUD show:YES];
+    [HUD hide:YES afterDelay:1.0 completion:NULL];
 }
 
 - (IBAction)showWithLabel:(id)sender {
