@@ -156,6 +156,8 @@
     
     HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
     HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
     
     // Regiser for HUD callbacks so we can remove it from the window at the right time
     HUD.delegate = self;
@@ -169,12 +171,25 @@
 //    [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
     [HUD show:YES];
     [HUD hide:YES afterDelay:1.0 completion:NULL];
+    [[AXPracticalHUD sharedHUD] showSuccessInView:self.navigationController.view text:@"heheda" detail:nil configuration:^(AXPracticalHUD *_HUD) {
+        _HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+        _HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+        _HUD.label.textColor = HUD.tintColor;
+        _HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
+    }];
+    
+    [[AXPracticalHUD sharedHUD] hide:YES afterDelay:2.0 completion:NULL];
 }
 
 - (IBAction)showWithLabel:(id)sender {
     
     HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
+    
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
     
     HUD.delegate = self;
     HUD.label.text = @"Loading";
@@ -191,6 +206,11 @@
     HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
     
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
+    
     HUD.delegate = self;
     HUD.label.text = @"Loading";
     HUD.detailLabel.text = @"updating data";
@@ -205,6 +225,11 @@
     
     HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
+    
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
     
     // Set determinate mode
     HUD.mode = AXPracticalHUDModeDeterminate;
@@ -223,6 +248,11 @@
     HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
     
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
+    
     // Set determinate mode
     HUD.mode = AXPracticalHUDModeDeterminateAnnularEnabled;
     
@@ -238,6 +268,11 @@
     HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
     
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
+    
     // Set determinate bar mode
     HUD.mode = AXPracticalHUDModeDeterminateHorizontalBar;
     HUD.tintColor = [UIColor orangeColor];
@@ -252,6 +287,11 @@
     
     HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
+    
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
     
     // The sample image is based on the work by http://www.pixelpressicons.com, http://creativecommons.org/licenses/by/2.5/ca/
     // Make the customViews 37 by 37 pixels for best results (those are the bounds of the build-in progress indicators)
@@ -271,6 +311,11 @@
     
     HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
+    
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
     
     HUD.delegate = self;
     HUD.label.text = @"Connecting";
@@ -297,6 +342,11 @@
     HUD = [[AXPracticalHUD alloc] initWithView:self.view.window];
     [self.view.window addSubview:HUD];
     
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
+    
     HUD.delegate = self;
     HUD.label.text = @"Loading";
     
@@ -306,6 +356,11 @@
 - (IBAction)showURL:(id)sender {
     NSURL *URL = [NSURL URLWithString:@"http://a1408.g.akamai.net/5/1408/1388/2005110403/1a1a1ad948be278cff2d96046ad90768d848b41947aa1986/sample_iPod.m4v.zip"];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
@@ -333,6 +388,11 @@
     
     AXPracticalHUD *hud = [AXPracticalHUD showHUDInView:self.navigationController.view animated:YES];
     
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
+    
     // Configure for text only and offset down
     hud.mode = AXPracticalHUDModeText;
     hud.label.text = @"Some message...";
@@ -345,6 +405,11 @@
 - (IBAction)showWithColor:(id)sender{
     HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
+    
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
     
     // Set the hud to display with a color
     HUD.contentView.color = [UIColor colorWithRed:0.23 green:0.50 blue:0.82 alpha:0.90];

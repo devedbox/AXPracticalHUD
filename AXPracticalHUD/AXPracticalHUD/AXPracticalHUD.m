@@ -760,21 +760,48 @@ if ([NSThread isMainThread]) {\
 }
 - (void)showErrorInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {
+    UIImage *image;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_8_0
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AXPracticalHUD.bundle/ax_hud_error"]];
+    image = [UIImage imageNamed:@"AXPracticalHUD.bundle/ax_hud_error"];
 #else
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AXPracticalHUD.bundle/ax_hud_error" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
+    image = [UIImage imageNamed:@"AXPracticalHUD.bundle/ax_hud_error" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
 #endif
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(context, 0, image.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
+    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+    CGContextClipToMask(context, rect, image.CGImage);
+    [self.tintColor?:[UIColor whiteColor] setFill];
+    CGContextFillRect(context, rect);
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     [imageView setFrame:CGRectMake(0, 0, 37, 37)];
     [self _showInView:view animated:YES mode:AXPracticalHUDModeCustomView text:text detail:detail customView:imageView configuration:configuration];
 }
 - (void)showSuccessInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {
+    UIImage *image;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_8_0
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AXPracticalHUD.bundle/ax_hud_success"]];
+    image = [UIImage imageNamed:@"AXPracticalHUD.bundle/ax_hud_success"];
 #else
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AXPracticalHUD.bundle/ax_hud_success" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
+    image = [UIImage imageNamed:@"AXPracticalHUD.bundle/ax_hud_success" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
 #endif
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(context, 0, image.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
+    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+    CGContextClipToMask(context, rect, image.CGImage);
+    [self.tintColor?:[UIColor whiteColor] setFill];
+    CGContextFillRect(context, rect);
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     [imageView setFrame:CGRectMake(0, 0, 37, 37)];
     [self _showInView:view animated:YES mode:AXPracticalHUDModeCustomView text:text detail:detail customView:imageView configuration:configuration];
 }
