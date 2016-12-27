@@ -71,7 +71,7 @@
         if (!_color) {
             CGContextSetGrayFillColor(context, 0.0, _opacity);
         } else {
-            CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
+            CGContextSetFillColorWithColor(context, _color.CGColor);
         }
         
         CGContextBeginPath(context);

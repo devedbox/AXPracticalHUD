@@ -15,6 +15,8 @@
     long long currentLength;
 }
 @property(strong, nonatomic) NSArray *dataSource;
+
+@property(weak, nonatomic) IBOutlet UISwitch *style;
 @end
 
 @implementation AXTableViewController
@@ -152,6 +154,9 @@
     HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
     
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    
     // Regiser for HUD callbacks so we can remove it from the window at the right time
     HUD.delegate = self;
     
@@ -159,7 +164,6 @@
     
 //    HUD.mode = AXPracticalHUDModeBreachedIndeterminate;
     HUD.dimBackground = YES;
-    HUD.tintColor = [UIColor orangeColor];
     
     // Show the HUD while the provided method executes in a new thread
     [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
