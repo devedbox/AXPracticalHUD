@@ -8,6 +8,7 @@
 
 #import "AXTableViewController.h"
 #import "AXPracticalHUD/AXPracticalHUD.h"
+#import <AXIndicatorView/AXSpinningWaitCursor.h>
 
 #ifndef kAXPracticalHUD
 #define kAXPracticalHUD [AXPracticalHUD sharedHUD]
@@ -33,7 +34,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    _dataSource = @[@"Simple indeterminate progress",@"With label",@"With detail label",@"Determinate mode",@"Custom view",@"Mode swithing",@"Using blocks",@"On window",@"NSURLConnection",@"Dim background",@"Text only",@"Colored"];
+    _dataSource = @[@"Simple indeterminate progress",@"With label",@"With detail label",@"Determinate mode",@"Custom view",@"Mode swithing",@"Using blocks",@"On window",@"NSURLConnection",@"Dim background",@"Text only",@"Colored", @"Spinning Wait Cursor"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,8 +98,11 @@
         case 10:
             [self showTextOnly:tableView];
             break;
-        default:
+        case 11:
             [self showWithGradient:tableView];
+            break;
+        default:
+            [self showSpinningWaitCursor:tableView];
             break;
     }
 }
@@ -300,6 +304,7 @@
     
     // Set custom view mode
     HUD.mode = AXPracticalHUDModeCustomView;
+    HUD.lockBackground = YES;
     
     HUD.delegate = self;
     HUD.label.text = @"Completed";
@@ -392,6 +397,35 @@
     
     // Show the HUD while the provided method executes in a new thread
     [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
+}
+
+- (IBAction)showSpinningWaitCursor:(id)sender {
+    HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
+    
+    // Regiser for HUD callbacks so we can remove it from the window at the right time
+    HUD.delegate = self;
+    
+    HUD.lockBackground = YES;
+    
+    HUD.mode = AXPracticalHUDModeCustomView;
+    AXSpinningWaitCursor *view = [AXSpinningWaitCursor new];
+    [view setFrame:CGRectMake(0, 0, 38, 38)];
+    [view setAnimating:YES];
+    HUD.customView = view;
+    // HUD.dimBackground = YES;
+    
+    // Show the HUD while the provided method executes in a new thread
+    // [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
+    [HUD show:YES];
+    [HUD hide:YES afterDelay:3.0 completion:^{
+        [self showTextOnly:sender];
+    }];
 }
 
 - (IBAction)showTextOnly:(id)sender {
