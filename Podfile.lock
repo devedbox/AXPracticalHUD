@@ -1,11 +1,11 @@
 PODS:
-  - AXIndicatorView (0.0.6)
+  - AXIndicatorView (0.0.7)
 
 DEPENDENCIES:
   - AXIndicatorView
 
 SPEC CHECKSUMS:
-  AXIndicatorView: f0b63fb2c501c3a83f380afa93c9f37a6e00e7ee
+  AXIndicatorView: caa6c08cc6b732fad163fa26197e3c34b1339060
 
 PODFILE CHECKSUM: 96152284029073f01cfe3c593d090a610fad66fa
 

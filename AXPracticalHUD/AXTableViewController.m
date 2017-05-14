@@ -34,7 +34,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    _dataSource = @[@"Simple indeterminate progress",@"With label",@"With detail label",@"Determinate mode",@"Custom view",@"Mode swithing",@"Using blocks",@"On window",@"NSURLConnection",@"Dim background",@"Text only",@"Colored", @"Spinning Wait Cursor"];
+    _dataSource = @[@"Simple indeterminate progress",@"With label",@"With detail label",@"Determinate mode",@"Custom view",@"Mode swithing",@"Using blocks",@"On window",@"NSURLConnection",@"Dim background",@"Text only",@"Colored", @"Spinning Wait Cursor", @"Top bar"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -101,8 +101,11 @@
         case 11:
             [self showWithGradient:tableView];
             break;
-        default:
+        case 12:
             [self showSpinningWaitCursor:tableView];
+            break;
+        case 13:
+            [self showTopBar:tableView];
             break;
     }
 }
@@ -426,6 +429,39 @@
     [HUD show:YES];
     [HUD hide:YES afterDelay:3.0 completion:^{
         [self showTextOnly:sender];
+    }];
+}
+
+- (IBAction)showTopBar:(id)sender {
+    HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    
+    // HUD.contentView.translucent = YES;
+    
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[[UIColor blackColor] colorWithAlphaComponent:0.7];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
+    
+    // Regiser for HUD callbacks so we can remove it from the window at the right time
+    HUD.delegate = self;
+    
+    HUD.lockBackground = YES;
+    
+    HUD.mode = AXPracticalHUDModeText;
+    HUD.label.text = @"Some messages...";
+    HUD.position = AXPracticalHUDPositionTop;
+    
+    HUD.margin = 0.0;
+    HUD.contentInsets = UIEdgeInsetsMake(22, 0, 22, 0);
+    HUD.animation = AXPracticalHUDAnimationFlipIn;
+    // HUD.dimBackground = YES;
+    
+    // Show the HUD while the provided method executes in a new thread
+    // [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
+    [HUD show:YES];
+    [HUD hide:YES afterDelay:3.0 completion:^{
+        [self showSpinningWaitCursor:sender];
     }];
 }
 
