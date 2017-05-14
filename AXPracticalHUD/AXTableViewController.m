@@ -403,7 +403,8 @@
     HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
     
-    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    // HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.contentView.color = [UIColor clearColor];
     HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
     HUD.label.textColor = HUD.tintColor;
     HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
