@@ -132,7 +132,7 @@
 
 - (void)setProgress:(CGFloat)progress {
     _progress = progress;
-    [self setNeedsDisplay];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
 }
 
 - (void)setProgressHeight:(CGFloat)progressHeight {

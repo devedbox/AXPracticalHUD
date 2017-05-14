@@ -9,6 +9,10 @@
 #import "AXTableViewController.h"
 #import "AXPracticalHUD/AXPracticalHUD.h"
 
+#ifndef kAXPracticalHUD
+#define kAXPracticalHUD [AXPracticalHUD sharedHUD]
+#endif
+
 @interface AXTableViewController ()<AXPracticalHUDDelegate>{
     AXPracticalHUD *HUD;
     long long expectedLength;
@@ -164,21 +168,23 @@
     
     HUD.lockBackground = YES;
     
-//    HUD.mode = AXPracticalHUDModeBreachedIndeterminate;
-    HUD.dimBackground = YES;
+    // HUD.mode = AXPracticalHUDModeBreachedIndeterminate;
+    // HUD.dimBackground = YES;
     
     // Show the HUD while the provided method executes in a new thread
-//    [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
+    // [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
     [HUD show:YES];
-    [HUD hide:YES afterDelay:1.0 completion:NULL];
-    [[AXPracticalHUD sharedHUD] showSuccessInView:self.navigationController.view text:@"heheda" detail:nil configuration:^(AXPracticalHUD *_HUD) {
-        _HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
-        _HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
-        _HUD.label.textColor = HUD.tintColor;
-        _HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
+    [HUD hide:YES afterDelay:3.0 completion:^{
+        [[AXPracticalHUD sharedHUD] showSuccessInView:self.navigationController.view text:@"heheda" detail:nil configuration:^(AXPracticalHUD *_HUD) {
+            _HUD.lockBackground = YES;
+            _HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+            _HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+            _HUD.label.textColor = HUD.tintColor;
+            _HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
+        }];
+        
+        [[AXPracticalHUD sharedHUD] hide:YES afterDelay:2.0 completion:NULL];
     }];
-    
-    [[AXPracticalHUD sharedHUD] hide:YES afterDelay:2.0 completion:NULL];
 }
 
 - (IBAction)showWithLabel:(id)sender {

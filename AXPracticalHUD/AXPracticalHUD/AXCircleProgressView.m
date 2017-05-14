@@ -104,21 +104,21 @@
 #pragma mark - Setters
 - (void)setProgress:(CGFloat)progress {
     _progress = progress;
-    [self setNeedsDisplay];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
 }
 
 - (void)setProgressBgnColor:(UIColor *)progressBgnColor {
     _progressBgnColor = progressBgnColor;
-    [self setNeedsDisplay];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
 }
 
 - (void)setProgressColor:(UIColor *)progressColor {
     _progressColor = progressColor;
-    [self setNeedsDisplay];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
 }
 
 - (void)setAnnularEnabled:(BOOL)annularEnabled {
     _annularEnabled = annularEnabled;
-    [self setNeedsDisplay];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
 }
 @end

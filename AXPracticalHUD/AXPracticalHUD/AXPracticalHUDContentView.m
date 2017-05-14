@@ -132,12 +132,12 @@
 
 - (void)setColor:(UIColor *)color {
     _color = color;
-    [self setNeedsDisplay];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
 }
 
 - (void)setEndColor:(UIColor *)endColor {
     _endColor = endColor;
-    [self setNeedsDisplay];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
 }
 
 - (void)setTranslucent:(BOOL)translucent {
@@ -147,8 +147,8 @@
     } else {
         [_effectView removeFromSuperview];
     }
-    [self setNeedsDisplay];
-    [self setNeedsLayout];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(setNeedsLayout) withObject:nil waitUntilDone:YES];
 }
 
 - (void)setTranslucentStyle:(AXPracticalHUDTranslucentStyle)translucentStyle {
@@ -193,6 +193,6 @@
 
 - (void)setOpacity:(CGFloat)opacity {
     _opacity = opacity;
-    [self setNeedsDisplay];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
 }
 @end

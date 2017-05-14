@@ -344,9 +344,9 @@ if ([NSThread isMainThread]) {\
 
 - (void)setMode:(AXPracticalHUDMode)mode {
     _mode = mode;
-    [self setupIndicators];
-    [self setNeedsLayout];
-    [self setNeedsDisplay];
+    [self performSelectorOnMainThread:@selector(setupIndicators) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(setNeedsLayout) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
 }
 
 - (void)setPosition:(AXPracticalHUDPosition)position {
@@ -357,8 +357,8 @@ if ([NSThread isMainThread]) {\
         [_contentView removeMotionEffect:_xMotionEffect];
         [_contentView removeMotionEffect:_yMotionEffect];
     }
-    [self setNeedsDisplay];
-    [self setNeedsLayout];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(setNeedsLayout) withObject:nil waitUntilDone:YES];
 }
 
 - (void)setProgress:(CGFloat)progress {
@@ -370,17 +370,17 @@ if ([NSThread isMainThread]) {\
 
 - (void)setCustomView:(UIView *)customView {
     _customView = customView;
-    [self setupIndicators];
-    [self setNeedsLayout];
-    [self setNeedsDisplay];
+    [self performSelectorOnMainThread:@selector(setupIndicators) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(setNeedsLayout) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
 }
 
 - (void)setTintColor:(UIColor *)tintColor {
     [super setTintColor:tintColor];
     
-    [self setupIndicators];
-    [self setNeedsLayout];
-    [self setNeedsDisplay];
+    [self performSelectorOnMainThread:@selector(setupIndicators) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(setNeedsLayout) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
 }
 #pragma mark - Getters
 - (CGRect)contentFrame {
@@ -457,8 +457,8 @@ if ([NSThread isMainThread]) {\
 - (void)showingAnimated:(BOOL)animated {
     // Cancel any scheduled hideDelayed: calls
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    [self setNeedsDisplay];
-    [self setNeedsLayout];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(setNeedsLayout) withObject:nil waitUntilDone:YES];
     _showStarted = [NSDate date];
     // Animating
     if (animated) {
@@ -545,7 +545,7 @@ if ([NSThread isMainThread]) {\
                 _indicator = [[AXActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 37, 37)];
                 _indicator.backgroundColor = [UIColor clearColor];
             }
-            [(AXActivityIndicatorView *)_indicator setLineWidth:2.5];
+            [(AXActivityIndicatorView *)_indicator setLineWidth:3];
             [(AXActivityIndicatorView *)_indicator setDrawingComponents:12];
             [(AXActivityIndicatorView *)_indicator setShouldGradientColorIndex:YES];
             [(AXActivityIndicatorView *)_indicator setTintColor:self.tintColor];
@@ -671,7 +671,7 @@ if ([NSThread isMainThread]) {\
     // Stay in sync with the superview in any case
     if (self.superview) {
         self.bounds = self.superview.bounds;
-        [self setNeedsDisplay];
+        [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
     }
     
     // Not needed on iOS 8+, compile out when the deployment target allows,
