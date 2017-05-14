@@ -18,6 +18,8 @@
     AXPracticalHUD *HUD;
     long long expectedLength;
     long long currentLength;
+    
+    UIStatusBarStyle _statusBarStyle;
 }
 @property(strong, nonatomic) NSArray *dataSource;
 
@@ -34,12 +36,17 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    _statusBarStyle = UIStatusBarStyleDefault;
     _dataSource = @[@"Simple indeterminate progress",@"With label",@"With detail label",@"Determinate mode",@"Custom view",@"Mode swithing",@"Using blocks",@"On window",@"NSURLConnection",@"Dim background",@"Text only",@"Colored", @"Spinning Wait Cursor", @"Top bar"];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return _statusBarStyle;
 }
 
 #pragma mark - Table view data source
@@ -437,8 +444,15 @@
     [self.navigationController.view addSubview:HUD];
     
     // HUD.contentView.translucent = YES;
+    _statusBarStyle = UIStatusBarStyleLightContent;
+    [self setNeedsStatusBarAppearanceUpdate];
     
-    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[[UIColor blackColor] colorWithAlphaComponent:0.7];
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor colorWithRed:0.976 green:0.765 blue:0.325 alpha:1.00];
+    if (_style.isOn) {
+        HUD.contentView.endColor = nil;
+    } else {
+        HUD.contentView.endColor = [UIColor colorWithRed:0.969 green:0.463 blue:0.137 alpha:1.00];
+    }
     HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
     HUD.label.textColor = HUD.tintColor;
     HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
@@ -462,6 +476,8 @@
     [HUD show:YES];
     [HUD hide:YES afterDelay:3.0 completion:^{
         // [self showSpinningWaitCursor:sender];
+        _statusBarStyle = UIStatusBarStyleDefault;
+        [self setNeedsStatusBarAppearanceUpdate];
     }];
 }
 
