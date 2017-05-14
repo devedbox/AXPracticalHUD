@@ -460,9 +460,9 @@
     // Show the HUD while the provided method executes in a new thread
     // [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
     [HUD show:YES];
-    [HUD hide:YES afterDelay:3.0 completion:^{
-        [self showSpinningWaitCursor:sender];
-    }];
+    // [HUD hide:YES afterDelay:3.0 completion:^{
+    //     [self showSpinningWaitCursor:sender];
+    // }];
 }
 
 - (IBAction)showTextOnly:(id)sender {
