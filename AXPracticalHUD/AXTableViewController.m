@@ -56,6 +56,7 @@
     
     // Configure the cell...
     cell.textLabel.text = _dataSource[indexPath.row];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"index%@", @(indexPath.row)];
     
     return cell;
 }
@@ -76,34 +77,28 @@
             [self showWithLabelDeterminate:tableView];
             break;
         case 4:
-            [self showWIthLabelAnnularDeterminate:tableView];
-            break;
-        case 5:
-            [self showWithLabelDeterminateHorizontalBar:tableView];
-            break;
-        case 6:
             [self showWithCustomView:tableView];
             break;
-        case 7:
+        case 5:
             [self showWithLabelMixed:tableView];
             break;
-        case 8:
+        case 6:
             [self showUsingBlocks:tableView];
             break;
-        case 9:
+        case 7:
             [self showOnWindow:tableView];
             break;
-        case 10:
+        case 8:
             [self showURL:tableView];
             break;
-        case 11:
-            [self showWithGradient:tableView];
+        case 9:
+            [self showDimBackground:tableView];
             break;
-        case 12:
+        case 10:
             [self showTextOnly:tableView];
             break;
         default:
-            [self showWithColor:tableView];
+            [self showWithGradient:tableView];
             break;
     }
 }
@@ -325,7 +320,8 @@
     
     HUD.delegate = self;
     HUD.label.text = @"Connecting";
-    HUD.minimumSize = CGSizeMake(135.f, 135.f);
+    // HUD.minimumSize = CGSizeMake(135.f, 135.f);
+    HUD.lockBackground = YES;
     
     [HUD show:YES executingMethod:@selector(myMixedTask) toTarget:self withObject:nil];
 }
@@ -334,7 +330,11 @@
 #if NS_BLOCKS_AVAILABLE
     AXPracticalHUD *hud = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:hud];
+    hud.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    hud.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    hud.label.textColor = HUD.tintColor;
     hud.label.text = @"With a block";
+    hud.lockBackground = YES;
     [hud show:YES executingBlockOnGQ:^{
         [self myTask];
     } completion:^{
@@ -352,6 +352,7 @@
     HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
     HUD.label.textColor = HUD.tintColor;
     HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
+    HUD.lockBackground = YES;
     
     HUD.delegate = self;
     HUD.label.text = @"Loading";
@@ -360,13 +361,15 @@
 }
 
 - (IBAction)showURL:(id)sender {
-    NSURL *URL = [NSURL URLWithString:@"http://a1408.g.akamai.net/5/1408/1388/2005110403/1a1a1ad948be278cff2d96046ad90768d848b41947aa1986/sample_iPod.m4v.zip"];
+    NSString *string = @"https://d11.baidupcs.com/file/c91e4a9a09c9561e2d31af33aa47d2f8?bkt=p3-1400c91e4a9a09c9561e2d31af33aa47d2f85391e614000000945a55&xcode=45e50a736e0b559667025687e660eb151d2c3a93442d63710967cef3f0948c81&fid=1074718808-250528-12928484830213&time=1494732099&sign=FDTAXGERLBHS-DCb740ccc5511e5e8fedcff06b081203-8a%2B8ih%2FxqgECu%2F4UtfeyaXy%2Fiv0%3D&to=d11&size=9722453&sta_dx=9722453&sta_cs=8141&sta_ft=mp4&sta_ct=7&sta_mt=7&fm2=MH,Yangquan,Netizen-anywhere,,sichuan,ct&newver=1&newfm=1&secfm=1&flow_ver=3&pkey=1400c91e4a9a09c9561e2d31af33aa47d2f85391e614000000945a55&sl=75104334&expires=8h&rt=pr&r=159132871&mlogid=3095624263498811401&vuk=1074718808&vbdid=2598551201&fin=%5Bxcodechina.com%5D千锋3G学院-iOS开发视频教程-第02讲-XCode安装.mp4&rtype=1&iv=0&dp-logid=3095624263498811401&dp-callid=0.1.1&hps=1&csl=165&csign=WQgRCr4wc6y6NFj9yzC7%2Fgjm6Kw%3D&by=themis";
+    NSURL *URL = [NSURL URLWithString:[string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
     HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
     HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
     HUD.label.textColor = HUD.tintColor;
     HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
+    HUD.lockBackground = YES;
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
@@ -382,6 +385,7 @@
     [self.navigationController.view addSubview:HUD];
     HUD.mode = AXPracticalHUDModeDeterminateColorfulHorizontalBar;
     HUD.progress = 1.0;
+    HUD.lockBackground = YES;
     
     // Regiser for HUD callbacks so we can remove it from the window at the right time
     HUD.delegate = self;
@@ -392,7 +396,7 @@
 
 - (IBAction)showTextOnly:(id)sender {
     
-    AXPracticalHUD *hud = [AXPracticalHUD showHUDInView:self.navigationController.view animated:YES];
+    HUD = [AXPracticalHUD showHUDInView:self.navigationController.view animated:YES];
     
     HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
     HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
@@ -400,12 +404,13 @@
     HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
     
     // Configure for text only and offset down
-    hud.mode = AXPracticalHUDModeText;
-    hud.label.text = @"Some message...";
-    hud.margin = 10.f;
-    hud.removeFromSuperViewOnHide = YES;
+    HUD.mode = AXPracticalHUDModeText;
+    HUD.label.text = @"Some message...";
+    HUD.margin = 10.f;
+    HUD.removeFromSuperViewOnHide = YES;
+    HUD.lockBackground = YES;
     
-    [hud hide:YES afterDelay:3 completion:nil];
+    [HUD hide:YES afterDelay:3 completion:nil];
 }
 
 - (IBAction)showWithColor:(id)sender{
@@ -421,6 +426,27 @@
     HUD.contentView.color = [UIColor colorWithRed:0.23 green:0.50 blue:0.82 alpha:0.90];
     
     HUD.delegate = self;
+    [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
+}
+
+- (IBAction)showDimBackground:(id)sender {
+    HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    
+    HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
+    HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
+    HUD.label.textColor = HUD.tintColor;
+    HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
+    
+    // Regiser for HUD callbacks so we can remove it from the window at the right time
+    HUD.delegate = self;
+    
+    HUD.lockBackground = YES;
+    
+    // HUD.mode = AXPracticalHUDModeBreachedIndeterminate;
+    HUD.dimBackground = YES;
+    
+    // Show the HUD while the provided method executes in a new thread
     [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
 }
 
@@ -476,6 +502,7 @@
     expectedLength = MAX([response expectedContentLength], 1);
     currentLength = 0;
     HUD.mode = AXPracticalHUDModeDeterminate;
+    HUD.lockBackground = YES;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
@@ -486,6 +513,7 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
     HUD.mode = AXPracticalHUDModeCustomView;
+    HUD.lockBackground = YES;
     [HUD hide:YES afterDelay:2 completion:nil];
 }
 
