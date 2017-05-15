@@ -39,21 +39,32 @@ if ([NSThread isMainThread]) {\
 
 @interface AXPracticalHUD()
 {
+    /// Title label.
     UILabel *_label;
+    /// Detail text label.
     UILabel *_detailLabel;
+    /// Content view of HUD.
     AXPracticalHUDContentView *_contentView;
+    /// Indicate is animating or not of the HUD view.
     BOOL _animated;
+    
     BOOL _isFinished;
     SEL _executedMethod;
     id _executedTarget;
     id _executedObject;
     CGAffineTransform _rotationTransform;
 }
+/// Grace planned timer.
 @property(strong, nonatomic) NSTimer *graceTimer;
+/// Min show planned timer.
 @property(strong, nonatomic) NSTimer *minShowTimer;
+/// Date of show's starting.
 @property(strong, nonatomic) NSDate *showStarted;
+/// Frame of content field.
 @property(readonly, nonatomic) CGRect contentFrame;
+/// Indocator view.
 @property(strong, nonatomic) UIView *indicator;
+// Motions:
 @property(strong, nonatomic) UIInterpolatingMotionEffect *xMotionEffect;
 @property(strong, nonatomic) UIInterpolatingMotionEffect *yMotionEffect;
 @end
