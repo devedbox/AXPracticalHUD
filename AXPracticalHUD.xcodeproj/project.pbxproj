@@ -24,6 +24,7 @@
 		01ABFF781BFF0AA200EEDF8C /* AXPracticalHUDContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF721BFF0AA200EEDF8C /* AXPracticalHUDContentView.m */; };
 		19AD6AB631E6F488B46FF73E /* Pods_AXPracticalHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574ECCB2C4144949818CF2C9 /* Pods_AXPracticalHUD.framework */; };
 		DC6665651DA7907300B2D063 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = DC6665641DA7907300B2D063 /* background.png */; };
+		DC7C4BD11EC8989C008E6D66 /* JYMessageBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7C4BD01EC8989C008E6D66 /* JYMessageBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,8 @@
 		2D5D374875714F82D4B500F9 /* Pods-AXPracticalHUD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AXPracticalHUD.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AXPracticalHUD/Pods-AXPracticalHUD.debug.xcconfig"; sourceTree = "<group>"; };
 		574ECCB2C4144949818CF2C9 /* Pods_AXPracticalHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AXPracticalHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC6665641DA7907300B2D063 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		DC7C4BCF1EC8989C008E6D66 /* JYMessageBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYMessageBar.h; sourceTree = "<group>"; };
+		DC7C4BD01EC8989C008E6D66 /* JYMessageBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYMessageBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +100,7 @@
 				01ABFF571BFF0A3E00EEDF8C /* ViewController.m */,
 				01AB00281BFF4FD500EEDF8C /* AXTableViewController.h */,
 				01AB00291BFF4FD500EEDF8C /* AXTableViewController.m */,
+				DC7C4BCE1EC8989C008E6D66 /* JYMessageBar */,
 				01ABFF671BFF0AA200EEDF8C /* AXPracticalHUD */,
 				01ABFF591BFF0A3E00EEDF8C /* Main.storyboard */,
 				01ABFF5C1BFF0A3E00EEDF8C /* Assets.xcassets */,
@@ -158,6 +162,15 @@
 				01ABFF721BFF0AA200EEDF8C /* AXPracticalHUDContentView.m */,
 			);
 			name = ContentView;
+			sourceTree = "<group>";
+		};
+		DC7C4BCE1EC8989C008E6D66 /* JYMessageBar */ = {
+			isa = PBXGroup;
+			children = (
+				DC7C4BCF1EC8989C008E6D66 /* JYMessageBar.h */,
+				DC7C4BD01EC8989C008E6D66 /* JYMessageBar.m */,
+			);
+			path = JYMessageBar;
 			sourceTree = "<group>";
 		};
 		DE0F4661E98654ADD43A48C5 /* Pods */ = {
@@ -303,6 +316,7 @@
 				01ABFF581BFF0A3E00EEDF8C /* ViewController.m in Sources */,
 				01ABFF551BFF0A3E00EEDF8C /* AppDelegate.m in Sources */,
 				01ABFF751BFF0AA200EEDF8C /* AXGradientProgressView.m in Sources */,
+				DC7C4BD11EC8989C008E6D66 /* JYMessageBar.m in Sources */,
 				01ABFF521BFF0A3E00EEDF8C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

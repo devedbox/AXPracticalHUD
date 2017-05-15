@@ -85,6 +85,9 @@
         CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, gradColors, gradLocations, locationCount);
         CGContextDrawLinearGradient(context, gradient, CGPointMake(self.bounds.size.width / 2, self.bounds.size.height), CGPointMake(self.bounds.size.width / 2, 0), kCGGradientDrawsAfterEndLocation);
         CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
+        
+        CGColorSpaceRelease(colorSpace);
+        CGGradientRelease(gradient);
     } else {
         if (!_color) {
             CGContextSetGrayFillColor(context, 0.0, _opacity);

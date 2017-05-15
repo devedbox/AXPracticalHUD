@@ -179,6 +179,9 @@ if ([NSThread isMainThread]) {\
         CGFloat gradRadius = MIN(self.bounds.size.width, self.bounds.size.height);
         //Gradient draw
         CGContextDrawRadialGradient (context, gradient, gradCenter, 0, gradCenter, gradRadius, kCGGradientDrawsAfterEndLocation);
+        
+        CGColorSpaceRelease(colorSpace);
+        CGGradientRelease(gradient);
     }
     
     UIGraphicsPopContext();
@@ -585,7 +588,7 @@ if ([NSThread isMainThread]) {\
         case AXPracticalHUDModeCustomView:
             [_indicator removeFromSuperview];
             _indicator = _customView;
-            [_contentView addSubview:_indicator];
+            if (_indicator) [_contentView addSubview:_indicator];
             break;
         case AXPracticalHUDModeDeterminateColorfulHorizontalBar:
             [_indicator removeFromSuperview];
