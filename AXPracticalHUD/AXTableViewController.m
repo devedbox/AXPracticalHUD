@@ -9,6 +9,7 @@
 #import "AXTableViewController.h"
 #import "AXPracticalHUD/AXPracticalHUD.h"
 #import <AXIndicatorView/AXSpinningWaitCursor.h>
+#import "JYMessageBar.h"
 
 #ifndef kAXPracticalHUD
 #define kAXPracticalHUD [AXPracticalHUD sharedHUD]
@@ -462,12 +463,30 @@
     
     HUD.lockBackground = YES;
     
-    HUD.mode = AXPracticalHUDModeText;
-    HUD.label.text = @"Some messages...";
+    HUD.mode = AXPracticalHUDModeCustomView;
+    JYMessageBar *messageBar = [[JYMessageBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
+    messageBar.avatar.image = [UIImage imageNamed:@"background"];
+    messageBar.nickname = @"Some nickmame...";
+    messageBar.content = @"Some message...";
+    NSDate *date = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"HH:mm";
+    messageBar.time = [formatter stringFromDate:date];
+    HUD.customView = messageBar;
+    
+    messageBar.touchEnabled = YES;
+    messageBar.handler = ^(JYMessageBar *__weak bar, NSString *nickname, NSNumber *ID) {
+        [self showTextOnly:self];
+    };
+    
+    messageBar.panToBottomHandler = ^{
+        [HUD hide:YES afterDelay:0.5 completion:NULL];
+    };
+    
     HUD.position = AXPracticalHUDPositionTop;
     
     HUD.margin = 0.0;
-    HUD.contentInsets = UIEdgeInsetsMake(22, 0, 22, 0);
+    HUD.contentInsets = UIEdgeInsetsMake(20, 15, 5, 0);
     HUD.animation = AXPracticalHUDAnimationFlipIn;
     // HUD.dimBackground = YES;
     
