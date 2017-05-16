@@ -13,18 +13,6 @@
     UITapGestureRecognizer *_tapGesture;
     UIPanGestureRecognizer *_panGesture;
 }
-/**
- nickname label
- */
-@property (strong, nonatomic) UILabel *nicknameLabel;
-/**
- content label
- */
-@property (strong, nonatomic) UILabel *contentLabel;
-/**
- time label
- */
-@property (strong, nonatomic) UILabel *timeLabel;
 @end
 
 @implementation JYMessageBar
@@ -171,7 +159,7 @@
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)pan {
-    if (pan.state == UIGestureRecognizerStateChanged) {
+    if (pan.state == UIGestureRecognizerStateEnded || pan.state == UIGestureRecognizerStateRecognized) {
         if (self.panToBottomHandler) {
             self.panToBottomHandler ();
         }

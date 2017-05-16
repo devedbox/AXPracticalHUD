@@ -448,11 +448,27 @@
     _statusBarStyle = UIStatusBarStyleLightContent;
     [self setNeedsStatusBarAppearanceUpdate];
     
+    JYMessageBar *messageBar = [[JYMessageBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+    messageBar.avatar.image = [UIImage imageNamed:@"background"];
+    messageBar.nickname = @"Some nickmame...";
+    messageBar.content = @"Some message...";
+    NSDate *date = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"HH:mm";
+    messageBar.time = [formatter stringFromDate:date];
+    HUD.customView = messageBar;
+    
     HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor colorWithRed:0.976 green:0.765 blue:0.325 alpha:1.00];
     if (_style.isOn) {
         HUD.contentView.endColor = nil;
+        messageBar.nicknameLabel.textColor = [UIColor blackColor];
+        messageBar.contentLabel.textColor = [UIColor blackColor];
+        messageBar.timeLabel.textColor = [UIColor blackColor];
     } else {
         HUD.contentView.endColor = [UIColor colorWithRed:0.969 green:0.463 blue:0.137 alpha:1.00];
+        messageBar.nicknameLabel.textColor = [UIColor whiteColor];
+        messageBar.contentLabel.textColor = [UIColor whiteColor];
+        messageBar.timeLabel.textColor = [UIColor whiteColor];
     }
     HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
     HUD.label.textColor = HUD.tintColor;
@@ -465,15 +481,6 @@
     HUD.lockBackground = YES;
     
     HUD.mode = AXPracticalHUDModeCustomView;
-    JYMessageBar *messageBar = [[JYMessageBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
-    messageBar.avatar.image = [UIImage imageNamed:@"background"];
-    messageBar.nickname = @"Some nickmame...";
-    messageBar.content = @"Some message...";
-    NSDate *date = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"HH:mm";
-    messageBar.time = [formatter stringFromDate:date];
-    HUD.customView = messageBar;
     
     messageBar.touchEnabled = YES;
     messageBar.handler = ^(JYMessageBar *__weak bar, NSString *nickname, NSNumber *ID) {
@@ -481,7 +488,7 @@
     };
     
     messageBar.panToBottomHandler = ^{
-        [HUD hide:YES afterDelay:0.5 completion:NULL];
+        [HUD hide:YES afterDelay:0.0 completion:NULL];
     };
     
     HUD.position = AXPracticalHUDPositionTop;

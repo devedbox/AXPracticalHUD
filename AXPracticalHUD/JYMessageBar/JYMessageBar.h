@@ -55,4 +55,16 @@ typedef void(^JYMessageBarPanToBottomHandler)();
  Pan handler block
  */
 @property (copy, nonatomic) JYMessageBarPanToBottomHandler panToBottomHandler;
+/**
+ nickname label
+ */
+@property (strong, nonatomic) UILabel *nicknameLabel;
+/**
+ content label
+ */
+@property (strong, nonatomic) UILabel *contentLabel;
+/**
+ time label
+ */
+@property (strong, nonatomic) UILabel *timeLabel;
 @end
