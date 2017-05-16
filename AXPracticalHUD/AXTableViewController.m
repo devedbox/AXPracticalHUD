@@ -457,6 +457,7 @@
     HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
     HUD.label.textColor = HUD.tintColor;
     HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
+    HUD.contentView.layer.cornerRadius = 0.0;
     
     // Regiser for HUD callbacks so we can remove it from the window at the right time
     HUD.delegate = self;
@@ -464,7 +465,7 @@
     HUD.lockBackground = YES;
     
     HUD.mode = AXPracticalHUDModeCustomView;
-    JYMessageBar *messageBar = [[JYMessageBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
+    JYMessageBar *messageBar = [[JYMessageBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
     messageBar.avatar.image = [UIImage imageNamed:@"background"];
     messageBar.nickname = @"Some nickmame...";
     messageBar.content = @"Some message...";
