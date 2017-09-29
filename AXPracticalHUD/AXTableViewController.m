@@ -448,7 +448,17 @@
     _statusBarStyle = UIStatusBarStyleLightContent;
     [self setNeedsStatusBarAppearanceUpdate];
     
-    JYMessageBar *messageBar = [[JYMessageBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+    CGRect frame = CGRectZero;
+    if ([[[UIDevice currentDevice].systemVersion stringByReplacingOccurrencesOfString:@"." withString:@""] integerValue] >= 11) {
+        if (@available(iOS 11.0, *)) {
+            frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.safeAreaInsets.top);
+        } else {
+            frame = CGRectMake(0, 0, self.view.bounds.size.width, 44);
+        }
+    } else {
+        frame = CGRectMake(0, 0, self.view.bounds.size.width, 44);
+    }
+    JYMessageBar *messageBar = [[JYMessageBar alloc] initWithFrame:frame];
     messageBar.avatar.image = [UIImage imageNamed:@"background"];
     messageBar.nickname = @"Some nickmame...";
     messageBar.content = @"Some message...";
@@ -586,7 +596,13 @@
     sleep(2);
     // Switch to determinate mode
     HUD.mode = AXPracticalHUDModeDeterminate;
-    HUD.label.text = @"Progress";
+    if ([NSThread currentThread].isMainThread) {
+        HUD.label.text = @"Progress";
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            HUD.label.text = @"Progress";
+        });
+    }
     float progress = 0.0f;
     while (progress < 1.0f)
     {
