@@ -25,6 +25,7 @@
 		19AD6AB631E6F488B46FF73E /* Pods_AXPracticalHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574ECCB2C4144949818CF2C9 /* Pods_AXPracticalHUD.framework */; };
 		DC6665651DA7907300B2D063 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = DC6665641DA7907300B2D063 /* background.png */; };
 		DC7C4BD11EC8989C008E6D66 /* JYMessageBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7C4BD01EC8989C008E6D66 /* JYMessageBar.m */; };
+		DCB52EBD1ECACBE2009A4028 /* TestsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB52EBC1ECACBE2009A4028 /* TestsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,8 @@
 		DC6665641DA7907300B2D063 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		DC7C4BCF1EC8989C008E6D66 /* JYMessageBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYMessageBar.h; sourceTree = "<group>"; };
 		DC7C4BD01EC8989C008E6D66 /* JYMessageBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYMessageBar.m; sourceTree = "<group>"; };
+		DCB52EBB1ECACBE2009A4028 /* TestsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsTableViewController.h; sourceTree = "<group>"; };
+		DCB52EBC1ECACBE2009A4028 /* TestsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +103,7 @@
 				01ABFF571BFF0A3E00EEDF8C /* ViewController.m */,
 				01AB00281BFF4FD500EEDF8C /* AXTableViewController.h */,
 				01AB00291BFF4FD500EEDF8C /* AXTableViewController.m */,
+				DCB52EBA1ECACBBE009A4028 /* Tests */,
 				DC7C4BCE1EC8989C008E6D66 /* JYMessageBar */,
 				01ABFF671BFF0AA200EEDF8C /* AXPracticalHUD */,
 				01ABFF591BFF0A3E00EEDF8C /* Main.storyboard */,
@@ -171,6 +175,15 @@
 				DC7C4BD01EC8989C008E6D66 /* JYMessageBar.m */,
 			);
 			path = JYMessageBar;
+			sourceTree = "<group>";
+		};
+		DCB52EBA1ECACBBE009A4028 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				DCB52EBB1ECACBE2009A4028 /* TestsTableViewController.h */,
+				DCB52EBC1ECACBE2009A4028 /* TestsTableViewController.m */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		DE0F4661E98654ADD43A48C5 /* Pods */ = {
@@ -309,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01ABFF771BFF0AA200EEDF8C /* AXPracticalHUD.m in Sources */,
+				DCB52EBD1ECACBE2009A4028 /* TestsTableViewController.m in Sources */,
 				01ABFF781BFF0AA200EEDF8C /* AXPracticalHUDContentView.m in Sources */,
 				01ABFF731BFF0AA200EEDF8C /* AXBarProgressView.m in Sources */,
 				01ABFF741BFF0AA200EEDF8C /* AXCircleProgressView.m in Sources */,
