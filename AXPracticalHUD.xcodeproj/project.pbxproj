@@ -25,8 +25,51 @@
 		19AD6AB631E6F488B46FF73E /* Pods_AXPracticalHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574ECCB2C4144949818CF2C9 /* Pods_AXPracticalHUD.framework */; };
 		DC6665651DA7907300B2D063 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = DC6665641DA7907300B2D063 /* background.png */; };
 		DC7C4BD11EC8989C008E6D66 /* JYMessageBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7C4BD01EC8989C008E6D66 /* JYMessageBar.m */; };
+		DC9975691F7E2B71008FD921 /* AXPracticalHUDFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = DC9975671F7E2B71008FD921 /* AXPracticalHUDFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DC99756C1F7E2B71008FD921 /* AXPracticalHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9975651F7E2B71008FD921 /* AXPracticalHUD.framework */; };
+		DC99756D1F7E2B71008FD921 /* AXPracticalHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC9975651F7E2B71008FD921 /* AXPracticalHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DC9975721F7E2BA0008FD921 /* AXPracticalHUD.h in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF6F1BFF0AA200EEDF8C /* AXPracticalHUD.h */; };
+		DC9975731F7E2BA0008FD921 /* AXPracticalHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF701BFF0AA200EEDF8C /* AXPracticalHUD.m */; };
+		DC9975741F7E2BA0008FD921 /* AXBarProgressView.h in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF681BFF0AA200EEDF8C /* AXBarProgressView.h */; };
+		DC9975751F7E2BA0008FD921 /* AXBarProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF691BFF0AA200EEDF8C /* AXBarProgressView.m */; };
+		DC9975761F7E2BA0008FD921 /* AXCircleProgressView.h in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF6A1BFF0AA200EEDF8C /* AXCircleProgressView.h */; };
+		DC9975771F7E2BA0008FD921 /* AXCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF6B1BFF0AA200EEDF8C /* AXCircleProgressView.m */; };
+		DC9975781F7E2BA0008FD921 /* AXGradientProgressView.h in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF6C1BFF0AA200EEDF8C /* AXGradientProgressView.h */; };
+		DC9975791F7E2BA0008FD921 /* AXGradientProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF6D1BFF0AA200EEDF8C /* AXGradientProgressView.m */; };
+		DC99757A1F7E2BA0008FD921 /* AXPracticalHUDContentView.h in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF711BFF0AA200EEDF8C /* AXPracticalHUDContentView.h */; };
+		DC99757B1F7E2BA0008FD921 /* AXPracticalHUDContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF721BFF0AA200EEDF8C /* AXPracticalHUDContentView.m */; };
+		DC99757C1F7E2BB4008FD921 /* AXPracticalHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01ABFF6E1BFF0AA200EEDF8C /* AXPracticalHUD.bundle */; };
+		DC99757D1F7E2BBD008FD921 /* AXPracticalHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 01ABFF6F1BFF0AA200EEDF8C /* AXPracticalHUD.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DC99757E1F7E2BCB008FD921 /* AXBarProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 01ABFF681BFF0AA200EEDF8C /* AXBarProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DC99757F1F7E2BCB008FD921 /* AXCircleProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 01ABFF6A1BFF0AA200EEDF8C /* AXCircleProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DC9975801F7E2BCB008FD921 /* AXGradientProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 01ABFF6C1BFF0AA200EEDF8C /* AXGradientProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DC9975811F7E2BCB008FD921 /* AXPracticalHUDContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 01ABFF711BFF0AA200EEDF8C /* AXPracticalHUDContentView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCB52EBD1ECACBE2009A4028 /* TestsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB52EBC1ECACBE2009A4028 /* TestsTableViewController.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DC99756A1F7E2B71008FD921 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01ABFF451BFF0A3E00EEDF8C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC9975641F7E2B71008FD921;
+			remoteInfo = AXPracticalHUDFramework;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DC9975711F7E2B71008FD921 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DC99756D1F7E2B71008FD921 /* AXPracticalHUD.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		01AB00281BFF4FD500EEDF8C /* AXTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXTableViewController.h; sourceTree = "<group>"; };
@@ -60,6 +103,9 @@
 		DC6665641DA7907300B2D063 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		DC7C4BCF1EC8989C008E6D66 /* JYMessageBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYMessageBar.h; sourceTree = "<group>"; };
 		DC7C4BD01EC8989C008E6D66 /* JYMessageBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYMessageBar.m; sourceTree = "<group>"; };
+		DC9975651F7E2B71008FD921 /* AXPracticalHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AXPracticalHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC9975671F7E2B71008FD921 /* AXPracticalHUDFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AXPracticalHUDFramework.h; sourceTree = "<group>"; };
+		DC9975681F7E2B71008FD921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCB52EBB1ECACBE2009A4028 /* TestsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsTableViewController.h; sourceTree = "<group>"; };
 		DCB52EBC1ECACBE2009A4028 /* TestsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,7 +115,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC99756C1F7E2B71008FD921 /* AXPracticalHUD.framework in Frameworks */,
 				19AD6AB631E6F488B46FF73E /* Pods_AXPracticalHUD.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC9975611F7E2B71008FD921 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				01ABFF4F1BFF0A3E00EEDF8C /* AXPracticalHUD */,
+				DC9975661F7E2B71008FD921 /* AXPracticalHUDFramework */,
 				01ABFF4E1BFF0A3E00EEDF8C /* Products */,
 				DE0F4661E98654ADD43A48C5 /* Pods */,
 				2B2C8E1C5669A465B5A7A8DD /* Frameworks */,
@@ -90,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				01ABFF4D1BFF0A3E00EEDF8C /* AXPracticalHUD.app */,
+				DC9975651F7E2B71008FD921 /* AXPracticalHUD.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,6 +233,15 @@
 			path = JYMessageBar;
 			sourceTree = "<group>";
 		};
+		DC9975661F7E2B71008FD921 /* AXPracticalHUDFramework */ = {
+			isa = PBXGroup;
+			children = (
+				DC9975671F7E2B71008FD921 /* AXPracticalHUDFramework.h */,
+				DC9975681F7E2B71008FD921 /* Info.plist */,
+			);
+			path = AXPracticalHUDFramework;
+			sourceTree = "<group>";
+		};
 		DCB52EBA1ECACBBE009A4028 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +262,22 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		DC9975621F7E2B71008FD921 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC9975691F7E2B71008FD921 /* AXPracticalHUDFramework.h in Headers */,
+				DC99757E1F7E2BCB008FD921 /* AXBarProgressView.h in Headers */,
+				DC99757F1F7E2BCB008FD921 /* AXCircleProgressView.h in Headers */,
+				DC9975801F7E2BCB008FD921 /* AXGradientProgressView.h in Headers */,
+				DC9975811F7E2BCB008FD921 /* AXPracticalHUDContentView.h in Headers */,
+				DC99757D1F7E2BBD008FD921 /* AXPracticalHUD.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		01ABFF4C1BFF0A3E00EEDF8C /* AXPracticalHUD */ = {
 			isa = PBXNativeTarget;
@@ -208,15 +289,35 @@
 				01ABFF4B1BFF0A3E00EEDF8C /* Resources */,
 				5BAAD80CB75970C6174538F5 /* [CP] Embed Pods Frameworks */,
 				2100B4AA15E675EDA162579F /* [CP] Copy Pods Resources */,
+				DC9975711F7E2B71008FD921 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DC99756B1F7E2B71008FD921 /* PBXTargetDependency */,
 			);
 			name = AXPracticalHUD;
 			productName = AXPracticalHUD;
 			productReference = 01ABFF4D1BFF0A3E00EEDF8C /* AXPracticalHUD.app */;
 			productType = "com.apple.product-type.application";
+		};
+		DC9975641F7E2B71008FD921 /* AXPracticalHUDFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC9975701F7E2B71008FD921 /* Build configuration list for PBXNativeTarget "AXPracticalHUDFramework" */;
+			buildPhases = (
+				DC9975601F7E2B71008FD921 /* Sources */,
+				DC9975611F7E2B71008FD921 /* Frameworks */,
+				DC9975621F7E2B71008FD921 /* Headers */,
+				DC9975631F7E2B71008FD921 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AXPracticalHUDFramework;
+			productName = AXPracticalHUDFramework;
+			productReference = DC9975651F7E2B71008FD921 /* AXPracticalHUD.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -230,6 +331,11 @@
 					01ABFF4C1BFF0A3E00EEDF8C = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = TKA48YVS5T;
+					};
+					DC9975641F7E2B71008FD921 = {
+						CreatedOnToolsVersion = 9.0;
+						DevelopmentTeam = TKA48YVS5T;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -247,6 +353,7 @@
 			projectRoot = "";
 			targets = (
 				01ABFF4C1BFF0A3E00EEDF8C /* AXPracticalHUD */,
+				DC9975641F7E2B71008FD921 /* AXPracticalHUDFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -263,6 +370,14 @@
 				01ABFF5B1BFF0A3E00EEDF8C /* Main.storyboard in Resources */,
 				01AB002D1BFF68BA00EEDF8C /* 37x-Checkmark.png in Resources */,
 				01AB002E1BFF68BA00EEDF8C /* 37x-Checkmark@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC9975631F7E2B71008FD921 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC99757C1F7E2BB4008FD921 /* AXPracticalHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,7 +450,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DC9975601F7E2B71008FD921 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC9975721F7E2BA0008FD921 /* AXPracticalHUD.h in Sources */,
+				DC9975731F7E2BA0008FD921 /* AXPracticalHUD.m in Sources */,
+				DC9975741F7E2BA0008FD921 /* AXBarProgressView.h in Sources */,
+				DC9975751F7E2BA0008FD921 /* AXBarProgressView.m in Sources */,
+				DC9975761F7E2BA0008FD921 /* AXCircleProgressView.h in Sources */,
+				DC9975771F7E2BA0008FD921 /* AXCircleProgressView.m in Sources */,
+				DC9975781F7E2BA0008FD921 /* AXGradientProgressView.h in Sources */,
+				DC9975791F7E2BA0008FD921 /* AXGradientProgressView.m in Sources */,
+				DC99757A1F7E2BA0008FD921 /* AXPracticalHUDContentView.h in Sources */,
+				DC99757B1F7E2BA0008FD921 /* AXPracticalHUDContentView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DC99756B1F7E2B71008FD921 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC9975641F7E2B71008FD921 /* AXPracticalHUDFramework */;
+			targetProxy = DC99756A1F7E2B71008FD921 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		01ABFF591BFF0A3E00EEDF8C /* Main.storyboard */ = {
@@ -442,6 +582,7 @@
 			baseConfigurationReference = 2D5D374875714F82D4B500F9 /* Pods-AXPracticalHUD.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = TKA48YVS5T;
 				INFOPLIST_FILE = AXPracticalHUD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -455,11 +596,88 @@
 			baseConfigurationReference = 269C6E62371C72E181B29DD1 /* Pods-AXPracticalHUD.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = TKA48YVS5T;
 				INFOPLIST_FILE = AXPracticalHUD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = KEEPStudio.AXPracticalHUD;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		DC99756E1F7E2B71008FD921 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = TKA48YVS5T;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = AXPracticalHUDFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = devedbox.AXPracticalHUDFramework;
+				PRODUCT_NAME = AXPracticalHUD;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DC99756F1F7E2B71008FD921 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = TKA48YVS5T;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = AXPracticalHUDFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = devedbox.AXPracticalHUDFramework;
+				PRODUCT_NAME = AXPracticalHUD;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -480,6 +698,15 @@
 			buildConfigurations = (
 				01ABFF651BFF0A3E00EEDF8C /* Debug */,
 				01ABFF661BFF0A3E00EEDF8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC9975701F7E2B71008FD921 /* Build configuration list for PBXNativeTarget "AXPracticalHUDFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC99756E1F7E2B71008FD921 /* Debug */,
+				DC99756F1F7E2B71008FD921 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
