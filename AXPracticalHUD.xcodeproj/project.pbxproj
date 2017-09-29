@@ -44,6 +44,7 @@
 		DC99757F1F7E2BCB008FD921 /* AXCircleProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 01ABFF6A1BFF0AA200EEDF8C /* AXCircleProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC9975801F7E2BCB008FD921 /* AXGradientProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 01ABFF6C1BFF0AA200EEDF8C /* AXGradientProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC9975811F7E2BCB008FD921 /* AXPracticalHUDContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 01ABFF711BFF0AA200EEDF8C /* AXPracticalHUDContentView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DC9975891F7E2F7A008FD921 /* AXIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9975881F7E2F7A008FD921 /* AXIndicatorView.framework */; };
 		DCB52EBD1ECACBE2009A4028 /* TestsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB52EBC1ECACBE2009A4028 /* TestsTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,8 @@
 		DC9975651F7E2B71008FD921 /* AXPracticalHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AXPracticalHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC9975671F7E2B71008FD921 /* AXPracticalHUDFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AXPracticalHUDFramework.h; sourceTree = "<group>"; };
 		DC9975681F7E2B71008FD921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC9975871F7E2F69008FD921 /* AXIndicatorView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AXIndicatorView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC9975881F7E2F7A008FD921 /* AXIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AXIndicatorView.framework; path = Carthage/Build/iOS/AXIndicatorView.framework; sourceTree = "<group>"; };
 		DCB52EBB1ECACBE2009A4028 /* TestsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsTableViewController.h; sourceTree = "<group>"; };
 		DCB52EBC1ECACBE2009A4028 /* TestsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC9975891F7E2F7A008FD921 /* AXIndicatorView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +201,8 @@
 		2B2C8E1C5669A465B5A7A8DD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DC9975871F7E2F69008FD921 /* AXIndicatorView.framework */,
+				DC9975881F7E2F7A008FD921 /* AXIndicatorView.framework */,
 				574ECCB2C4144949818CF2C9 /* Pods_AXPracticalHUD.framework */,
 			);
 			name = Frameworks;
@@ -629,6 +635,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = AXPracticalHUDFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -667,6 +677,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = AXPracticalHUDFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
