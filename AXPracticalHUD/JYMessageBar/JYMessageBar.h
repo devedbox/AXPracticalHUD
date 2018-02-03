@@ -17,7 +17,7 @@ typedef void(^JYMessageBarHandler)(JYMessageBar __weak *bar, NSString *nickname,
 /**
  @description The handler block when pan to the bottom of the view
  */
-typedef void(^JYMessageBarPanToBottomHandler)();
+typedef void(^JYMessageBarPanToBottomHandler)(void);
 
 @interface JYMessageBar : UIView
 {

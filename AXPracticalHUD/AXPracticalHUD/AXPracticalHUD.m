@@ -331,7 +331,7 @@ if ([NSThread isMainThread]) {\
     [self show:YES];
 }
 
-- (void)hide:(BOOL)animated afterDelay:(NSTimeInterval)delay completion:(void (^)())completion
+- (void)hide:(BOOL)animated afterDelay:(NSTimeInterval)delay completion:(void (^)(void))completion
 {
     _animated = animated;
     _completion = [completion copy];
