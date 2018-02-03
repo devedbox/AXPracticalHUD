@@ -521,6 +521,7 @@ if ([NSThread isMainThread]) {\
                                 options:7
                              animations:^{
                                  _contentView.frame = rect;
+                                 self.alpha = 0.0;
                              } completion:^(BOOL finished) {
                                  if (finished) {
                                      _contentView.frame = self.contentFrame;
