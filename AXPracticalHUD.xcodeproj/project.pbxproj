@@ -26,8 +26,6 @@
 		DC6665651DA7907300B2D063 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = DC6665641DA7907300B2D063 /* background.png */; };
 		DC7C4BD11EC8989C008E6D66 /* JYMessageBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7C4BD01EC8989C008E6D66 /* JYMessageBar.m */; };
 		DC9975691F7E2B71008FD921 /* AXPracticalHUDFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = DC9975671F7E2B71008FD921 /* AXPracticalHUDFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DC99756C1F7E2B71008FD921 /* AXPracticalHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9975651F7E2B71008FD921 /* AXPracticalHUD.framework */; };
-		DC99756D1F7E2B71008FD921 /* AXPracticalHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC9975651F7E2B71008FD921 /* AXPracticalHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DC9975721F7E2BA0008FD921 /* AXPracticalHUD.h in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF6F1BFF0AA200EEDF8C /* AXPracticalHUD.h */; };
 		DC9975731F7E2BA0008FD921 /* AXPracticalHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF701BFF0AA200EEDF8C /* AXPracticalHUD.m */; };
 		DC9975741F7E2BA0008FD921 /* AXBarProgressView.h in Sources */ = {isa = PBXBuildFile; fileRef = 01ABFF681BFF0AA200EEDF8C /* AXBarProgressView.h */; };
@@ -48,16 +46,6 @@
 		DCB52EBD1ECACBE2009A4028 /* TestsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB52EBC1ECACBE2009A4028 /* TestsTableViewController.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		DC99756A1F7E2B71008FD921 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 01ABFF451BFF0A3E00EEDF8C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DC9975641F7E2B71008FD921;
-			remoteInfo = AXPracticalHUDFramework;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		DC9975711F7E2B71008FD921 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -65,7 +53,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				DC99756D1F7E2B71008FD921 /* AXPracticalHUD.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,7 +105,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC99756C1F7E2B71008FD921 /* AXPracticalHUD.framework in Frameworks */,
 				19AD6AB631E6F488B46FF73E /* Pods_AXPracticalHUD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,7 +286,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				DC99756B1F7E2B71008FD921 /* PBXTargetDependency */,
 			);
 			name = AXPracticalHUD;
 			productName = AXPracticalHUD;
@@ -474,14 +459,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		DC99756B1F7E2B71008FD921 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DC9975641F7E2B71008FD921 /* AXPracticalHUDFramework */;
-			targetProxy = DC99756A1F7E2B71008FD921 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		01ABFF591BFF0A3E00EEDF8C /* Main.storyboard */ = {
