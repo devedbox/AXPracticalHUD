@@ -125,19 +125,19 @@ typedef void(^AXPracticalHUDCompletionBlock)(void);
 @interface AXPracticalHUD(Shared)
 + (instancetype)sharedHUD;
 
-- (void)showPieInView:(UIView *)view;
 - (void)showProgressInView:(UIView *)view;
-- (void)showColorfulProgressInView:(UIView *)view;
+- (void)showProgressBarInView:(UIView *)view;
+- (void)showColorfulProgressBarInView:(UIView *)view;
 - (void)showTextInView:(UIView *)view;
-- (void)showSimpleInView:(UIView *)view;
+- (void)showNormalInView:(UIView *)view;
 - (void)showErrorInView:(UIView *)view;
 - (void)showSuccessInView:(UIView *)view;
 
-- (void)showPieInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
 - (void)showProgressInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
-- (void)showColorfulProgressInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
+- (void)showProgressBarInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
+- (void)showColorfulProgressBarInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
 - (void)showTextInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
-- (void)showSimpleInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
+- (void)showNormalInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
 - (void)showErrorInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
 - (void)showSuccessInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration;
 @end

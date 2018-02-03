@@ -731,20 +731,20 @@ if ([NSThread isMainThread]) {\
     return _sharedInstance;
 }
 
-- (void)showPieInView:(UIView *)view {
-    [self showPieInView:view text:nil detail:nil configuration:nil];
-}
 - (void)showProgressInView:(UIView *)view {
     [self showProgressInView:view text:nil detail:nil configuration:nil];
 }
-- (void)showColorfulProgressInView:(UIView *)view; {
-    [self showColorfulProgressInView:view text:nil detail:nil configuration:nil];
+- (void)showProgressBarInView:(UIView *)view {
+    [self showProgressInView:view text:nil detail:nil configuration:nil];
+}
+- (void)showColorfulProgressBarInView:(UIView *)view; {
+    [self showColorfulProgressBarInView:view text:nil detail:nil configuration:nil];
 }
 - (void)showTextInView:(UIView *)view {
     [self showTextInView:view text:nil detail:nil configuration:nil];
 }
-- (void)showSimpleInView:(UIView *)view {
-    [self showSimpleInView:view text:nil detail:nil configuration:nil];
+- (void)showNormalInView:(UIView *)view {
+    [self showNormalInView:view text:nil detail:nil configuration:nil];
 }
 - (void)showErrorInView:(UIView *)view {
     [self showErrorInView:view text:nil detail:nil configuration:nil];
@@ -753,15 +753,15 @@ if ([NSThread isMainThread]) {\
     [self showSuccessInView:view text:nil detail:nil configuration:nil];
 }
 
-- (void)showPieInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
+- (void)showProgressInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {
     [self _showInView:view animated:YES mode:AXPracticalHUDModeProgress text:text detail:detail customView:nil configuration:configuration];
 }
-- (void)showProgressInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
+- (void)showProgressBarInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {
     [self _showInView:view animated:YES mode:AXPracticalHUDModeProgressBar text:text detail:detail customView:nil configuration:configuration];
 }
-- (void)showColorfulProgressInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
+- (void)showColorfulProgressBarInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {
     [self _showInView:view animated:YES mode:AXPracticalHUDModeColourfulProgressBar text:text detail:detail customView:nil configuration:configuration];
 }
@@ -769,7 +769,7 @@ if ([NSThread isMainThread]) {\
 {
     [self _showInView:view animated:YES mode:AXPracticalHUDModeText text:text detail:detail customView:nil configuration:configuration];
 }
-- (void)showSimpleInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
+- (void)showNormalInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {
     [self _showInView:view animated:YES mode:AXPracticalHUDModeNormal text:text detail:detail customView:nil configuration:configuration];
 }
