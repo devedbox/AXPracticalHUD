@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, AXPracticalHUDPosition) {
     AXPracticalHUDPositionBottom
 };
 /// Completion block when task finished.
-typedef void(^AXPracticalHUDCompletionBlock)();
+typedef void(^AXPracticalHUDCompletionBlock)(void);
 /// HUD delegate
 @protocol AXPracticalHUDDelegate;
 
