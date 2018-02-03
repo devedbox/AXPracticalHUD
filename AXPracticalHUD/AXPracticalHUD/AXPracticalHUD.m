@@ -108,7 +108,7 @@ if ([NSThread isMainThread]) {\
     _contentInsets = UIEdgeInsetsMake(15.0f, 15.0f, 15.0f, 15.0f);
     _progressing = NO;
     
-    _mode = AXPracticalHUDModeIndeterminate;
+    _mode = AXPracticalHUDModeNormal;
     _position = AXPracticalHUDPositionCenter;
     _progress = 0.0f;
     _removeFromSuperViewOnHide = YES;
@@ -554,7 +554,7 @@ if ([NSThread isMainThread]) {\
 
 - (void)setupIndicators {
     switch (_mode) {
-        case AXPracticalHUDModeIndeterminate:
+        case AXPracticalHUDModeNormal:
             if (![_indicator isKindOfClass:[AXActivityIndicatorView class]]) {
                 [_indicator removeFromSuperview];
                 _indicator = [[AXActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 37, 37)];
@@ -567,7 +567,7 @@ if ([NSThread isMainThread]) {\
             [(AXActivityIndicatorView *)_indicator setAnimating:YES];
             [_contentView addSubview:_indicator];
             break;
-        case AXPracticalHUDModeBreachedAnnularIndeterminate: {
+        case AXPracticalHUDModeBreachedRing: {
             if (![_indicator isKindOfClass:[AXBreachedAnnulusIndicatorView class]]) {
                 [_indicator removeFromSuperview];
                 _indicator = [[AXBreachedAnnulusIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 37, 37)];
@@ -578,22 +578,22 @@ if ([NSThread isMainThread]) {\
             [(AXBreachedAnnulusIndicatorView *)_indicator setAnimating:YES];
         }
             break;
-        case AXPracticalHUDModeDeterminateHorizontalBar:
+        case AXPracticalHUDModeProgressBar:
             [_indicator removeFromSuperview];
             _indicator = [[AXBarProgressView alloc] init];
             [_indicator setValue:self.tintColor forKey:@"lineColor"];
             [_indicator setValue:self.tintColor forKey:@"progressColor"];
             [_contentView addSubview:_indicator];
             break;
-        case AXPracticalHUDModeDeterminate:
-        case AXPracticalHUDModeDeterminateAnnularEnabled:
+        case AXPracticalHUDModeProgress:
+        case AXPracticalHUDModeProgressRing:
             if (![_indicator isKindOfClass:[AXCircleProgressView class]]) {
                 [_indicator removeFromSuperview];
                 _indicator = [[AXCircleProgressView alloc] init];
                 [_indicator setValue:self.tintColor forKey:@"progressColor"];
                 [_contentView addSubview:_indicator];
             }
-            if (_mode == AXPracticalHUDModeDeterminateAnnularEnabled) {
+            if (_mode == AXPracticalHUDModeProgressRing) {
                 [_indicator setValue:@(YES) forKey:@"annularEnabled"];
             }
             break;
@@ -602,7 +602,7 @@ if ([NSThread isMainThread]) {\
             _indicator = _customView;
             if (_indicator) [_contentView addSubview:_indicator];
             break;
-        case AXPracticalHUDModeDeterminateColorfulHorizontalBar:
+        case AXPracticalHUDModeColourfulProgressBar:
             [_indicator removeFromSuperview];
             _indicator = [[AXGradientProgressView alloc] init];
             [_indicator setValue:@(2.0) forKey:@"progressHeight"];
@@ -755,15 +755,15 @@ if ([NSThread isMainThread]) {\
 
 - (void)showPieInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {
-    [self _showInView:view animated:YES mode:AXPracticalHUDModeDeterminate text:text detail:detail customView:nil configuration:configuration];
+    [self _showInView:view animated:YES mode:AXPracticalHUDModeProgress text:text detail:detail customView:nil configuration:configuration];
 }
 - (void)showProgressInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {
-    [self _showInView:view animated:YES mode:AXPracticalHUDModeDeterminateHorizontalBar text:text detail:detail customView:nil configuration:configuration];
+    [self _showInView:view animated:YES mode:AXPracticalHUDModeProgressBar text:text detail:detail customView:nil configuration:configuration];
 }
 - (void)showColorfulProgressInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {
-    [self _showInView:view animated:YES mode:AXPracticalHUDModeDeterminateColorfulHorizontalBar text:text detail:detail customView:nil configuration:configuration];
+    [self _showInView:view animated:YES mode:AXPracticalHUDModeColourfulProgressBar text:text detail:detail customView:nil configuration:configuration];
 }
 - (void)showTextInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {
@@ -771,7 +771,7 @@ if ([NSThread isMainThread]) {\
 }
 - (void)showSimpleInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {
-    [self _showInView:view animated:YES mode:AXPracticalHUDModeIndeterminate text:text detail:detail customView:nil configuration:configuration];
+    [self _showInView:view animated:YES mode:AXPracticalHUDModeNormal text:text detail:detail customView:nil configuration:configuration];
 }
 - (void)showErrorInView:(UIView *)view text:(NSString *)text detail:(NSString *)detail configuration:(void(^)(AXPracticalHUD *HUD))configuration
 {

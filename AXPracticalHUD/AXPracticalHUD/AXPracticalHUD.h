@@ -14,21 +14,21 @@
 /// Mode of hud view
 typedef NS_ENUM(NSInteger, AXPracticalHUDMode) {
     /// Progress is shown using an UIActivityIndicatorView. This is the default.
-    AXPracticalHUDModeIndeterminate,
+    AXPracticalHUDModeNormal,
     /// Progress is shown using a round, pie-chart like, progress view.
-    AXPracticalHUDModeDeterminate,
+    AXPracticalHUDModeProgress,
     /// Progress is shown using a horizontal progress bar
-    AXPracticalHUDModeDeterminateHorizontalBar,
+    AXPracticalHUDModeProgressBar,
     /// Progress is shown using a horizontal colorful progress bar
-    AXPracticalHUDModeDeterminateColorfulHorizontalBar,
+    AXPracticalHUDModeColourfulProgressBar,
     /// Progress is shown using a ring-shaped progress view.
-    AXPracticalHUDModeDeterminateAnnularEnabled,
+    AXPracticalHUDModeProgressRing,
     /// Shows a custom view
     AXPracticalHUDModeCustomView,
     /// Shows only labels
     AXPracticalHUDModeText,
     /// Progress is shown using an breach annular indicator.
-    AXPracticalHUDModeBreachedAnnularIndeterminate
+    AXPracticalHUDModeBreachedRing
 };
 /// Animation styles of hud view animating.
 typedef NS_ENUM(NSInteger, AXPracticalHUDAnimation) {

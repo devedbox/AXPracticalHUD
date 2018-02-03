@@ -213,7 +213,7 @@
     
     HUD.lockBackground = YES;
     HUD.square = YES;
-    HUD.mode = AXPracticalHUDModeBreachedAnnularIndeterminate;
+    HUD.mode = AXPracticalHUDModeBreachedRing;
     
     [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
 }
@@ -233,7 +233,7 @@
     HUD.detailLabel.text = @"updating data";
     HUD.lockBackground = YES;
     HUD.square = YES;
-    HUD.mode = AXPracticalHUDModeBreachedAnnularIndeterminate;
+    HUD.mode = AXPracticalHUDModeBreachedRing;
     
     [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
 }
@@ -249,7 +249,7 @@
     HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
     
     // Set determinate mode
-    HUD.mode = AXPracticalHUDModeDeterminate;
+    HUD.mode = AXPracticalHUDModeProgress;
     
     HUD.delegate = self;
     HUD.label.text = @"Loading";
@@ -271,7 +271,7 @@
     HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
     
     // Set determinate mode
-    HUD.mode = AXPracticalHUDModeDeterminateAnnularEnabled;
+    HUD.mode = AXPracticalHUDModeProgressRing;
     
     HUD.delegate = self;
     HUD.label.text = @"Loading";
@@ -291,7 +291,7 @@
     HUD.detailLabel.textColor = [HUD.tintColor colorWithAlphaComponent:0.8];
     
     // Set determinate bar mode
-    HUD.mode = AXPracticalHUDModeDeterminateHorizontalBar;
+    HUD.mode = AXPracticalHUDModeProgressBar;
     HUD.tintColor = [UIColor orangeColor];
     
     HUD.delegate = self;
@@ -400,7 +400,7 @@
     
     HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
-    HUD.mode = AXPracticalHUDModeDeterminateColorfulHorizontalBar;
+    HUD.mode = AXPracticalHUDModeColourfulProgressBar;
     HUD.progress = 1.0;
     HUD.lockBackground = YES;
     
@@ -597,7 +597,7 @@
     // Indeterminate mode
     sleep(2);
     // Switch to determinate mode
-    HUD.mode = AXPracticalHUDModeDeterminate;
+    HUD.mode = AXPracticalHUDModeProgress;
     if ([NSThread currentThread].isMainThread) {
         HUD.label.text = @"Progress";
     } else {
@@ -613,7 +613,7 @@
         usleep(50000);
     }
     // Back to indeterminate mode
-    HUD.mode = AXPracticalHUDModeIndeterminate;
+    HUD.mode = AXPracticalHUDModeNormal;
     HUD.label.text = @"Cleaning up";
     sleep(2);
     // UIImageView is a UIKit class, we have to initialize it on the main thread
@@ -633,7 +633,7 @@
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     expectedLength = MAX([response expectedContentLength], 1);
     currentLength = 0;
-    HUD.mode = AXPracticalHUDModeDeterminate;
+    HUD.mode = AXPracticalHUDModeProgress;
     HUD.lockBackground = YES;
 }
 
