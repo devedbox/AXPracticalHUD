@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DC9975641F7E2B71008FD921"
-               BuildableName = "AXPracticalHUDFramework.framework"
+               BuildableName = "AXPracticalHUD.framework"
                BlueprintName = "AXPracticalHUDFramework"
                ReferencedContainer = "container:AXPracticalHUD.xcodeproj">
             </BuildableReference>
@@ -48,7 +48,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC9975641F7E2B71008FD921"
-            BuildableName = "AXPracticalHUDFramework.framework"
+            BuildableName = "AXPracticalHUD.framework"
             BlueprintName = "AXPracticalHUDFramework"
             ReferencedContainer = "container:AXPracticalHUD.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC9975641F7E2B71008FD921"
-            BuildableName = "AXPracticalHUDFramework.framework"
+            BuildableName = "AXPracticalHUD.framework"
             BlueprintName = "AXPracticalHUDFramework"
             ReferencedContainer = "container:AXPracticalHUD.xcodeproj">
          </BuildableReference>

@@ -191,9 +191,9 @@
 			children = (
 				01ABFF6F1BFF0AA200EEDF8C /* AXPracticalHUD.h */,
 				01ABFF701BFF0AA200EEDF8C /* AXPracticalHUD.m */,
+				DCF0461A20261C6A003E81B7 /* ContentView */,
+				DCF0461920261C58003E81B7 /* ProgressViews */,
 				01ABFF6E1BFF0AA200EEDF8C /* AXPracticalHUD.bundle */,
-				DC5DE49E1DA6A68300C58AD5 /* Progress */,
-				DC5DE49F1DA6A6C100C58AD5 /* ContentView */,
 			);
 			path = AXPracticalHUD;
 			sourceTree = "<group>";
@@ -206,28 +206,6 @@
 				574ECCB2C4144949818CF2C9 /* Pods_AXPracticalHUD.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DC5DE49E1DA6A68300C58AD5 /* Progress */ = {
-			isa = PBXGroup;
-			children = (
-				01ABFF681BFF0AA200EEDF8C /* AXBarProgressView.h */,
-				01ABFF691BFF0AA200EEDF8C /* AXBarProgressView.m */,
-				01ABFF6A1BFF0AA200EEDF8C /* AXCircleProgressView.h */,
-				01ABFF6B1BFF0AA200EEDF8C /* AXCircleProgressView.m */,
-				01ABFF6C1BFF0AA200EEDF8C /* AXGradientProgressView.h */,
-				01ABFF6D1BFF0AA200EEDF8C /* AXGradientProgressView.m */,
-			);
-			name = Progress;
-			sourceTree = "<group>";
-		};
-		DC5DE49F1DA6A6C100C58AD5 /* ContentView */ = {
-			isa = PBXGroup;
-			children = (
-				01ABFF711BFF0AA200EEDF8C /* AXPracticalHUDContentView.h */,
-				01ABFF721BFF0AA200EEDF8C /* AXPracticalHUDContentView.m */,
-			);
-			name = ContentView;
 			sourceTree = "<group>";
 		};
 		DC7C4BCE1EC8989C008E6D66 /* JYMessageBar */ = {
@@ -255,6 +233,28 @@
 				DCB52EBC1ECACBE2009A4028 /* TestsTableViewController.m */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		DCF0461920261C58003E81B7 /* ProgressViews */ = {
+			isa = PBXGroup;
+			children = (
+				01ABFF681BFF0AA200EEDF8C /* AXBarProgressView.h */,
+				01ABFF691BFF0AA200EEDF8C /* AXBarProgressView.m */,
+				01ABFF6A1BFF0AA200EEDF8C /* AXCircleProgressView.h */,
+				01ABFF6B1BFF0AA200EEDF8C /* AXCircleProgressView.m */,
+				01ABFF6C1BFF0AA200EEDF8C /* AXGradientProgressView.h */,
+				01ABFF6D1BFF0AA200EEDF8C /* AXGradientProgressView.m */,
+			);
+			path = ProgressViews;
+			sourceTree = "<group>";
+		};
+		DCF0461A20261C6A003E81B7 /* ContentView */ = {
+			isa = PBXGroup;
+			children = (
+				01ABFF711BFF0AA200EEDF8C /* AXPracticalHUDContentView.h */,
+				01ABFF721BFF0AA200EEDF8C /* AXPracticalHUDContentView.m */,
+			);
+			path = ContentView;
 			sourceTree = "<group>";
 		};
 		DE0F4661E98654ADD43A48C5 /* Pods */ = {
