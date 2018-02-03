@@ -177,6 +177,7 @@
     HUD.delegate = self;
     
     HUD.lockBackground = YES;
+    HUD.animation = AXPracticalHUDAnimationFlipIn;
     
     // HUD.mode = AXPracticalHUDModeBreachedIndeterminate;
     // HUD.dimBackground = YES;
@@ -489,6 +490,7 @@
     HUD.delegate = self;
     
     HUD.lockBackground = YES;
+    HUD.dimBackground = YES;
     
     HUD.mode = AXPracticalHUDModeCustomView;
     
