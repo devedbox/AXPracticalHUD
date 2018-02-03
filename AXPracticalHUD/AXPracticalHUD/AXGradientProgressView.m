@@ -115,13 +115,11 @@
 - (CADisplayLink *)displayLink {
     if (_displayLink) return _displayLink;
     _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(handleDisplayLink:)];
-#if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_10_0
-    self.displayLink.frameInterval = 1;
-#else
-    if ([self.displayLink respondsToSelector:@selector(setPreferredFramesPerSecond:)] && kCFCoreFoundationVersionNumber > kCFCoreFoundationVersionNumber_iOS_9_4) {
+    if (@available(iOS 10.0, *)) {
         self.displayLink.preferredFramesPerSecond = 60;
+    } else {
+        self.displayLink.frameInterval = 1;
     }
-#endif
     return _displayLink;
 }
 
