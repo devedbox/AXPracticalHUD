@@ -379,7 +379,9 @@ if ([NSThread isMainThread]) {\
 - (void)setProgress:(CGFloat)progress {
     _progress = progress;
     if ([_indicator isKindOfClass:[AXBarProgressView class]] || [_indicator isKindOfClass:[AXCircleProgressView class]] || [_indicator isKindOfClass:[AXGradientProgressView class]]) {
-        [_indicator setValue:@(_progress) forKey:@"progress"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_indicator setValue:@(_progress) forKey:@"progress"];
+        });
     }
 }
 
