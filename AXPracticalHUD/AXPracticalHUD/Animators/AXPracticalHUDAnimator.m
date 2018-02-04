@@ -120,7 +120,7 @@ id<AXPracticalHUDAnimator> AXPracticalHUDZoomAnimator() {
                   initialSpringVelocity:1.0
                                 options:7
                              animations:^{
-                                 hud.contentView.transform = CGAffineTransformMakeScale(0.5, 0.5);
+                                 hud.contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
                              } completion:^(BOOL finished) {
                                  if (finished) {
                                      hud.contentView.transform = CGAffineTransformIdentity;
