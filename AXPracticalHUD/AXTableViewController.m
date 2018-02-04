@@ -522,7 +522,9 @@
 
 - (IBAction)showTextOnly:(id)sender {
     
-    HUD = [AXPracticalHUD showHUDInView:self.navigationController.view animated:YES];
+    HUD = [[AXPracticalHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    
     
     HUD.contentView.color = _style.isOn?[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.00]:[UIColor blackColor];
     HUD.tintColor = _style.isOn?[UIColor blackColor]:[UIColor whiteColor];
@@ -535,7 +537,9 @@
     HUD.margin = 10.f;
     HUD.removeFromSuperViewOnHide = YES;
     HUD.lockBackground = YES;
+    HUD.animator = AXPracticalHUDFlipUpAnimator();
     
+    [HUD show:YES];
     [HUD hide:YES afterDelay:3 completion:nil];
 }
 
