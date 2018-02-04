@@ -68,6 +68,8 @@ if ([NSThread isMainThread]) {\
 // Motions:
 @property(strong, nonatomic) UIInterpolatingMotionEffect *xMotionEffect;
 @property(strong, nonatomic) UIInterpolatingMotionEffect *yMotionEffect;
+/// Is the hud is animating.
+@property(assign, nonatomic) BOOL animating;
 @end
 
 @implementation AXPracticalHUD
@@ -200,6 +202,10 @@ if ([NSThread isMainThread]) {\
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    
+    if (_animating) {
+        return;
+    }
     
     if (self.superview) {
         self.frame = self.superview.bounds;
@@ -401,24 +407,27 @@ if ([NSThread isMainThread]) {\
 }
 #pragma mark - Getters
 - (CGRect)contentFrame {
-    CGSize size = CGSizeApplyAffineTransform(_size, self.contentView.transform);
+    CGSize size = _size;
     switch (_position) {
-        case AXPracticalHUDPositionTop:
-            return CGRectMake(round((self.bounds.size.width - size.width) / 2) + _offsets.x, 0 + _offsets.y, size.width, size.height);
-            break;
-        case AXPracticalHUDPositionCenter:
-            return CGRectMake(round((self.bounds.size.width - size.width) / 2) + _offsets.x, round((self.bounds.size.height - size.height) / 2) + _offsets.y, size.width, size.height);
-            break;
-        case AXPracticalHUDPositionBottom:
+        case AXPracticalHUDPositionTop: {
+            CGPoint origin = CGPointMake(round((self.bounds.size.width - size.width) / 2) + _offsets.x, 0 + _offsets.y);
+            return CGRectMake(origin.x, origin.y, size.width, size.height);
+        }
+        case AXPracticalHUDPositionCenter: {
+            CGPoint origin = CGPointMake(round((self.bounds.size.width - size.width) / 2) + _offsets.x, round((self.bounds.size.height - size.height) / 2) + _offsets.y);
+            return  CGRectMake(origin.x, origin.y, size.width, size.height);
+        }
+        case AXPracticalHUDPositionBottom: {
+            CGPoint origin;
             if (self.superview) {
-                return CGRectMake(round((self.bounds.size.width - size.width) / 2) + _offsets.x, self.superview.bounds.size.height - size.height + _offsets.y, size.width, size.height);
+                origin = CGPointMake(round((self.bounds.size.width - size.width) / 2) + _offsets.x, self.superview.bounds.size.height - size.height + _offsets.y);
             } else {
-                return CGRectMake(round((self.bounds.size.width - size.width) / 2) + _offsets.x, round((self.bounds.size.height - size.height) / 2) + _offsets.y, size.width, size.height);
+                origin = CGPointMake(round((self.bounds.size.width - size.width) / 2) + _offsets.x, round((self.bounds.size.height - size.height) / 2) + _offsets.y);
             }
-            break;
+            return CGRectMake(origin.x, origin.y, size.width, size.height);
+        }
         default:
             return CGRectZero;
-            break;
     }
 }
 
@@ -475,15 +484,30 @@ if ([NSThread isMainThread]) {\
 - (void)showingAnimated:(BOOL)animated {
     // Cancel any scheduled hideDelayed: calls
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
-    [self performSelectorOnMainThread:@selector(setNeedsLayout) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay)
+                           withObject:nil
+                        waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(setNeedsLayout)
+                           withObject:nil
+                        waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(layoutIfNeeded)
+                           withObject:nil
+                        waitUntilDone:YES];
     
     id<AXPracticalHUDAnimator> animator = _animator?:AXPracticalHUDFadeAnimator();
     _showStarted = [NSDate date];
+    [self setAnimating:YES];
     // Animating
     [animator hud:self
           animate:animated
          isHidden:NO];
+    if (animated) {
+        [self performSelector:@selector(setAnimating:)
+                   withObject:@(NO)
+                   afterDelay:[animator durationForTransition:NO]];
+    } else {
+        [self setAnimating:NO];
+    }
 }
 
 - (void)_showingByAnimated {
@@ -495,20 +519,22 @@ if ([NSThread isMainThread]) {\
 }
 
 - (void)hidingAnimated:(BOOL)animated {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     id<AXPracticalHUDAnimator> animator = _animator?:AXPracticalHUDFadeAnimator();
-    
+    [self setAnimating:YES];
     [animator hud:self
           animate:animated
          isHidden:YES];
     
     if (animated) {
-        [NSObject cancelPreviousPerformRequestsWithTarget:self
-                                                 selector:@selector(completed)
-                                                   object:nil];
+        [self performSelector:@selector(setAnimating:)
+                   withObject:@(NO)
+                   afterDelay:[animator durationForTransition:YES]];
         [self performSelector:@selector(completed)
                    withObject:nil
-                   afterDelay:[animator durationForTransition:NO]];
+                   afterDelay:[animator durationForTransition:YES]];
     } else {
+        [self setAnimating:NO];
         [self completed];
     }
 }

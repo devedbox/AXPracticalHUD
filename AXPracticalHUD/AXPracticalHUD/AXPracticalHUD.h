@@ -16,6 +16,7 @@
 extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDFadeAnimator(void);
 extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDFlipUpAnimator(void);
 extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDZoomAnimator(void);
+extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDDropDownAnimator(void);
 
 /// Mode of hud view
 typedef NS_ENUM(NSInteger, AXPracticalHUDMode) {
