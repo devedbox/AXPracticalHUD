@@ -23,6 +23,9 @@
 @interface _AXPracticalHUDZoomAnimator: NSObject<AXPracticalHUDAnimator>
 @end
 
+@interface _AXPracticalHUDDropDownAnimator: NSObject<AXPracticalHUDAnimator>
+@end
+
 id<AXPracticalHUDAnimator> AXPracticalHUDFadeAnimator() {
     return [_AXPracticalHUDFadeAnimator new];
 }
@@ -31,6 +34,9 @@ id<AXPracticalHUDAnimator> AXPracticalHUDFlipUpAnimator() {
 }
 id<AXPracticalHUDAnimator> AXPracticalHUDZoomAnimator() {
     return [_AXPracticalHUDZoomAnimator new];
+}
+id<AXPracticalHUDAnimator> AXPracticalHUDDropDownAnimator() {
+    return [_AXPracticalHUDDropDownAnimator new];
 }
 
 #pragma mark - Fade.
@@ -139,6 +145,49 @@ id<AXPracticalHUDAnimator> AXPracticalHUDZoomAnimator() {
                              animations:^{
                                  hud.contentView.transform = CGAffineTransformIdentity;
                              } completion:nil];
+        }
+    } else {
+        hud.alpha = isHidden ? 0.0 : 1.0;
+    }
+}
+@end
+
+@implementation _AXPracticalHUDDropDownAnimator
+- (NSTimeInterval)durationForTransition:(BOOL)isHidden {
+    return isHidden ? 0.35 : 0.5;
+}
+
+- (void)hud:(AXPracticalHUD *)hud animate:(BOOL)animated isHidden:(BOOL)isHidden {
+    if (animated) {
+        if (isHidden) {
+            [UIView animateWithDuration:0.25
+                                  delay:0.1
+                 usingSpringWithDamping:1.0
+                  initialSpringVelocity:0.9
+                                options:7
+                             animations:^{
+                hud.contentView.transform = CGAffineTransformRotate(CGAffineTransformMakeTranslation(0, CGRectGetHeight(hud.frame)-CGRectGetMinY(hud.contentView.frame)), -M_PI/12);
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    hud.contentView.transform = CGAffineTransformIdentity;
+                }
+            }];
+            [UIView animateWithDuration:0.25 delay:0.1 options:7 animations:^{
+                hud.alpha = 0.0;
+            } completion:NULL];
+        } else {
+            [UIView animateWithDuration:0.25 animations:^{
+                hud.alpha = 1.0;
+            }];
+            hud.contentView.transform = CGAffineTransformRotate(CGAffineTransformMakeTranslation(0, -CGRectGetMaxY(hud.contentView.frame)), M_PI/12);
+            [UIView animateWithDuration:0.4
+                                  delay:0.1
+                 usingSpringWithDamping:1.0
+                  initialSpringVelocity:0.9
+                                options:7
+                             animations:^{
+                hud.contentView.transform = CGAffineTransformIdentity;
+            } completion:NULL];
         }
     } else {
         hud.alpha = isHidden ? 0.0 : 1.0;
