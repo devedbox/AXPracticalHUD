@@ -105,20 +105,22 @@ id<AXPracticalHUDAnimator> AXPracticalHUDZoomAnimator() {
 
 @implementation _AXPracticalHUDZoomAnimator
 - (NSTimeInterval)durationForTransition:(BOOL)isHidden {
-    return isHidden ? 0.4 : 0.35;
+    return 0.35;
 }
 
 - (void)hud:(AXPracticalHUD *)hud animate:(BOOL)animated isHidden:(BOOL)isHidden {
     if (animated) {
         if (isHidden) {
-            [UIView animateWithDuration:0.4
+            [UIView animateWithDuration:0.25 animations:^{
+                hud.alpha = 0.0;
+            }];
+            [UIView animateWithDuration:0.35
                                   delay:0.0
                  usingSpringWithDamping:1.0
-                  initialSpringVelocity:0.9
+                  initialSpringVelocity:1.0
                                 options:7
                              animations:^{
                                  hud.contentView.transform = CGAffineTransformMakeScale(0.5, 0.5);
-                                 hud.alpha = 0.0;
                              } completion:^(BOOL finished) {
                                  if (finished) {
                                      hud.contentView.transform = CGAffineTransformIdentity;
