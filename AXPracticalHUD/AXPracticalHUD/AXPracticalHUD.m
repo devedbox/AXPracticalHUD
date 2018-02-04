@@ -273,6 +273,7 @@ if ([NSThread isMainThread]) {\
     rect_detail.origin.x = round((_size.width - rect_detail.size.width) / 2) + _contentInsets.left - _contentInsets.right;
     _detailLabel.frame = rect_detail;
     
+    // Set the frame by applying the transform of the contview.
     _contentView.frame = self.contentFrame;
 }
 
@@ -398,18 +399,19 @@ if ([NSThread isMainThread]) {\
 }
 #pragma mark - Getters
 - (CGRect)contentFrame {
+    CGSize size = CGSizeApplyAffineTransform(_size, self.contentView.transform);
     switch (_position) {
         case AXPracticalHUDPositionTop:
-            return CGRectMake(round((self.bounds.size.width - _size.width) / 2) + _offsets.x, 0 + _offsets.y, _size.width, _size.height);
+            return CGRectMake(round((self.bounds.size.width - size.width) / 2) + _offsets.x, 0 + _offsets.y, size.width, size.height);
             break;
         case AXPracticalHUDPositionCenter:
-            return CGRectMake(round((self.bounds.size.width - _size.width) / 2) + _offsets.x, round((self.bounds.size.height - _size.height) / 2) + _offsets.y, _size.width, _size.height);
+            return CGRectMake(round((self.bounds.size.width - size.width) / 2) + _offsets.x, round((self.bounds.size.height - size.height) / 2) + _offsets.y, size.width, size.height);
             break;
         case AXPracticalHUDPositionBottom:
             if (self.superview) {
-                return CGRectMake(round((self.bounds.size.width - _size.width) / 2) + _offsets.x, self.superview.bounds.size.height - _size.height + _offsets.y, _size.width, _size.height);
+                return CGRectMake(round((self.bounds.size.width - size.width) / 2) + _offsets.x, self.superview.bounds.size.height - size.height + _offsets.y, size.width, size.height);
             } else {
-                return CGRectMake(round((self.bounds.size.width - _size.width) / 2) + _offsets.x, round((self.bounds.size.height - _size.height) / 2) + _offsets.y, _size.width, _size.height);
+                return CGRectMake(round((self.bounds.size.width - size.width) / 2) + _offsets.x, round((self.bounds.size.height - size.height) / 2) + _offsets.y, size.width, size.height);
             }
             break;
         default:

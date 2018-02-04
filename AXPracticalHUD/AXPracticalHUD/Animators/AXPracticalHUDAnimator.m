@@ -20,11 +20,17 @@
 @interface _AXPracticalHUDFlipUpAnimator: NSObject<AXPracticalHUDAnimator>
 @end
 
+@interface _AXPracticalHUDZoomAnimator: NSObject<AXPracticalHUDAnimator>
+@end
+
 id<AXPracticalHUDAnimator> AXPracticalHUDFadeAnimator() {
     return [_AXPracticalHUDFadeAnimator new];
 }
 id<AXPracticalHUDAnimator> AXPracticalHUDFlipUpAnimator() {
     return [_AXPracticalHUDFlipUpAnimator new];
+}
+id<AXPracticalHUDAnimator> AXPracticalHUDZoomAnimator() {
+    return [_AXPracticalHUDZoomAnimator new];
 }
 
 #pragma mark - Fade.
@@ -88,6 +94,49 @@ id<AXPracticalHUDAnimator> AXPracticalHUDFlipUpAnimator() {
                              animations:^{
                 hud.contentView.frame = hud.contentFrame;
             } completion:nil];
+        }
+    } else {
+        hud.alpha = isHidden ? 0.0 : 1.0;
+    }
+}
+@end
+
+#pragma mark - Zoom.
+
+@implementation _AXPracticalHUDZoomAnimator
+- (NSTimeInterval)durationForTransition:(BOOL)isHidden {
+    return isHidden ? 0.4 : 0.35;
+}
+
+- (void)hud:(AXPracticalHUD *)hud animate:(BOOL)animated isHidden:(BOOL)isHidden {
+    if (animated) {
+        if (isHidden) {
+            [UIView animateWithDuration:0.4
+                                  delay:0.0
+                 usingSpringWithDamping:1.0
+                  initialSpringVelocity:0.9
+                                options:7
+                             animations:^{
+                                 hud.contentView.transform = CGAffineTransformMakeScale(0.5, 0.5);
+                                 hud.alpha = 0.0;
+                             } completion:^(BOOL finished) {
+                                 if (finished) {
+                                     hud.contentView.transform = CGAffineTransformIdentity;
+                                 }
+                             }];
+        } else {
+            [UIView animateWithDuration:0.25 animations:^{
+                hud.alpha = 1.0;
+            }];
+            hud.contentView.transform = CGAffineTransformMakeScale(0.5, 0.5);
+            [UIView animateWithDuration:0.35
+                                  delay:0.0
+                 usingSpringWithDamping:1.0
+                  initialSpringVelocity:0.9
+                                options:7
+                             animations:^{
+                                 hud.contentView.transform = CGAffineTransformIdentity;
+                             } completion:nil];
         }
     } else {
         hud.alpha = isHidden ? 0.0 : 1.0;

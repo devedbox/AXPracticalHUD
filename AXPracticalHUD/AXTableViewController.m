@@ -234,6 +234,7 @@
     HUD.lockBackground = YES;
     HUD.square = YES;
     HUD.mode = AXPracticalHUDModeBreachedRing;
+    HUD.animator = AXPracticalHUDZoomAnimator();
     
     [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
 }
