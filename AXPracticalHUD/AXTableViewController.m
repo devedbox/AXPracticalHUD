@@ -214,6 +214,7 @@
     HUD.lockBackground = YES;
     HUD.square = YES;
     HUD.mode = AXPracticalHUDModeBreachedRing;
+    HUD.animator = AXPracticalHUDDropDownAnimator();
     
     [HUD show:YES executingMethod:@selector(myTask) toTarget:self withObject:nil];
 }
@@ -619,7 +620,9 @@
     }
     // Back to indeterminate mode
     HUD.mode = AXPracticalHUDModeNormal;
-    HUD.label.text = @"Cleaning up";
+    dispatch_async(dispatch_get_main_queue(), ^{
+        HUD.label.text = @"Cleaning up";
+    });
     sleep(2);
     // UIImageView is a UIKit class, we have to initialize it on the main thread
     __block UIImageView *imageView;
