@@ -7,6 +7,7 @@
 //
 
 #import "AXPracticalHUD.h"
+#import "AXPracticalHUDAnimator.h"
 #import <AXIndicatorView/AXIndicatorView.h>
 
 #ifndef kCFCoreFoundationVersionNumber_iOS_8_0
@@ -102,7 +103,6 @@ if ([NSThread isMainThread]) {\
     _offsets = CGPointZero;
     _minimumSize = CGSizeZero;
     _grace = 0.0f;
-    _animation = AXPracticalHUDAnimationFade;
     _threshold = 0.5f;
     _dimBackground = NO;
     _contentInsets = UIEdgeInsetsMake(15.0f, 15.0f, 15.0f, 15.0f);
@@ -473,30 +473,13 @@ if ([NSThread isMainThread]) {\
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
     [self performSelectorOnMainThread:@selector(setNeedsLayout) withObject:nil waitUntilDone:YES];
+    
+    id<AXPracticalHUDAnimator> animator = _animator?:AXPracticalHUDFadeAnimator();
     _showStarted = [NSDate date];
     // Animating
-    if (animated) {
-        if (_animation == AXPracticalHUDAnimationFlipIn) {
-            [UIView animateWithDuration:0.25 animations:^{
-                self.alpha = 1.0;
-            }];
-            CGRect rect = self.contentFrame;
-            
-            CGFloat translation = (_position == AXPracticalHUDPositionBottom || _position == AXPracticalHUDPositionCenter) ? self.bounds.size.height : -rect.size.height;
-            rect.origin.y = translation;
-            _contentView.frame = rect;
-            [UIView animateWithDuration:0.5 delay:0.15 usingSpringWithDamping:1.0 initialSpringVelocity:0.9 options:7
-                             animations:^{
-                                 _contentView.frame = self.contentFrame;
-                             } completion:nil];
-        } else {
-            [UIView animateWithDuration:0.25 delay:0.15 options:7 animations:^{
-                                 self.alpha = 1.0;
-                             } completion:nil];
-        }
-    } else {
-        self.alpha = 1.0;
-    }
+    [animator hud:self
+          animate:animated
+         isHidden:NO];
 }
 
 - (void)_showingByAnimated {
@@ -508,38 +491,20 @@ if ([NSThread isMainThread]) {\
 }
 
 - (void)hidingAnimated:(BOOL)animated {
-    // Animating
-    if (animated && _showStarted) {
-        if (_animation == AXPracticalHUDAnimationFlipIn) {
-            CGRect rect = self.contentFrame;
-            CGFloat translation = (_position == AXPracticalHUDPositionBottom || _position == AXPracticalHUDPositionCenter) ? self.bounds.size.height : -rect.size.height;
-            rect.origin.y = translation;
-            [UIView animateWithDuration:0.5
-                                  delay:0.0
-                 usingSpringWithDamping:1.0
-                  initialSpringVelocity:0.9
-                                options:7
-                             animations:^{
-                                 _contentView.frame = rect;
-                                 self.alpha = 0.0;
-                             } completion:^(BOOL finished) {
-                                 if (finished) {
-                                     _contentView.frame = self.contentFrame;
-                                     [self completed];
-                                 }
-                             }];
-        } else {
-            [UIView animateWithDuration:0.25 animations:^{
-                self.alpha = .0f;
-            } completion:^(BOOL finished) {
-                if (finished) {
-                    [self completed];
-                }
-            }];
-        }
-        _showStarted = nil;
+    id<AXPracticalHUDAnimator> animator = _animator?:AXPracticalHUDFadeAnimator();
+    
+    [animator hud:self
+          animate:animated
+         isHidden:YES];
+    
+    if (animated) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                                 selector:@selector(completed)
+                                                   object:nil];
+        [self performSelector:@selector(completed)
+                   withObject:nil
+                   afterDelay:[animator durationForTransition:NO]];
     } else {
-        self.alpha = .0f;
         [self completed];
     }
 }

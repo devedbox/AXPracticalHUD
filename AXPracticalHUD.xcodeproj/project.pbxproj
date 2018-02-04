@@ -44,6 +44,7 @@
 		DC9975811F7E2BCB008FD921 /* AXPracticalHUDContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 01ABFF711BFF0AA200EEDF8C /* AXPracticalHUDContentView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC9975891F7E2F7A008FD921 /* AXIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9975881F7E2F7A008FD921 /* AXIndicatorView.framework */; };
 		DCB52EBD1ECACBE2009A4028 /* TestsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB52EBC1ECACBE2009A4028 /* TestsTableViewController.m */; };
+		DCF0461F2026220E003E81B7 /* AXPracticalHUDAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF0461E2026220E003E81B7 /* AXPracticalHUDAnimator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -98,6 +99,8 @@
 		DC9975881F7E2F7A008FD921 /* AXIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AXIndicatorView.framework; path = Carthage/Build/iOS/AXIndicatorView.framework; sourceTree = "<group>"; };
 		DCB52EBB1ECACBE2009A4028 /* TestsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsTableViewController.h; sourceTree = "<group>"; };
 		DCB52EBC1ECACBE2009A4028 /* TestsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsTableViewController.m; sourceTree = "<group>"; };
+		DCF0461D2026220E003E81B7 /* AXPracticalHUDAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AXPracticalHUDAnimator.h; sourceTree = "<group>"; };
+		DCF0461E2026220E003E81B7 /* AXPracticalHUDAnimator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AXPracticalHUDAnimator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +180,7 @@
 			children = (
 				01ABFF6F1BFF0AA200EEDF8C /* AXPracticalHUD.h */,
 				01ABFF701BFF0AA200EEDF8C /* AXPracticalHUD.m */,
+				DCF0461C202621EB003E81B7 /* Animators */,
 				DCF0461A20261C6A003E81B7 /* ContentView */,
 				DCF0461920261C58003E81B7 /* ProgressViews */,
 				01ABFF6E1BFF0AA200EEDF8C /* AXPracticalHUD.bundle */,
@@ -241,6 +245,15 @@
 				01ABFF721BFF0AA200EEDF8C /* AXPracticalHUDContentView.m */,
 			);
 			path = ContentView;
+			sourceTree = "<group>";
+		};
+		DCF0461C202621EB003E81B7 /* Animators */ = {
+			isa = PBXGroup;
+			children = (
+				DCF0461D2026220E003E81B7 /* AXPracticalHUDAnimator.h */,
+				DCF0461E2026220E003E81B7 /* AXPracticalHUDAnimator.m */,
+			);
+			path = Animators;
 			sourceTree = "<group>";
 		};
 		DE0F4661E98654ADD43A48C5 /* Pods */ = {
@@ -430,6 +443,7 @@
 				01ABFF771BFF0AA200EEDF8C /* AXPracticalHUD.m in Sources */,
 				DCB52EBD1ECACBE2009A4028 /* TestsTableViewController.m in Sources */,
 				01ABFF781BFF0AA200EEDF8C /* AXPracticalHUDContentView.m in Sources */,
+				DCF0461F2026220E003E81B7 /* AXPracticalHUDAnimator.m in Sources */,
 				01ABFF731BFF0AA200EEDF8C /* AXBarProgressView.m in Sources */,
 				01ABFF741BFF0AA200EEDF8C /* AXCircleProgressView.m in Sources */,
 				01AB002A1BFF4FD500EEDF8C /* AXTableViewController.m in Sources */,

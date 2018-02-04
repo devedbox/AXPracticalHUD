@@ -177,7 +177,7 @@
     HUD.delegate = self;
     
     HUD.lockBackground = YES;
-    HUD.animation = AXPracticalHUDAnimationFlipIn;
+    HUD.animator = AXPracticalHUDFlipUpAnimator();
     
     // HUD.mode = AXPracticalHUDModeBreachedIndeterminate;
     // HUD.dimBackground = YES;
@@ -507,7 +507,7 @@
     
     HUD.margin = 0.0;
     HUD.contentInsets = UIEdgeInsetsMake(20, 15, 5, 0);
-    HUD.animation = AXPracticalHUDAnimationFlipIn;
+    HUD.animator = AXPracticalHUDFlipUpAnimator();
     // HUD.dimBackground = YES;
     
     // Show the HUD while the provided method executes in a new thread
