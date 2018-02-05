@@ -19,7 +19,7 @@ extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDZoomAnimator(void);
 extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDDropDownAnimator(void);
 
 /// Mode of hud view
-typedef NS_ENUM(NSInteger, AXPracticalHUDMode) {
+NS_SWIFT_NAME(PracticalHUDMode) typedef NS_ENUM(NSInteger, AXPracticalHUDMode) {
     /// Progress is shown using an UIActivityIndicatorView. This is the default.
     AXPracticalHUDModeNormal,
     /// Progress is shown using a round, pie-chart like, progress view.
@@ -51,7 +51,7 @@ typedef void(^AXPracticalHUDCompletionBlock)(void);
 /// HUD delegate
 @protocol AXPracticalHUDDelegate;
 
-@interface AXPracticalHUD : UIView
+NS_SWIFT_NAME(PracticalHUD) @interface AXPracticalHUD : UIView
 /// Delegate of HUD view,
 @property(assign, nonatomic, nullable) id<AXPracticalHUDDelegate>delegate;
 #pragma mark - Boolean
@@ -171,7 +171,7 @@ typedef void(^AXPracticalHUDCompletionBlock)(void);
 + (nonnull NSArray *)HUDsInView:(nonnull UIView *)view;
 @end
 
-@protocol AXPracticalHUDDelegate <NSObject>
+NS_SWIFT_NAME(PracticalHUDDelegate) @protocol AXPracticalHUDDelegate <NSObject>
 @optional
 - (void)HUDDidHidden:(nonnull AXPracticalHUD *)HUD;
 @end
