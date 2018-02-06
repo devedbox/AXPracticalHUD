@@ -7,6 +7,9 @@
 //
 
 #import "AXPracticalHUD.h"
+#import "AXBarProgressView.h"
+#import "AXCircleProgressView.h"
+#import "AXGradientProgressView.h"
 #import "AXPracticalHUDAnimator.h"
 #import <AXIndicatorView/AXIndicatorView.h>
 

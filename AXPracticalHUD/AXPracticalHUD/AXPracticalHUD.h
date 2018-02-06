@@ -6,9 +6,6 @@
 //  Copyright © 2015 ai. All rights reserved.
 //
 
-#import "AXBarProgressView.h"
-#import "AXCircleProgressView.h"
-#import "AXGradientProgressView.h"
 #import "AXPracticalHUDContentView.h"
 
 @protocol AXPracticalHUDAnimator;
@@ -19,7 +16,7 @@ extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDZoomAnimator(void);
 extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDDropDownAnimator(void);
 
 /// Mode of hud view
-NS_SWIFT_NAME(PracticalHUDMode) typedef NS_ENUM(NSInteger, AXPracticalHUDMode) {
+typedef NS_ENUM(NSInteger, AXPracticalHUDMode) {
     /// Progress is shown using an UIActivityIndicatorView. This is the default.
     AXPracticalHUDModeNormal,
     /// Progress is shown using a round, pie-chart like, progress view.
@@ -36,7 +33,7 @@ NS_SWIFT_NAME(PracticalHUDMode) typedef NS_ENUM(NSInteger, AXPracticalHUDMode) {
     AXPracticalHUDModeText,
     /// Progress is shown using an breach annular indicator.
     AXPracticalHUDModeBreachedRing
-};
+} NS_SWIFT_NAME(PracticalHUDMode);
 /// Position of hud view.
 typedef NS_ENUM(NSInteger, AXPracticalHUDPosition) {
     /// Top position.
@@ -45,9 +42,9 @@ typedef NS_ENUM(NSInteger, AXPracticalHUDPosition) {
     AXPracticalHUDPositionCenter,
     /// Bottom position
     AXPracticalHUDPositionBottom
-};
+} NS_SWIFT_NAME(PracticalHUDPosition);
 /// Completion block when task finished.
-typedef void(^AXPracticalHUDCompletionBlock)(void);
+typedef void(^AXPracticalHUDCompletionBlock)(void) NS_SWIFT_NAME(PracticalHUDCompletion);
 /// HUD delegate
 @protocol AXPracticalHUDDelegate;
 

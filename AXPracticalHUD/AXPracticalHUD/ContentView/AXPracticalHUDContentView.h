@@ -30,9 +30,9 @@ typedef NS_ENUM(NSInteger, AXPracticalHUDTranslucentStyle) {
     AXPracticalHUDTranslucentStyleLight,
     /// Dark translucent style.
     AXPracticalHUDTranslucentStyleDark
-};
+} NS_SWIFT_NAME(PracticalHUDTranslucentStyle);
 
-@interface AXPracticalHUDContentView : UIView
+NS_SWIFT_NAME(PracticalHUDContentView) @interface AXPracticalHUDContentView : UIView
 /// Color of the content view. Default is nil.
 @property(strong, nonatomic) UIColor *color;
 /// End color of the content view. Default is nil.

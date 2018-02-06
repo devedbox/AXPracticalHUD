@@ -93,7 +93,7 @@ Pod::Spec.new do |s|
   s.source_files  = "AXPracticalHUD/AXPracticalHUD/*.{h,m}", "AXPracticalHUD/AXPracticalHUD/*/*.{h,m}"
   #s.exclude_files = "Classes/Exclude"
 
-  # s.public_header_files = "Classes/**/*.h"
+  s.public_header_files = "AXPracticalHUD/AXPracticalHUD/*.{h}", "AXPracticalHUD/AXPracticalHUD/ContentView/*.{h}"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
