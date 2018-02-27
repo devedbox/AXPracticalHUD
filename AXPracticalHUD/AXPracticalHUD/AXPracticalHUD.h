@@ -10,10 +10,10 @@
 
 @protocol AXPracticalHUDAnimator;
 
-extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDFadeAnimator(void);
-extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDFlipUpAnimator(void);
-extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDZoomAnimator(void);
-extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDDropDownAnimator(void);
+extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDFadeAnimator(void) NS_SWIFT_NAME(PracticalHUDFadeAnimator());
+extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDFlipUpAnimator(void) NS_SWIFT_NAME(PracticalHUDFlipUpAnimator());
+extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDZoomAnimator(void) NS_SWIFT_NAME(PracticalHUDZoomAnimator());
+extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDDropDownAnimator(void) NS_SWIFT_NAME(PracticalHUDDropDownAnimator());
 
 /// Mode of hud view
 typedef NS_ENUM(NSInteger, AXPracticalHUDMode) {
@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, AXPracticalHUDMode) {
     AXPracticalHUDModeText,
     /// Progress is shown using an breach annular indicator.
     AXPracticalHUDModeBreachedRing
-} NS_SWIFT_NAME(PracticalHUDMode);
+};
 /// Position of hud view.
 typedef NS_ENUM(NSInteger, AXPracticalHUDPosition) {
     /// Top position.
@@ -42,7 +42,7 @@ typedef NS_ENUM(NSInteger, AXPracticalHUDPosition) {
     AXPracticalHUDPositionCenter,
     /// Bottom position
     AXPracticalHUDPositionBottom
-} NS_SWIFT_NAME(PracticalHUDPosition);
+};
 /// Completion block when task finished.
 typedef void(^AXPracticalHUDCompletionBlock)(void) NS_SWIFT_NAME(PracticalHUDCompletion);
 /// HUD delegate
