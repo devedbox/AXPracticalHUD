@@ -120,7 +120,11 @@ NS_SWIFT_NAME(PracticalHUD) @interface AXPracticalHUD : UIView
 @end
 
 @interface AXPracticalHUD(Shared)
-+ (nullable instancetype)sharedHUD;
+#if UIKIT_DEFINE_AS_PROPERTIES
+@property(class, readonly, nonatomic, nullable) AXPracticalHUD *sharedHUD NS_SWIFT_NAME(shared);
+#else
++ (nullable instancetype)sharedHUD NS_SWIFT_NAME(shared());
+#endif
 
 - (void)showProgressInView:(nullable UIView *)view NS_SWIFT_NAME(showProgress(in:));
 - (void)showProgressBarInView:(nullable UIView *)view NS_SWIFT_NAME(showProgressBar(in:));
