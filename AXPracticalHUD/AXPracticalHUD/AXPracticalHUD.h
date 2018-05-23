@@ -10,10 +10,10 @@
 
 @protocol AXPracticalHUDAnimator;
 
-extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDFadeAnimator(void) NS_SWIFT_NAME(PracticalHUDFadeAnimator());
-extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDFlipUpAnimator(void) NS_SWIFT_NAME(PracticalHUDFlipUpAnimator());
-extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDZoomAnimator(void) NS_SWIFT_NAME(PracticalHUDZoomAnimator());
-extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDDropDownAnimator(void) NS_SWIFT_NAME(PracticalHUDDropDownAnimator());
+extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDFadeAnimator(void);
+extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDFlipUpAnimator(void);
+extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDZoomAnimator(void);
+extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDDropDownAnimator(void);
 
 /// Mode of hud view
 typedef NS_ENUM(NSInteger, AXPracticalHUDMode) {
@@ -44,11 +44,11 @@ typedef NS_ENUM(NSInteger, AXPracticalHUDPosition) {
     AXPracticalHUDPositionBottom
 };
 /// Completion block when task finished.
-typedef void(^AXPracticalHUDCompletionBlock)(void) NS_SWIFT_NAME(PracticalHUDCompletion);
+typedef void(^AXPracticalHUDCompletionBlock)(void);
 /// HUD delegate
 @protocol AXPracticalHUDDelegate;
 
-NS_SWIFT_NAME(PracticalHUD) @interface AXPracticalHUD : UIView
+@interface AXPracticalHUD : UIView
 /// Delegate of HUD view,
 @property(assign, nonatomic, nullable) id<AXPracticalHUDDelegate>delegate;
 #pragma mark - Boolean
@@ -168,7 +168,7 @@ NS_SWIFT_NAME(PracticalHUD) @interface AXPracticalHUD : UIView
 + (nonnull NSArray *)HUDsInView:(nonnull UIView *)view;
 @end
 
-NS_SWIFT_NAME(PracticalHUDDelegate) @protocol AXPracticalHUDDelegate <NSObject>
+@protocol AXPracticalHUDDelegate <NSObject>
 @optional
 - (void)HUDWillShow:(nonnull AXPracticalHUD *)HUD;
 - (void)HUDDidHidden:(nonnull AXPracticalHUD *)HUD;
