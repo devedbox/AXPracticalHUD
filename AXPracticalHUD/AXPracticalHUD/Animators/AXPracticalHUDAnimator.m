@@ -42,6 +42,10 @@ id<AXPracticalHUDAnimator> AXPracticalHUDDropDownAnimator() {
 #pragma mark - Fade.
 
 @implementation _AXPracticalHUDFadeAnimator
+- (BOOL)allowsLayoutSubviewsDuringAnimation {
+    return YES;
+}
+
 - (NSTimeInterval)durationForTransition:(BOOL)isHidden {
     return isHidden ? 0.25 : 0.4;
 }
@@ -60,6 +64,10 @@ id<AXPracticalHUDAnimator> AXPracticalHUDDropDownAnimator() {
 #pragma mark - FlipUp.
 
 @implementation _AXPracticalHUDFlipUpAnimator
+- (BOOL)allowsLayoutSubviewsDuringAnimation {
+    return NO;
+}
+
 - (NSTimeInterval)durationForTransition:(BOOL)isHidden {
     return isHidden ? 0.5 : 0.65;
 }
@@ -110,6 +118,10 @@ id<AXPracticalHUDAnimator> AXPracticalHUDDropDownAnimator() {
 #pragma mark - Zoom.
 
 @implementation _AXPracticalHUDZoomAnimator
+- (BOOL)allowsLayoutSubviewsDuringAnimation {
+    return NO;
+}
+
 - (NSTimeInterval)durationForTransition:(BOOL)isHidden {
     return 0.35;
 }
@@ -153,6 +165,10 @@ id<AXPracticalHUDAnimator> AXPracticalHUDDropDownAnimator() {
 @end
 
 @implementation _AXPracticalHUDDropDownAnimator
+- (BOOL)allowsLayoutSubviewsDuringAnimation {
+    return NO;
+}
+
 - (NSTimeInterval)durationForTransition:(BOOL)isHidden {
     return isHidden ? 0.35 : 0.5;
 }
