@@ -506,6 +506,9 @@ if ([NSThread isMainThread]) {\
 
 #pragma mark - Private helper
 - (void)showingAnimated:(BOOL)animated {
+    if (_delegate && [_delegate respondsToSelector:@selector(HUDWillShow:)]) {
+        [_delegate HUDWillShow:self];
+    }
     // Cancel any scheduled hideDelayed: calls
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self performSelectorOnMainThread:@selector(setNeedsDisplay)

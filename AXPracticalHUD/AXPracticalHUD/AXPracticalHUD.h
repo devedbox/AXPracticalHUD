@@ -170,5 +170,6 @@ NS_SWIFT_NAME(PracticalHUD) @interface AXPracticalHUD : UIView
 
 NS_SWIFT_NAME(PracticalHUDDelegate) @protocol AXPracticalHUDDelegate <NSObject>
 @optional
+- (void)HUDWillShow:(nonnull AXPracticalHUD *)HUD;
 - (void)HUDDidHidden:(nonnull AXPracticalHUD *)HUD;
 @end
