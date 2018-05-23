@@ -25,7 +25,7 @@
 
 #import <UIKit/UIKit.h>
 /// Circle style progress view.
-@interface AXCircleProgressView : UIView
+NS_SWIFT_NAME(CircleProgressView) @interface AXCircleProgressView : UIView
 /// Progress value. Between [0, 1].
 @property(assign, nonatomic) CGFloat progress;
 /// Progress color. Color for the progress indicator. Default is white.
@@ -33,5 +33,5 @@
 /// Progress background color. Color for the background of the progress indicator. Default is 0.1@white.
 @property(strong, nonatomic) UIColor *progressBgnColor;
 /// Annular enabled. Pie style or hollow. Default is NO means pie.
-@property(assign, nonatomic) BOOL annularEnabled;
+@property(assign, nonatomic, getter=isAnnularEnabled) BOOL annularEnabled;
 @end

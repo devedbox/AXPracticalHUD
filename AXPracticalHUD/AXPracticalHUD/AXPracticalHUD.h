@@ -10,10 +10,10 @@
 
 @protocol AXPracticalHUDAnimator;
 
-extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDFadeAnimator(void);
-extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDFlipUpAnimator(void);
-extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDZoomAnimator(void);
-extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDDropDownAnimator(void);
+extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDFadeAnimator(void) NS_SWIFT_NAME(PracticalHUDFadeAnimator());
+extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDFlipUpAnimator(void) NS_SWIFT_NAME(PracticalHUDFlipUpAnimator());
+extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDZoomAnimator(void) NS_SWIFT_NAME(PracticalHUDZoomAnimator());
+extern id<AXPracticalHUDAnimator> _Nullable AXPracticalHUDDropDownAnimator(void) NS_SWIFT_NAME(PracticalHUDDropDownAnimator());
 
 /// Mode of hud view
 typedef NS_ENUM(NSInteger, AXPracticalHUDMode) {
@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, AXPracticalHUDMode) {
     AXPracticalHUDModeText,
     /// Progress is shown using an breach annular indicator.
     AXPracticalHUDModeBreachedRing
-};
+} NS_SWIFT_NAME(PracticalHUDMode);
 /// Position of hud view.
 typedef NS_ENUM(NSInteger, AXPracticalHUDPosition) {
     /// Top position.
@@ -42,24 +42,24 @@ typedef NS_ENUM(NSInteger, AXPracticalHUDPosition) {
     AXPracticalHUDPositionCenter,
     /// Bottom position
     AXPracticalHUDPositionBottom
-};
+} NS_SWIFT_NAME(PracticalHUDPosition);
 /// Completion block when task finished.
 typedef void(^AXPracticalHUDCompletionBlock)(void);
 /// HUD delegate
 @protocol AXPracticalHUDDelegate;
 
-@interface AXPracticalHUD : UIView
+NS_SWIFT_NAME(PracticalHUD) @interface AXPracticalHUD : UIView
 /// Delegate of HUD view,
 @property(assign, nonatomic, nullable) id<AXPracticalHUDDelegate>delegate;
 #pragma mark - Boolean
 /// Restore the hud view when hud hided if YES, setting the properties of hud view to the initial state. Default is NO.
-@property(assign, nonatomic) BOOL restoreEnabled;
+@property(assign, nonatomic, getter=isRestoreEnabled) BOOL restoreEnabled;
 /// Lock the background to avoid the touch events if YES. Default is NO.
-@property(assign, nonatomic) BOOL lockBackground;
+@property(assign, nonatomic, getter=shouldLockBackground) BOOL lockBackground;
 /// Using dim background if YES. Default is NO.
-@property(assign, nonatomic) BOOL dimBackground;
+@property(assign, nonatomic, getter=shouldDimBackground) BOOL dimBackground;
 /// Remove the hud from super view if hud is hidden. Default is YES.
-@property(assign, nonatomic) BOOL removeFromSuperViewOnHide;
+@property(assign, nonatomic, getter=shouldRemoveFromSuperViewOnHide) BOOL removeFromSuperViewOnHide;
 /// Using the square content view if YES. Default is NO.
 @property(assign, nonatomic, getter=isSquare) BOOL square;
 #pragma mark - Frame.
@@ -89,7 +89,7 @@ typedef void(^AXPracticalHUDCompletionBlock)(void);
 @property(copy, nonatomic, nullable) AXPracticalHUDCompletionBlock completion;
 #pragma mark - Tasks.
 /// Is tasks progressing.
-@property(readonly, nonatomic) BOOL progressing;
+@property(readonly, nonatomic, getter=isProgressing) BOOL progressing;
 #pragma mark - Progress.
 /// Progress of the progerss indicator.
 @property(assign, nonatomic) CGFloat progress;
@@ -122,53 +122,60 @@ typedef void(^AXPracticalHUDCompletionBlock)(void);
 @interface AXPracticalHUD(Shared)
 + (nullable instancetype)sharedHUD;
 
-- (void)showProgressInView:(nonnull UIView *)view;
-- (void)showProgressBarInView:(nonnull UIView *)view;
-- (void)showColorfulProgressBarInView:(nonnull UIView *)view;
-- (void)showTextInView:(nonnull UIView *)view;
-- (void)showNormalInView:(nonnull UIView *)view;
-- (void)showErrorInView:(nonnull UIView *)view;
-- (void)showSuccessInView:(nonnull UIView *)view;
+- (void)showProgressInView:(nonnull UIView *)view NS_SWIFT_NAME(showProgress(in:));
+- (void)showProgressBarInView:(nonnull UIView *)view NS_SWIFT_NAME(showProgressBar(in:));
+- (void)showColorfulProgressBarInView:(nonnull UIView *)view NS_SWIFT_NAME(showColorfulProgressBar(in:));
+- (void)showTextInView:(nonnull UIView *)view NS_SWIFT_NAME(showText(in:));
+- (void)showNormalInView:(nonnull UIView *)view NS_SWIFT_NAME(showNormal(in:));
+- (void)showErrorInView:(nonnull UIView *)view NS_SWIFT_NAME(showError(in:));
+- (void)showSuccessInView:(nonnull UIView *)view NS_SWIFT_NAME(showSuccess(in:));
 
 - (void)showProgressInView:(nonnull UIView *)view
                       text:(nullable NSString *)text
                     detail:(nullable NSString *)detail
-             configuration:(nullable void(^)(AXPracticalHUD * _Nullable HUD))configuration;
+             configuration:(nullable void(^)(AXPracticalHUD * _Nullable HUD))configuration
+NS_SWIFT_NAME(showProgress(in:text:detail:configuration:));
 - (void)showProgressBarInView:(nonnull UIView *)view
                          text:(nullable NSString *)text
                        detail:(nullable NSString *)detail
-                configuration:(nullable void(^)(AXPracticalHUD * _Nullable HUD))configuration;
+                configuration:(nullable void(^)(AXPracticalHUD * _Nullable HUD))configuration
+NS_SWIFT_NAME(showProgressBar(in:text:detail:configuration:));
 - (void)showColorfulProgressBarInView:(nonnull UIView *)view
                                  text:(nullable NSString *)text
                                detail:(nullable NSString *)detail
-                        configuration:(nullable void(^)(AXPracticalHUD * _Nullable HUD))configuration;
+                        configuration:(nullable void(^)(AXPracticalHUD * _Nullable HUD))configuration
+NS_SWIFT_NAME(showColorfulProgressBar(in:text:detail:configuration:));
 - (void)showTextInView:(nonnull UIView *)view
                   text:(nullable NSString *)text
                 detail:(nullable NSString *)detail
-         configuration:(nullable void(^)(AXPracticalHUD * _Nullable HUD))configuration;
+         configuration:(nullable void(^)(AXPracticalHUD * _Nullable HUD))configuration
+NS_SWIFT_NAME(showText(in:text:detail:configuration:));
 - (void)showNormalInView:(nonnull UIView *)view
                     text:(nullable NSString *)text
                   detail:(nullable NSString *)detail
-           configuration:(nullable void(^)(AXPracticalHUD * _Nullable HUD))configuration;
+           configuration:(nullable void(^)(AXPracticalHUD * _Nullable HUD))configuration
+NS_SWIFT_NAME(showNormal(in:text:detail:configuration:));
 - (void)showErrorInView:(nonnull UIView *)view
                    text:(nullable NSString *)text
                  detail:(nullable NSString *)detail
-          configuration:(nullable void(^)(AXPracticalHUD * _Nullable HUD))configuration;
+          configuration:(nullable void(^)(AXPracticalHUD * _Nullable HUD))configuration
+NS_SWIFT_NAME(showError(in:text:detail:configuration:));
 - (void)showSuccessInView:(nonnull UIView *)view
                      text:(nullable NSString *)text
                    detail:(nullable NSString *)detail
-            configuration:(nullable void(^)(AXPracticalHUD * _Nullable HUD))configuration;
+            configuration:(nullable void(^)(AXPracticalHUD * _Nullable HUD))configuration
+NS_SWIFT_NAME(showSuccess(in:text:detail:configuration:));
 @end
 
 @interface AXPracticalHUD(Convenence)
-+ (nullable instancetype)showHUDInView:(nonnull UIView *)view animated:(BOOL)animated;
-+ (BOOL)hideHUDInView:(nonnull UIView *)view animated:(BOOL)animated;
-+ (NSInteger)hideAllHUDsInView:(nonnull UIView *)view animated:(BOOL)animated;
-+ (nullable instancetype)HUDInView:(nonnull UIView *)view;
-+ (nonnull NSArray *)HUDsInView:(nonnull UIView *)view;
++ (nullable instancetype)showHUDInView:(nonnull UIView *)view animated:(BOOL)animated NS_SWIFT_NAME(showHud(in:animated:));
++ (BOOL)hideHUDInView:(nonnull UIView *)view animated:(BOOL)animated NS_SWIFT_NAME(hideHud(in:animated:));
++ (NSInteger)hideAllHUDsInView:(nonnull UIView *)view animated:(BOOL)animated NS_SWIFT_NAME(hideAllHuds(in:animated:));
++ (nullable instancetype)HUDInView:(nonnull UIView *)view NS_SWIFT_NAME(hud(in:));
++ (nonnull NSArray *)HUDsInView:(nonnull UIView *)view NS_SWIFT_NAME(huds(in:));
 @end
 
-@protocol AXPracticalHUDDelegate <NSObject>
+NS_SWIFT_NAME(PracticalHUDDelegate) @protocol AXPracticalHUDDelegate <NSObject>
 @optional
 - (void)HUDWillShow:(nonnull AXPracticalHUD *)HUD;
 - (void)HUDDidHidden:(nonnull AXPracticalHUD *)HUD;

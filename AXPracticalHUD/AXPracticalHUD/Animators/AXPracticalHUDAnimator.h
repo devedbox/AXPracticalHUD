@@ -13,7 +13,7 @@
 /// The abstract declaration of the animator of the hud to show or hide
 /// on the attached view. Custom classes should conform this protocol to
 /// offer the showing and hiding methods.
-@protocol AXPracticalHUDAnimator<NSObject>
+NS_SWIFT_NAME(PracticalHUDAnimator) @protocol AXPracticalHUDAnimator<NSObject>
 @required
 /// The last time duration of the animation.
 - (NSTimeInterval)durationForTransition:(BOOL)isHidden;

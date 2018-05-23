@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/devedbox/AXPracticalHUD.git", :tag => s.version }
   s.source_files = "AXPracticalHUD/AXPracticalHUD/*.{h,m}", "AXPracticalHUD/AXPracticalHUD/*/*.{h,m}"
-  s.public_header_files = "AXPracticalHUD/AXPracticalHUD/*.{h}", "AXPracticalHUD/AXPracticalHUD/ContentView/*.{h}"
+  s.public_header_files = "AXPracticalHUD/AXPracticalHUD/*.{h}", "AXPracticalHUD/AXPracticalHUD/*/*.{h}", "AXPracticalHUD/AXPracticalHUD/ContentView/*.{h}"
   s.resource     = "AXPracticalHUD/AXPracticalHUD/AXPracticalHUD.bundle"
   s.frameworks   = "UIKit", "Foundation"
   s.requires_arc = true
